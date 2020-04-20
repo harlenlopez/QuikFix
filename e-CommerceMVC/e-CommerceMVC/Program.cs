@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace e_CommerceMVC
+namespace ECommerceMVC
 {
     public class Program
     {
