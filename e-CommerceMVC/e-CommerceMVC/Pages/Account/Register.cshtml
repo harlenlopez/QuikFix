@@ -2,3 +2,16 @@
 @model ECommerceMVC.Pages.Account.RegisterModel
 @{
 }
+
+<!DOCTYPE html>
+<head>
+    <title>E-Commerce</title>
+</head>
+
+<body>
+    <form method="post">
+        <label asp-for="RegisterData.Email"></label>
+        <input asp-for="RegisterData.Email" />
+        <span asp-validation-for="RegisterData.Email"></span>
+    </form>
+</body>
