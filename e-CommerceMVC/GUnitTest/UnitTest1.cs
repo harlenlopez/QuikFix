@@ -1,4 +1,6 @@
+using ECommerceMVC.Data;
 using ECommerceMVC.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using Xunit;
 
@@ -62,6 +64,17 @@ namespace GUnitTest
             Assert.Equal("http://google.com", product.Image);
         }
 
+        [Fact]
+        public void AbleToCreateAProductInOurDatabase()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+                .UseInMemoryDatabase("AbleToCreateAProductInOurDatabase")
+                 .Options;
+            
+            using(StoreDbContext storeDb = new StoreDbContext(options))
+            {
 
+            }
+        }
     }
 }

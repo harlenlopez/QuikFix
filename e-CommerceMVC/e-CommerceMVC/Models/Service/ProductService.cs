@@ -1,5 +1,6 @@
 ﻿using ECommerceMVC.Data;
 using ECommerceMVC.Models.Interface;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,29 +18,41 @@ namespace ECommerceMVC.Models.Service
             _context = context;
 
         }
+
         public async Task<Product> CreateInventory(Product inventory)
         {
-            throw new NotImplementedException();
+            _context.Inventories.Add(inventory);
+            await _context.SaveChangesAsync();
+            return inventory;
         }
 
-        public Task DeleteInventories(int ID)
+        public async Task<Product> DeleteInventories(int ID)
         {
-            throw new NotImplementedException();
+            var product = await _context.Inventories.FindAsync(ID);
+            _context.Remove(ID);
+            await _context.SaveChangesAsync();
+            return product;
         }
 
-        public Task<List<Product>> GetAllInventories()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<List<Product>> GetAllInventories() => await _context.Inventories.ToListAsync();
 
-        public Task<List<Product>> GetInventoryById(int ID)
-        {
-            throw new NotImplementedException();
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public async Task<Product> GetInventoryById(int ID) => await _context.Inventories.FindAsync(ID);
 
-        public Task UpdateInventories(Product inventory)
+        /// <summary>
+        /// Update method for product route
+        /// </summary>
+        /// <param name="product">product that is being updated</param>
+        /// <returns>product</returns>
+        public async Task<Product> UpdateInventories(Product product)
         {
-            throw new NotImplementedException();
+            _context.Inventories.Update(product);
+            await _context.SaveChangesAsync();
+            return product;
         }
     }
 }
