@@ -30,11 +30,15 @@ namespace ECommerceMVC
             Configuration = builder.Build();
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        /// <summary>
+        /// This will hold our middleware
+        /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            //adding razor page toour middle ware
+            services.AddRazorPages();
 
             // To incorporate our dbcontext that is in the Data folder
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -65,6 +69,8 @@ namespace ECommerceMVC
             // Endpoint to our default home/index/id?
             app.UseEndpoints(endpoints =>
             {
+                // Implementing razor page to the application endpoint
+                endpoints.MapRazorPages();
                 endpoints.MapDefaultControllerRoute();
 
             });
