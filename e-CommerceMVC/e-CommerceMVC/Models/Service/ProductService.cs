@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.Models.Service
 {
-    public class InventoryService : IInventoryManager
+    public class ProductService : IProductManager
     {
         private readonly StoreDbContext _context;
 
-        public InventoryService(StoreDbContext context)
+        public ProductService(StoreDbContext context)
         {
             _context = context;
 
         }
-        public async Task<Inventory> CreateInventory(Inventory inventory)
+        public async Task<Product> CreateInventory(Product inventory)
         {
             throw new NotImplementedException();
         }
@@ -27,17 +27,17 @@ namespace ECommerceMVC.Models.Service
             throw new NotImplementedException();
         }
 
-        public Task<List<Inventory>> GetAllInventories()
+        public Task<List<Product>> GetAllInventories()
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Inventory>> GetInventoryById(int ID)
+        public Task<List<Product>> GetInventoryById(int ID)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateInventories(Inventory inventory)
+        public Task UpdateInventories(Product inventory)
         {
             throw new NotImplementedException();
         }
