@@ -12,22 +12,36 @@ namespace ECommerceMVC.Pages.Account
 {
     public class RegisterModel : PageModel
     {
+        /// <summary>
+        /// Local variables
+        /// </summary>
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
 
+        /// <summary>
+        /// Biding user form data to normalize it
+        /// </summary>
         [BindProperty]
         public RegisterInfo RegisterData { get; set; }
 
+        // constructor to bringing in identity built in libraries (UserManager and SigninManager)
         public RegisterModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
         }
 
+        /// <summary>
+        /// Get method that will be used to get the page when route is being hit
+        /// </summary>
         public void OnGet()
         {
         }
 
+        /// <summary>
+        /// Post Method that will grab data from the Register Razor page
+        /// </summary>
+        /// <returns>To the index page if its successful otherwise back to same page</returns>
         public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)
@@ -49,6 +63,7 @@ namespace ECommerceMVC.Pages.Account
                     return RedirectToAction("index", "Home");
                 }
 
+                // Adding all the error message into model state
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(String.Empty, error.Description);
@@ -58,6 +73,9 @@ namespace ECommerceMVC.Pages.Account
             return Page();
         }
 
+        /// <summary>
+        /// Nested class that will be ran to normalize inputs from the page.
+        /// </summary>
         public class RegisterInfo
         {
             [Required]
