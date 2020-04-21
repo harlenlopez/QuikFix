@@ -47,6 +47,16 @@ namespace ECommerceMVC
             }
             );
 
+            //to create store database fro DbContext
+            services.AddDbContext<StoreDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            }
+
+
+);
+
+
             /// TO add identity to our application
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
