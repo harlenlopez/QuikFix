@@ -1,0 +1,39 @@
+﻿@page
+@model ECommerceMVC.Pages.Account.RegisterModel
+@{
+}
+
+<!DOCTYPE html>
+<head>
+    <title>E-Commerce</title>
+</head>
+
+<body>
+    <form method="post">
+        <label asp-for="RegisterData.Email"></label>
+        <input asp-for="RegisterData.Email" />
+        <span asp-validation-for="RegisterData.Email"></span>
+
+        <label asp-for="RegisterData.FirstName"></label>
+        <input asp-for="RegisterData.FirstName" />
+        <span asp-validation-for="RegisterData.FirstName"></span>
+
+        <label asp-for="RegisterData.LastName"></label>
+        <input asp-for="RegisterData.LastName" />
+        <span asp-validation-for="RegisterData.LastName"></span>
+
+        <label asp-for="RegisterData.BirthDay"></label>
+        <input asp-for="RegisterData.BirthDay" />
+        <span asp-validation-for="RegisterData.BirthDay"></span>
+
+        <label asp-for="RegisterData.Password"></label>
+        <input asp-for="RegisterData.Password" />
+        <span asp-validation-for="RegisterData.Password"></span>
+
+        <label asp-for="RegisterData.ConfirmPassword"></label>
+        <input asp-for="RegisterData.ConfirmPassword" />
+        <span asp-validation-for="RegisterData.ConfirmPassword"></span>
+
+        <button type="submit">Enter</button>
+    </form>
+</body>
