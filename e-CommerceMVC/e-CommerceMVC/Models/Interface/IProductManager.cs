@@ -8,7 +8,7 @@ namespace ECommerceMVC.Models.Interface
     /// <summary>
     /// Create, Read, Update, Delete
     /// </summary>
-    interface IProductManager
+    public interface IProductManager
     {
         Task<Product> GetInventoryById(int ID);
         Task<Product> CreateInventory(Product inventory);

@@ -81,6 +81,7 @@ namespace ECommerceMVC
             {
                 // Implementing razor page to the application endpoint
                 endpoints.MapRazorPages();
+                // default route
                 endpoints.MapDefaultControllerRoute();
 
             });

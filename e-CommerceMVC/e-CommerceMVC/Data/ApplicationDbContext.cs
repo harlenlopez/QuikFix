@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.Data
 {
+    /// <summary>
+    /// This is dbcontext for identity database
+    /// </summary>
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)

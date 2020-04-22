@@ -13,12 +13,21 @@ namespace ECommerceMVC.Models.Service
     {
         private readonly StoreDbContext _context;
 
+        /// <summary>
+        ///  using the database context
+        /// </summary>
+        /// <param name="context">context of the databas</param>
         public ProductService(StoreDbContext context)
         {
             _context = context;
 
         }
 
+        /// <summary>
+        /// To create a product
+        /// </summary>
+        /// <param name="inventory">product that user wants to add to the database</param>
+        /// <returns>product that has been created</returns>
         public async Task<Product> CreateInventory(Product inventory)
         {
             _context.Inventories.Add(inventory);
@@ -26,19 +35,27 @@ namespace ECommerceMVC.Models.Service
             return inventory;
         }
 
+        /// <summary>
+        /// Delete route for product
+        /// </summary>
+        /// <param name="product">product that will be deleted</param>
         public async Task DeleteInventories(Product product)
         {
             _context.Inventories.Remove(product);
             await _context.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Getting all of our products in the database
+        /// </summary>
+        /// <returns>list of products</returns>
         public async Task<List<Product>> GetAllInventories() => await _context.Inventories.ToListAsync();
 
         /// <summary>
-        /// 
+        /// getting a product specific to the id
         /// </summary>
-        /// <param name="ID"></param>
-        /// <returns></returns>
+        /// <param name="ID">id of the product to be query</param>
+        /// <returns>product</returns>
         public async Task<Product> GetInventoryById(int ID) => await _context.Inventories.FindAsync(ID);
 
         /// <summary>
