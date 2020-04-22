@@ -26,12 +26,10 @@ namespace ECommerceMVC.Models.Service
             return inventory;
         }
 
-        public async Task<Product> DeleteInventories(int ID)
+        public async Task DeleteInventories(Product product)
         {
-            var product = await _context.Inventories.FindAsync(ID);
-            _context.Remove(ID);
+            _context.Inventories.Remove(product);
             await _context.SaveChangesAsync();
-            return product;
         }
 
         public async Task<List<Product>> GetAllInventories() => await _context.Inventories.ToListAsync();

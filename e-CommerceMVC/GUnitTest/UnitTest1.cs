@@ -1,7 +1,9 @@
 using ECommerceMVC.Data;
 using ECommerceMVC.Models;
+using ECommerceMVC.Models.Service;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace GUnitTest
@@ -65,7 +67,7 @@ namespace GUnitTest
         }
 
         [Fact]
-        public void AbleToCreateAProductInOurDatabase()
+        public async void AbleToCreateAProductInOurDatabase()
         {
             DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
                 .UseInMemoryDatabase("AbleToCreateAProductInOurDatabase")
@@ -73,7 +75,138 @@ namespace GUnitTest
             
             using(StoreDbContext storeDb = new StoreDbContext(options))
             {
+                ProductService ps = new ProductService(storeDb);
 
+                Product product = new Product()
+                {
+                    Name = "Bob Ross",
+                    Description = "Happy little accident"
+                };
+                await ps.CreateInventory(product);
+
+                var data = storeDb.Inventories.Find(product.ID);
+
+                Assert.Equal(product, data);
+            }
+        }
+
+        [Fact]
+        public async void AbleToReadAProductFromDatabase()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+               .UseInMemoryDatabase("AbleToReadAProductFromDatabase")
+                .Options;
+
+            using (StoreDbContext storeDb = new StoreDbContext(options))
+            {
+                ProductService ps = new ProductService(storeDb);
+
+                Product product = new Product()
+                {
+                    Name = "Bob Ross",
+                    Description = "Happy little accident"
+                };
+
+                await ps.CreateInventory(product);
+
+                var data = storeDb.Inventories.Find(1);
+
+                Assert.Equal(product, data);
+            }
+        }
+
+        [Fact]
+        public async void AbleToReadAllFromDatabase()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+               .UseInMemoryDatabase("AbleToReadAllFromDatabase")
+                .Options;
+
+            using (StoreDbContext storeDb = new StoreDbContext(options))
+            {
+                ProductService ps = new ProductService(storeDb);
+
+                Product product = new Product()
+                {
+                    Name = "Bob Ross",
+                    Description = "Happy little accident"
+                };
+
+                Product product1 = new Product()
+                {
+                    Name = "PeaPod",
+                    Description = "Pocket Squarel"
+                };
+
+                List<Product> ProductList = new List<Product>();
+
+                ProductList.Add(product);
+                ProductList.Add(product1);
+
+
+                await ps.CreateInventory(product);
+                await ps.CreateInventory(product1);
+
+
+                var data = await storeDb.Inventories.ToListAsync();
+
+                Assert.Equal(ProductList, data);
+            }
+        }
+
+        [Fact]
+        public async void UpdateProductToDatabase()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+               .UseInMemoryDatabase("UpdateProductToDatabase")
+                .Options;
+
+            using (StoreDbContext storeDb = new StoreDbContext(options))
+            {
+                ProductService ps = new ProductService(storeDb);
+
+                Product product = new Product()
+                {
+                    Name = "Bob Ross",
+                    Description = "Happy little accident"
+                };
+
+                await ps.CreateInventory(product);
+
+                product.Name = "Pea Pod";
+
+                await ps.UpdateInventories(product);
+
+                var data = storeDb.Inventories.Find(product.ID);
+
+                Assert.Equal(product.Name, data.Name);
+            }
+        }
+
+        [Fact]
+        public async void DeleteProductFromDataBase()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+               .UseInMemoryDatabase("DeleteProductFromDataBase")
+                .Options;
+
+            using (StoreDbContext storeDb = new StoreDbContext(options))
+            {
+                ProductService ps = new ProductService(storeDb);
+
+                Product product = new Product()
+                {
+                    Name = "Bob Ross",
+                    Description = "Happy little accident"
+                };
+
+                await ps.CreateInventory(product);
+
+                await ps.DeleteInventories(product);
+
+                var data = storeDb.Inventories.Find(product.ID);
+
+                Assert.Null(data);
             }
         }
     }

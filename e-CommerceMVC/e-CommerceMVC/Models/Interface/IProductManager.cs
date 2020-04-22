@@ -10,11 +10,11 @@ namespace ECommerceMVC.Models.Interface
     /// </summary>
     interface IProductManager
     {
-        Task<List<Product>> GetInventoryById(int ID);
+        Task<Product> GetInventoryById(int ID);
         Task<Product> CreateInventory(Product inventory);
         Task<List<Product>> GetAllInventories();
-        Task UpdateInventories(Product inventory);
-        Task DeleteInventories(int ID);
+        Task<Product> UpdateInventories(Product inventory);
+        Task DeleteInventories(Product product);
 
     }
 }
