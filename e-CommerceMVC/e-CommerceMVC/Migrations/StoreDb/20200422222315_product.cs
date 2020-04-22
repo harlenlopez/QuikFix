@@ -2,7 +2,7 @@
 
 namespace ECommerceMVC.Migrations.StoreDb
 {
-    public partial class updateProduct : Migration
+    public partial class product : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

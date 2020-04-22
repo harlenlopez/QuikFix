@@ -11,6 +11,9 @@ namespace ECommerceMVC.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
+        public string FavoriteColor { get; set; }
+        public string Theme { get; set; }
+        public string TypeOfBusiness { get; set; }
 
     }
 }
