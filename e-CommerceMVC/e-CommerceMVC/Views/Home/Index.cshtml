@@ -1,15 +1,34 @@
-﻿<!DOCTYPE html>
-<head>
-    <title>
-        e-Commerce
-    </title>
-</head>
+﻿@model IEnumerable<ECommerceMVC.Models.Product>
+@{ 
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
 <body>
-    <h1>
-        hello World!
-    </h1>
-    <a asp-page="/account/login"> Click here to login</a>
+    <main>
+        <div class="row col-md-8 mx-auto my-auto" style="margin-top:30px">
+            @foreach (var template in Model)
+            {
+                <div class="col-sm-4">
+                    <div class="card" style="width: 18rem;">
+                        @if (@template.Image != "")
+                        {
+                            <img class="card-img-top" src="@template.Image" alt="Wireframe" />
+                        }
+                        else
+                        {
+                            <img class="card-img-top" src="https://via.placeholder.com/150" alt="placeholder image" />
 
-    <a asp-page="/account/register"> Click here to register</a>
-</body>
+                        }
+                        <div class="card-body">
+                            <h3 class="card-title">@template.Name</h3>
+                            <p>@template.Price</p>
+                            <p class="card-text">@template.Description</p>
+                            <button class="btn btn-primary">Purchase</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </main>
+    </body>
 

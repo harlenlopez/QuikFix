@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using ECommerceMVC.Data;
 using ECommerceMVC.Models;
+using ECommerceMVC.Models.Interface;
+using ECommerceMVC.Models.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -77,6 +79,9 @@ namespace ECommerceMVC
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = false;
             });
+
+
+            services.AddTransient<IProductManager, ProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,7 +93,7 @@ namespace ECommerceMVC
             }
 
             app.UseRouting();
-
+            app.UseStaticFiles();
             // adding an identity
             app.UseAuthentication();
 

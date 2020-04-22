@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="~/styles/reset.css" />
+    <link rel="stylesheet" href="~/styles/base.css" />
+    <link rel="stylesheet" href="~/styles/layout.css" />
+    <link rel="stylesheet" href="~/styles/module.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-light bg-light navbar-expand-lg">
+            <H1 class="ml-1">ECOMMERCE</H1>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="navbar-item col-sm-6">
+                        <a asp-page="/account/login">Login</a>
+                    </li>
+                    <li class="navbar-item col-sm-6">
+                        <a asp-page="/account/register">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
