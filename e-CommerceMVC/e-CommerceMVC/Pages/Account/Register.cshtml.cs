@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerceMVC.Models;
 using Microsoft.AspNetCore.Identity;
@@ -53,13 +54,38 @@ namespace ECommerceMVC.Pages.Account
                     Email = RegisterData.Email,
                     FirstName = RegisterData.FirstName,
                     LastName = RegisterData.LastName,
-                    BirthDate = RegisterData.BirthDay
+                    BirthDate = RegisterData.BirthDay,
+                    FavoriteColor = RegisterData.FavoriteColor,
+                    TypeOfBusiness = RegisterData.TypeOfBusiness,
+                    Theme = RegisterData.Theme
+
                 };
 
                 var result = await _userManager.CreateAsync(user, RegisterData.Password);
 
                 if (result.Succeeded)
                 {
+                    Claim name = new Claim("FullName", $"{user.FirstName} {user.LastName}");
+
+                    Claim birthday = new Claim(ClaimTypes.DateOfBirth, new DateTime(user.BirthDate.Year, user.BirthDate.Month, user.BirthDate.Day).ToString("u"), ClaimValueTypes.DateTime);
+
+                    Claim email = new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.Email);
+
+                    Claim color = new Claim("FavoriteColor", user.FavoriteColor);
+
+                    Claim business = new Claim("TypeOfBusiness", user.TypeOfBusiness);
+
+                    Claim theme = new Claim("Theme", user.Theme);
+
+                    List<Claim> claims = new List<Claim>()
+
+                    {
+                        name, birthday, email, color, theme, business
+                    };
+
+                    await _userManager.AddClaimsAsync(user, claims);
+                    //signs user in
+
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("index", "Home");
                 }
@@ -108,7 +134,7 @@ namespace ECommerceMVC.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Required]
-            [Display(Name ="Your Favorite Color")]
+            [Display(Name = "Your Favorite Color")]
             public string FavoriteColor { get; set; }
 
             [Required]
