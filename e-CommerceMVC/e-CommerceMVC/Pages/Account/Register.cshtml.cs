@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using ECommerceMVC.Models;
@@ -105,6 +106,18 @@ namespace ECommerceMVC.Pages.Account
             [DataType(DataType.Password)]
             [Compare("Password", ErrorMessage = "Password does not match")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name ="Your Favorite Color")]
+            public string FavoriteColor { get; set; }
+
+            [Required]
+            [Display(Name = "What Type of Business Do You Own?")]
+            public string TypeOfBusiness { get; set; }
+
+            [Required]
+            [Display(Name = "What Type Of Themes Do You Enjoy?")]
+            public string Theme { get; set; }
         }
     }
 }
