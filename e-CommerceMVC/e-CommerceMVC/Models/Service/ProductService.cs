@@ -1,5 +1,6 @@
 ﻿using ECommerceMVC.Data;
 using ECommerceMVC.Models.Interface;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,34 +13,61 @@ namespace ECommerceMVC.Models.Service
     {
         private readonly StoreDbContext _context;
 
+        /// <summary>
+        ///  using the database context
+        /// </summary>
+        /// <param name="context">context of the databas</param>
         public ProductService(StoreDbContext context)
         {
             _context = context;
 
         }
+
+        /// <summary>
+        /// To create a product
+        /// </summary>
+        /// <param name="inventory">product that user wants to add to the database</param>
+        /// <returns>product that has been created</returns>
         public async Task<Product> CreateInventory(Product inventory)
         {
-            throw new NotImplementedException();
+            _context.Inventories.Add(inventory);
+            await _context.SaveChangesAsync();
+            return inventory;
         }
 
-        public Task DeleteInventories(int ID)
+        /// <summary>
+        /// Delete route for product
+        /// </summary>
+        /// <param name="product">product that will be deleted</param>
+        public async Task DeleteInventories(Product product)
         {
-            throw new NotImplementedException();
+            _context.Inventories.Remove(product);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<List<Product>> GetAllInventories()
-        {
-            throw new NotImplementedException();
-        }
+        /// <summary>
+        /// Getting all of our products in the database
+        /// </summary>
+        /// <returns>list of products</returns>
+        public async Task<List<Product>> GetAllInventories() => await _context.Inventories.ToListAsync();
 
-        public Task<List<Product>> GetInventoryById(int ID)
-        {
-            throw new NotImplementedException();
-        }
+        /// <summary>
+        /// getting a product specific to the id
+        /// </summary>
+        /// <param name="ID">id of the product to be query</param>
+        /// <returns>product</returns>
+        public async Task<Product> GetInventoryById(int ID) => await _context.Inventories.FindAsync(ID);
 
-        public Task UpdateInventories(Product inventory)
+        /// <summary>
+        /// Update method for product route
+        /// </summary>
+        /// <param name="product">product that is being updated</param>
+        /// <returns>product</returns>
+        public async Task<Product> UpdateInventories(Product product)
         {
-            throw new NotImplementedException();
+            _context.Inventories.Update(product);
+            await _context.SaveChangesAsync();
+            return product;
         }
     }
 }

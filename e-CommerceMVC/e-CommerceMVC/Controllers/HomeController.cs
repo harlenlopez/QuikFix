@@ -8,6 +8,10 @@ namespace ECommerceMVC.Controllers
 {
     public class HomeController : Controller
     {
+        /// <summary>
+        /// Rendering index page
+        /// </summary>
+        /// <returns>returning to our index page</returns>
         public IActionResult Index()
         {
             return View();

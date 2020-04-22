@@ -28,13 +28,6 @@ Microsoft Visual Studio Community 2017 (Version 15.5.7)
 
 ---
 
-## Recent Updates
-
-#### V 0.1
-*Created Hello World first Page* -  04 21, 2020
-
----
-
 ## Usage
 
 ### Overview of Recent Posts
@@ -63,6 +56,7 @@ Microsoft Visual Studio Community 2017 (Version 15.5.7)
 ---
 
 ## Change Log
+0.2: *Added unit tesing and second database for product* 04 21, 2020
 0.1: *Created Hello World first Page* -  04 21, 2020
 
 

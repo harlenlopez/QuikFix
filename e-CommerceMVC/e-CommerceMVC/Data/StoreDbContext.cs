@@ -15,6 +15,9 @@ namespace ECommerceMVC.Data
             
         }
 
+        /// <summary>
+        /// This is used to seed data
+        /// </summary>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>().HasData(
@@ -121,6 +124,9 @@ namespace ECommerceMVC.Data
                 );
         }
 
+        /// <summary>
+        /// Using the dbset of product
+        /// </summary>
         public DbSet<Product> Inventories { get; set; }
 
     }
