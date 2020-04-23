@@ -15,7 +15,7 @@ Bootstrap, Popper, and jQuery. The backend was written in C# using ASP.NET Core 
 ---
 
 ## Tools Used
-Microsoft Visual Studio Community 2017 (Version 15.5.7)
+Microsoft Visual Studio Community 2019
 
 - C#
 - ASP.Net Core
