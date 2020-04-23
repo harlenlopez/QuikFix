@@ -16,7 +16,7 @@ namespace ECommerceMVC.Pages.Account
         /// <summary>
         ///  contstructor to use singinManager
         /// </summary>
-        /// <param name="signInManager"></param>
+        /// <param name="signInManager">the signinmanager library in identity</param>
         public LogoutModel(SignInManager<ApplicationUser> signInManager)
         {
             _signInManager = signInManager;
@@ -25,7 +25,7 @@ namespace ECommerceMVC.Pages.Account
         /// <summary>
         /// Logout when this route is called
         /// </summary>
-        /// <returns></returns>
+        /// <returns>back to home</returns>
         public async Task<IActionResult> OnGet()
         {
             await _signInManager.SignOutAsync();
