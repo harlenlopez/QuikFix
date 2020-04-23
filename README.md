@@ -31,7 +31,7 @@ Microsoft Visual Studio Community 2017 (Version 15.5.7)
 ## Usage
 
 ### Overview of Recent Posts
-![Overview of Recent Posts](https://via.placeholder.com/500x250)
+![Main Page](./assets/mainpage.png)
 
 ### Creating a Post
 ![Post Creation](https://via.placeholder.com/500x250)
@@ -56,7 +56,8 @@ Microsoft Visual Studio Community 2017 (Version 15.5.7)
 ---
 
 ## Change Log
-0.2: *Added unit tesing and second database for product* 04 21, 2020
+0.3: *Added bootstrap to our website and having the login, register and logout functionality implemented* 04 22, 2020  
+0.2: *Added unit tesing and second database for product* 04 21, 2020  
 0.1: *Created Hello World first Page* -  04 21, 2020
 
 
