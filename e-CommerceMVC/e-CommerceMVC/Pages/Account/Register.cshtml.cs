@@ -65,27 +65,34 @@ namespace ECommerceMVC.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    // claim for name of the user
                     Claim name = new Claim("FullName", $"{user.FirstName} {user.LastName}");
 
+                    // claim for birthday of the user
                     Claim birthday = new Claim(ClaimTypes.DateOfBirth, new DateTime(user.BirthDate.Year, user.BirthDate.Month, user.BirthDate.Day).ToString("u"), ClaimValueTypes.DateTime);
 
+                    // claim for email of the user
                     Claim email = new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.Email);
 
+                    // claim for favorite color of the user
                     Claim color = new Claim("FavoriteColor", user.FavoriteColor);
 
+                    // claim for business of the user owns
                     Claim business = new Claim("TypeOfBusiness", user.TypeOfBusiness);
 
+                    // claim for theme that user wants to make
                     Claim theme = new Claim("Theme", user.Theme);
 
+                    // creating a list of claims and tying it together
                     List<Claim> claims = new List<Claim>()
-
                     {
                         name, birthday, email, color, theme, business
                     };
 
+                    // adding the claims to the database
                     await _userManager.AddClaimsAsync(user, claims);
-                    //signs user in
 
+                    //signs user in
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("index", "Home");
                 }

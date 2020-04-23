@@ -24,6 +24,11 @@ namespace ECommerceMVC.Pages.Account
         public void OnGet()
         {
         }
+
+        /// <summary>
+        /// Post method that will have logging in the user when they are sign in, if info is not correct redirect them to this page
+        /// </summary>
+        /// <returns>Either to the main page or back to login page</returns>
         public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)
@@ -41,7 +46,7 @@ namespace ECommerceMVC.Pages.Account
                 }
 
             }
-            
+            // if this hits it will be back to our login page
             return Page();
         }
     }
