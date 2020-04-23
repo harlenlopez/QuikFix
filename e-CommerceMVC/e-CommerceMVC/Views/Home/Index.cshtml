@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ECommerceMVC.Models.Product>
+﻿@model ECommerceMVC.Models.Product
 @{ 
     Layout = "_Layout";
 }
@@ -7,31 +7,6 @@
 
 </head>
 <body>
-    <main>
-        <div class="row col-md-11 mx-auto" style="margin:30px auto;">
-            @foreach (var template in Model)
-            {
-                <div class="col-md-4" style="margin-top:30px;">
-                    <div class="card" >
-                        @if (@template.Image != "")
-                        {
-                            <img class="card-img-top" src="@template.Image" alt="Wireframe" />
-                        }
-                        else
-                        {
-                            <img class="card-img-top" src="https://via.placeholder.com/150" alt="placeholder image" />
-
-                        }
-                        <div class="card-body">
-                            <h3 class="card-title">@template.Name</h3>
-                            <p>@template.Price</p>
-                            <p class="card-text">@template.Description</p>
-                            <button class="btn btn-primary">Purchase</button>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </main>
-    </body>
+  
+</body>
 

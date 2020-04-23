@@ -14,10 +14,9 @@ namespace ECommerceMVC.Controllers
         /// Rendering index page
         /// </summary>
         /// <returns>returning to our index page</returns>
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var result = await _product.GetAllInventories();
-            return View(result);
+            return View();
         }
     }
 }
