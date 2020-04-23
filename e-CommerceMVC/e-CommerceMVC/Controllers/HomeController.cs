@@ -9,12 +9,7 @@ namespace ECommerceMVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProductManager _product;
-
-        public HomeController(IProductManager product)
-        {
-            _product = product;
-        }
+        
         /// <summary>
         /// Rendering index page
         /// </summary>
