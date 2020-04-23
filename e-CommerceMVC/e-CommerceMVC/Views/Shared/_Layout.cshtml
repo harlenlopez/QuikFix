@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@using ECommerceMVC.Models;
+@inject UserManager<ApplicationUser> UserManager;
+@inject SignInManager<ApplicationUser> SignInManager;
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -14,10 +19,22 @@
     <header>
         <nav class="navbar navbar-light text-white bg-dark navbar-expand-lg">
             <H1 class="ml-1">ECOMMERCE</H1>
-            <button type="button" class="navbar-toggler bg-light" data-toggle="collapse" data-target="#collapsable">
+            <button type="button" class="navbar-toggler bg-secondary" data-toggle="collapse" data-target="#collapsable">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapsable">
+
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <div class="nav navbar-nav ml-auto">
+                    <span class="pr-5 my-auto"> Aloha @User.Claims.First(x => x.Type == "FullName").Value </span>
+
+                    <a asp-page="/Account/Logout" class="bg-link text-white pr-1 nav-link">Logout</a>
+
+                </div>
+            }
+            else
+            {
                 <ul class="nav navbar-nav ml-auto">
                     <li class="navbar-item col-sm-6">
                         <a asp-page="/account/login" class="text-white nav-link">Login</a>
@@ -26,6 +43,7 @@
                         <a asp-page="/account/register" class="text-white nav-link">Register</a>
                     </li>
                 </ul>
+            }
             </div>
         </nav>
     </header>

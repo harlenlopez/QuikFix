@@ -24,6 +24,7 @@ namespace ECommerceMVC.Pages.Account
         public void OnGet()
         {
         }
+
         public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)
