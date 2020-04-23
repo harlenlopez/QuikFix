@@ -3,13 +3,16 @@
     Layout = "_Layout";
 }
 <!DOCTYPE html>
+<head>
+
+</head>
 <body>
     <main>
-        <div class="row col-md-8 mx-auto my-auto" style="margin-top:30px">
+        <div class="row col-md-10 mx-auto" style="margin-top:30px;">
             @foreach (var template in Model)
             {
-                <div class="col-sm-4">
-                    <div class="card" style="width: 18rem;">
+                <div class="col-md-4" style="margin-top:30px;">
+                    <div class="card" >
                         @if (@template.Image != "")
                         {
                             <img class="card-img-top" src="@template.Image" alt="Wireframe" />
