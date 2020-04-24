@@ -18,6 +18,7 @@ namespace ECommerceMVC.Pages.Shop
             _product = product;
         }
 
+        //using it to grab a all of the product
         public List<Product> PageList { get; set; }
 
         //page number variable
@@ -28,6 +29,7 @@ namespace ECommerceMVC.Pages.Shop
         [BindProperty(SupportsGet = true)]
         public int S { get; set; } = 6;
 
+        //amount that is in the page
         public int TotalRecords { get; set; }
 
         public async Task OnGet()
