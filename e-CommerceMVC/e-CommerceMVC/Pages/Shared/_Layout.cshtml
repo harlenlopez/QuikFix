@@ -15,12 +15,14 @@
     <link rel="stylesheet" href="~/styles/base.css" />
     <link rel="stylesheet" href="~/styles/layout.css" />
     <link rel="stylesheet" href="~/styles/module.css" />
+    <link rel="stylesheet" href="~/styles/index/theme.css" />
+
 
 </head>
 <body>
     <header>
         <nav class="navbar navbar-light text-white bg-dark navbar-expand-lg">
-            <H1 class="ml-1">ECOMMERCE</H1>
+            <H1 class="ml-1" id="title-logo">QuikFix</H1>
             <button type="button" class="navbar-toggler bg-secondary" data-toggle="collapse" data-target="#collapsable">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -29,7 +31,9 @@
                 @if (SignInManager.IsSignedIn(User))
             {
                 <div class="nav navbar-nav ml-auto">
-                    <span class="pr-5 my-auto"> Aloha @User.Claims.First(x => x.Type == "FullName").Value </span>
+                    <a asp-page="/Home/Index" class="bg link text-white pr-3 my-auto">Home</a>
+
+                    <span class="pr-3 my-auto"> Aloha @User.Claims.First(x => x.Type == "FullName").Value </span>
 
                     <a asp-page="/Account/Logout" class="bg-link text-white pr-1 nav-link">Logout</a>
 
@@ -38,10 +42,13 @@
             else
             {
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="navbar-item col-sm-6">
+                    <li class="navbar-item col-sm-4">
+                         <a asp-page="/Home/Index" class="text-white nav-link">Home</a>
+                    </li>
+                    <li class="navbar-item col-sm-4">
                         <a asp-page="/account/login" class="text-white nav-link">Login</a>
                     </li>
-                    <li class="navbar-item col-sm-6">
+                    <li class="navbar-item col-sm-4">
                         <a asp-page="/account/register" class="text-white nav-link">Register</a>
                     </li>
                 </ul>
