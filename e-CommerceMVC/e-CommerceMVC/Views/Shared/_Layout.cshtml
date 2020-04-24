@@ -10,25 +10,28 @@
     <meta name="viewport" content="width=device-width" />
     <title>E-Commerce</title>
     <link rel="stylesheet" href="~/styles/reset.css" />
-    <link rel="stylesheet" href="~/styles/base.css" />
-    <link rel="stylesheet" href="~/styles/layout.css" />
-    <link rel="stylesheet" href="~/styles/module.css" />
     @*implementing bootstrap*@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/styles/Index/theme.css" />
+
 </head>
 <body>
     <header>
         <nav class="navbar navbar-light text-white bg-dark navbar-expand-lg">
-            <H1 class="ml-1">ECOMMERCE</H1>
-            <button type="button" class="navbar-toggler bg-secondary" data-toggle="collapse" data-target="#collapsable">
+            <h1 class="ml-1" id="title-logo">QuikFix</h1>
+
+            <button type="button" class="navbar-toggler bg-light" data-toggle="collapse" data-target="#collapsable">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="collapsable">
 
+            <div class="collapse navbar-collapse" id="collapsable">
+                @* This logic check if user is logged in *@
             @if (SignInManager.IsSignedIn(User))
             {
                 <div class="nav navbar-nav ml-auto">
-                    <span class="pr-5 my-auto"> Aloha @User.Claims.First(x => x.Type == "FullName").Value </span>
+                    <a asp-page="/Shop/Index" class="bg link text-white pr-3 my-auto">Shop</a>
+
+                    <span class="pr-3 my-auto"> Aloha @User.Claims.First(x => x.Type == "FullName").Value </span>
 
                     <a asp-page="/Account/Logout" class="bg-link text-white pr-1 nav-link">Logout</a>
 
@@ -36,14 +39,18 @@
             }
             else
             {
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="navbar-item col-sm-6">
-                        <a asp-page="/account/login" class="text-white nav-link">Login</a>
-                    </li>
-                    <li class="navbar-item col-sm-6">
-                        <a asp-page="/account/register" class="text-white nav-link">Register</a>
-                    </li>
-                </ul>
+            <ul class="nav navbar-nav ml-auto">
+                <li class="navbar-item col-sm-4">
+                     <a asp-page="/Shop/Index" class="text-white nav-link">Shop</a>
+                </li>
+
+                <li class="navbar-item col-sm-4">
+                    <a asp-page="/account/login" class="text-white nav-link">Login</a>
+                </li>
+                <li class="navbar-item col-sm-4">
+                    <a asp-page="/account/register" class="text-white nav-link">Register</a>
+                </li>
+            </ul>
             }
             </div>
         </nav>
