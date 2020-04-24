@@ -32,6 +32,7 @@ namespace ECommerceMVC.Pages.Shop
         //amount that is in the page
         public int TotalRecords { get; set; }
 
+        // grabbing a product from the database and creating a pagination
         public async Task OnGet()
         {
             List<Product> ProductList = await _product.GetAllInventories();
