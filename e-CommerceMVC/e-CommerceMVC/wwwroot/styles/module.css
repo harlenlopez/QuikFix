@@ -1,5 +1,6 @@
-﻿@import url('layout.css');
+﻿
 
-body {
-
+.pagecenter {
+    display:flex;
+    justify-content:center;
 }

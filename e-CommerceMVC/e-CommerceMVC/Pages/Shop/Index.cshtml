@@ -2,16 +2,14 @@
 @model ECommerceMVC.Pages.Shop.IndexModel
 @{
     Layout = "_Layout";
-    int count = 0;
 }
 
 <!DOCTYPE html>
 <body>
     <main>
         <div class="row col-md-11 mx-auto" style="margin:30px auto;">
-            @foreach (var template in Model.ProductList)
+            @foreach (var template in Model.PageList)
             {
-                @count++;
             <div class="col-md-4" style="margin-top:30px;">
                 <div class="card text-center">
                     @if (@template.Image != "")
@@ -35,14 +33,19 @@
             </div>
             }
         </div>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </nav>
+
+        <div class="pagecenter">
+            <paging page-no="Model.P"
+                    page-size="Model.S"
+                    total-records="Model.TotalRecords"
+                    show-first-last="false"
+                    show-total-pages="false"
+                    show-total-records="false"
+                    show-page-size-nav="false"
+                    show-gap="false">
+                >
+            </paging>
+        </div>
     </main>
 
 </body>
