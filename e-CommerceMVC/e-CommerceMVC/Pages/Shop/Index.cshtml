@@ -2,6 +2,7 @@
 @model ECommerceMVC.Pages.Shop.IndexModel
 @{
     Layout = "_Layout";
+    int count = 0;
 }
 
 <!DOCTYPE html>
@@ -10,29 +11,38 @@
         <div class="row col-md-11 mx-auto" style="margin:30px auto;">
             @foreach (var template in Model.ProductList)
             {
-                <div class="col-md-4" style="margin-top:30px;">
-                    <div class="card">
-                        @if (@template.Image != "")
+                @count++;
+            <div class="col-md-4" style="margin-top:30px;">
+                <div class="card text-center">
+                    @if (@template.Image != "")
                         {
-                            <a asp-page="./Product" asp-route-id="@template.ID">
-                                <img class="card-img-top" src="@template.Image" alt="Wireframe" />
-                            </a>
+                    <a asp-page="./Product" asp-route-id="@template.ID">
+                        <img class="card-img-top" src="@template.Image" alt="Wireframe" />
+                    </a>
                         }
                         else
                         {
-                            <a asp-page="./Product" asp-route-id="@template.ID">
-                                <img class="card-img-top" src="https://via.placeholder.com/150" alt="placeholder image" />
-                             </a>
+                    <a asp-page="./Product" asp-route-id="@template.ID">
+                        <img class="card-img-top" src="https://via.placeholder.com/150" alt="placeholder image" />
+                    </a>
 
                                 }
-                                <div class="card-body">
-                                    <h3 class="card-title">@template.Name</h3>
-                                    <p class="card-subtitle mb-2 text-muted">@template.Price</p>
-                                </div>
-                        </div>
+                    <div class="card-body">
+                        <h3 class="card-title">@template.Name</h3>
+                        <p class="card-subtitle mb-2 text-muted">@template.Price</p>
+                    </div>
                 </div>
+            </div>
             }
         </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
     </main>
 
 </body>
