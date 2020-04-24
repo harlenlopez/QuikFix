@@ -30,19 +30,19 @@ Microsoft Visual Studio Community 2019
 - LazZiya.TagHelpers
 ---
 
-## Usage
+## Visual
 
-### Overview of Recent Posts
-![Main Page](./assets/mainpage.png)
+### Main Page
+![Main Page](./assets/mainpage.jpg)
 
-### Creating a Post
-![Post Creation](https://via.placeholder.com/500x250)
+### Product Page
+![Product Page](./assets/productlist.png)
 
-### Enriching a Post
-![Enriching Post](https://via.placeholder.com/500x250)
+### Login Page
+![Login Page](./assets/login.png)
 
 ### Viewing Post Details
-![Details of Post](https://via.placeholder.com/500x250)
+![Registration Page](./assets/register.png)
 
 ---
 ## Data Flow (Frontend, Backend, REST API)
