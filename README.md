@@ -1,19 +1,21 @@
-# Ecommerce-Project
+# QuikFix
 ---
+
 ### Deployed Site
 
-[Deployed Site](https://e-commercemvc.azurewebsites.net/)
+[Deployed Website](https://e-commercemvc.azurewebsites.net/)
 
 ---
-## Web Application
+## Application Information
 
-The web application consists of a frontend written in Razor views, HTML, CSS,
-Bootstrap, Popper, and jQuery. The backend was written in C# using ASP.NET Core 2, Entity Framework Core, and the MVC framework.
-
-
+In a current society, businesses are required to have website and this QuikFix is here to solve that problem. Our wonderful developers are here to create a intuitive website that not only solve headaching problem of creating a website, but design it to be scalable and game changing.
 
 ---
+## Claims
 
+- This website captures favorite color, design that user wants and types of business that employer owns. 
+
+---
 ## Tools Used
 Microsoft Visual Studio Community 2019
 
@@ -25,22 +27,22 @@ Microsoft Visual Studio Community 2019
 - Bootstrap
 - Azure
 - Swagger
-
+- LazZiya.TagHelpers
 ---
 
-## Usage
+## Visual
 
-### Overview of Recent Posts
-![Main Page](./assets/mainpage.png)
+### Main Page
+![Main Page](./assets/mainpage.jpg)
 
-### Creating a Post
-![Post Creation](https://via.placeholder.com/500x250)
+### Product Page
+![Product Page](./assets/productlist.png)
 
-### Enriching a Post
-![Enriching Post](https://via.placeholder.com/500x250)
+### Login Page
+![Login Page](./assets/login.png)
 
 ### Viewing Post Details
-![Details of Post](https://via.placeholder.com/500x250)
+![Registration Page](./assets/register.png)
 
 ---
 ## Data Flow (Frontend, Backend, REST API)
@@ -56,6 +58,7 @@ Microsoft Visual Studio Community 2019
 ---
 
 ## Change Log
+0.4: *Created a shop and product page that will display all of our services and detail page* 04 24, 2020  
 0.3: *Added bootstrap to our website and having the login, register and logout functionality implemented* 04 22, 2020  
 0.2: *Added unit tesing and second database for product* 04 21, 2020  
 0.1: *Created Hello World first Page* -  04 21, 2020
@@ -68,5 +71,5 @@ Microsoft Visual Studio Community 2019
 [Jin Kim](https://github.com/jinwoov)
 
 ---
-
-For more information on Markdown: https://www.markdownguide.org/cheat-sheet
+## Credit
+Photo by Georgie Cobbs on Unsplash  

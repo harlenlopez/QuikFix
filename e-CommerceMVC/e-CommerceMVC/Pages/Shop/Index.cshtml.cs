@@ -18,11 +18,31 @@ namespace ECommerceMVC.Pages.Shop
             _product = product;
         }
 
-        public List<Product> ProductList { get; set; }
+        //using it to grab a all of the product
+        public List<Product> PageList { get; set; }
 
+        //page number variable
+        [BindProperty(SupportsGet = true)]
+        public int P { get; set; } = 1;
+
+        //page size variable
+        [BindProperty(SupportsGet = true)]
+        public int S { get; set; } = 6;
+
+        //amount that is in the page
+        public int TotalRecords { get; set; }
+
+        // grabbing a product from the database and creating a pagination
         public async Task OnGet()
         {
-            ProductList = await _product.GetAllInventories();
+            List<Product> ProductList = await _product.GetAllInventories();
+
+            TotalRecords = ProductList.Count;
+
+            PageList = ProductList
+                .Skip((P - 1) * S)
+                .Take(S)
+                .ToList();
         }
     }
 }
