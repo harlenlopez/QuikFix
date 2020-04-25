@@ -73,6 +73,7 @@ namespace GUnitTest
                 .UseInMemoryDatabase("AbleToCreateAProductInOurDatabase")
                  .Options;
             
+            // using the context of database
             using(StoreDbContext storeDb = new StoreDbContext(options))
             {
                 ProductService ps = new ProductService(storeDb);
@@ -97,6 +98,7 @@ namespace GUnitTest
                .UseInMemoryDatabase("AbleToReadAProductFromDatabase")
                 .Options;
 
+            // using the context of database
             using (StoreDbContext storeDb = new StoreDbContext(options))
             {
                 ProductService ps = new ProductService(storeDb);

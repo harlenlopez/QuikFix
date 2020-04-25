@@ -10,29 +10,30 @@
         <div class="row col-md-11 mx-auto" style="margin:30px auto;">
             @foreach (var template in Model.PageList)
             {
-                <div class="col-md-4" style="margin-top:30px;">
-                    <div class="card text-center">
-                        @if (@template.Image != "")
+            <div class="col-md-4" style="margin-top:30px;">
+                <div class="card text-center">
+                    @if (@template.Image != "")
                         {
-                            <a asp-page="./Product" asp-route-id="@template.ID">
-                                <img class="card-img-top" src="@template.Image" alt="Wireframe" />
-                            </a>
+                    <a asp-page="./Product" asp-route-id="@template.ID">
+                        <img class="card-img-top" src="@template.Image" alt="Wireframe" />
+                    </a>
                         }
                         else
                         {
-                            <a asp-page="./Product" asp-route-id="@template.ID">
-                                <img class="card-img-top" src="https://via.placeholder.com/150" alt="placeholder image" />
-                            </a>
+                    <a asp-page="./Product" asp-route-id="@template.ID">
+                        <img class="card-img-top" src="https://via.placeholder.com/150" alt="placeholder image" />
+                    </a>
 
                         }
-                        <div class="card-body">
-                            <h3 class="card-title">@template.Name</h3>
-                            <p class="card-subtitle mb-2 text-muted">$@template.Price</p>
-                        </div>
+                    <div class="card-body">
+                        <h3 class="card-title">@template.Name</h3>
+                        <p class="card-subtitle mb-2 text-muted">$@template.Price</p>
                     </div>
                 </div>
+            </div>
             }
         </div>
+        @* ================== Pagination========================== *@
 
         <div class="pagecenter">
             <paging page-no="Model.P"
@@ -46,6 +47,8 @@
                 >
             </paging>
         </div>
+        @* ========================================================= *@
+
     </main>
 
 </body>
