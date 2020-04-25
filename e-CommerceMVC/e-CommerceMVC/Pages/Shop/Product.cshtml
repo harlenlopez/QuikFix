@@ -7,16 +7,27 @@
 <!DOCTYPE html>
 <body>
     <main>
-        <img src="@Model.Product.Image" alt="Product Image"/>
-        <p>
-            $@Model.Product.Price
-        </p>
-    <h1>
-        @Model.Product.Name
-    </h1>
-        <p>
-            @Model.Product.Description
-        </p>
+        <div class="container">
+                <div class="text-center">
+                    <img class="w-75 mx-auto pt-100" src="@Model.Product.Image" alt="Product Image"  id="detail-page" />
+                </div>
 
-        </main>
+                <div>
+                    <div class="col-sm-12 text-center">
+                        <h1>
+                            @Model.Product.Name
+                        </h1>
+                    </div>
+                    <div class="text-center">
+                        <p>
+                            $@Model.Product.Price
+                        </p>
+
+                        <p>
+                            @Model.Product.Description
+                        </p>
+                    </div>
+                </div>
+            </div>
+    </main>
 </body>

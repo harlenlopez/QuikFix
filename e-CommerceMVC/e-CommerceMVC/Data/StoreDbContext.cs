@@ -24,20 +24,20 @@ namespace ECommerceMVC.Data
                new Product
                {
                    ID = 1,
-                   SKU = "8fj38s10",
-                   Name = "modern",
-                   Description = "very modern dumpster fires",
-                   Image = "",
-                   Price = 200.00m,
-                   
+                   SKU = "12jrj830",
+                   Name = "Classic",
+                   Description = "Classic website",
+                   Image = "https://i.imgur.com/ex7bvr4.jpg",
+                   Price = 150.00m,
+
                },
                new Product
                {
                    ID = 2,
                    SKU = "8fw4s10",
-                   Name = "hipster",
-                   Description = "very hipster dumpster fires",
-                   Image = "",
+                   Name = "Hipster",
+                   Description = "Hipster website",
+                   Image = "https://i.imgur.com/KckYFPo.jpg",
                    Price = 300.00m,
 
                },
@@ -45,9 +45,9 @@ namespace ECommerceMVC.Data
                 {
                     ID = 3,
                     SKU = "4nj38s10",
-                    Name = "antique",
-                    Description = "very antique dumpster fires",
-                    Image = "",
+                    Name = "Antique",
+                    Description = "Antique website",
+                    Image = "https://i.imgur.com/rIRLFbX.jpg",
                     Price = 180.00m,
 
                 },
@@ -55,9 +55,9 @@ namespace ECommerceMVC.Data
                 {
                     ID = 4,
                     SKU = "7mj38s10",
-                    Name = "comic",
-                    Description = "very comical dumpster fires",
-                    Image = "",
+                    Name = "Comic",
+                    Description = "Comical website",
+                    Image = "https://i.imgur.com/xf5nzhK.jpg",
                     Price = 210.00m,
 
                 },
@@ -65,9 +65,9 @@ namespace ECommerceMVC.Data
                 {
                     ID = 5,
                     SKU = "12j38s10",
-                    Name = "nature",
-                    Description = "very natural dumpster fires",
-                    Image = "",
+                    Name = "Nature",
+                    Description = "Natural website",
+                    Image = "https://i.imgur.com/1k8nogz.jpg",
                     Price = 2000.00m,
 
                 },
@@ -75,9 +75,9 @@ namespace ECommerceMVC.Data
                 {
                     ID = 6,
                     SKU = "8fg38s10",
-                    Name = "technical",
-                    Description = "very technical dumpster fires",
-                    Image = "",
+                    Name = "Technical",
+                    Description = "Technical website",
+                    Image = "https://i.imgur.com/q1OefoY.jpg",
                     Price = 200.00m,
 
                 },
@@ -85,9 +85,9 @@ namespace ECommerceMVC.Data
                {
                    ID = 7,
                    SKU = "8fw8s10",
-                   Name = "greyscale",
-                   Description = "very drab dumpster fires",
-                   Image = "",
+                   Name = "Greyscale",
+                   Description = "Greyscale website",
+                   Image = "https://i.imgur.com/lJrL4Sr.jpg",
                    Price = 75.00m,
 
                },
@@ -95,9 +95,9 @@ namespace ECommerceMVC.Data
                 {
                     ID = 8,
                     SKU = "yv538s10",
-                    Name = "cozy",
-                    Description = "very cozy dumpster fires",
-                    Image = "",
+                    Name = "Cozy",
+                    Description = "Cozy website",
+                    Image = "https://i.imgur.com/ZesihIk.jpg",
                     Price = 240.00m,
 
                 },
@@ -105,21 +105,20 @@ namespace ECommerceMVC.Data
                 {
                     ID = 9,
                     SKU = "83nd8fn3",
-                    Name = "colorful",
-                    Description = "very colorful dumpster fires",
-                    Image = "",
+                    Name = "Colorful",
+                    Description = "Colorful website",
+                    Image = "https://i.imgur.com/26bU5zY.png",
                     Price = 350.00m,
 
                 },
                 new Product
                 {
                     ID = 10,
-                    SKU = "12jrj830",
-                    Name = "classic",
-                    Description = "very classic dumpster fires",
-                    Image = "",
-                    Price = 150.00m,
-
+                    SKU = "8fj38s10",
+                    Name = "Modern",
+                    Description = "Modern website",
+                    Image = "https://i.imgur.com/G6NxY8n.jpg",
+                    Price = 200.00m,
                 }
                 );
         }

@@ -4,3 +4,7 @@
     display:flex;
     justify-content:center;
 }
+
+#detail-page {
+    margin-top: 50px;
+}
