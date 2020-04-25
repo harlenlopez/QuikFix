@@ -6,7 +6,17 @@
 }
 <!DOCTYPE html>
 <body>
+    <main>
+        <img src="@Model.Product.Image" alt="Product Image"/>
+        <p>
+            $@Model.Product.Price
+        </p>
     <h1>
-        We are in product page
+        @Model.Product.Name
     </h1>
+        <p>
+            @Model.Product.Description
+        </p>
+
+        </main>
 </body>
