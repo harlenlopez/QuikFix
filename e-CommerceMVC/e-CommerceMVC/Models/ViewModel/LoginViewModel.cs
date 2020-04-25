@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.Models.ViewModel
 {
+    /// <summary>
+    /// Using this to get and set the login information when user logs in
+    /// </summary>
     public class LoginViewModel
     {
         [Required]

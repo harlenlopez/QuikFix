@@ -8,12 +8,12 @@
 ---
 ## Application Information
 
-In a current society, businesses are required to have website and this QuikFix is here to solve that problem. Our wonderful developers are here to create a intuitive website that not only solve headaching problem of creating a website, but design it to be scalable and game changing.
+In a current society, businesses are required to have website and QuikFix is here to solve that problem. Our wonderful developers are here to create a intuitive website that not only solve headache inducing problem of creating a website, but design it to be scalable and game changing.
 
 ---
 ## Claims
 
-- This website captures favorite color, design that user wants and types of business that employer owns. 
+- This website captures user's favorite color, design that user wants and the type of business the employer owns. They are required to input this information during the registration page. Our goal is to utilize these claims to tailor each web page to the end user.
 
 ---
 ## Tools Used
@@ -44,20 +44,11 @@ Microsoft Visual Studio Community 2019
 ### Viewing Post Details
 ![Registration Page](./assets/register.png)
 
----
-## Data Flow (Frontend, Backend, REST API)
-
-
----
-## Data Model
-
-### Overall Project Schema
-***[Add a description of your DB schema. Explain the relationships to me.]***  
-![Database Schema](/assets/img/ERD.png)
 
 ---
 
 ## Change Log
+0.5: *Added detail page to show description, price and title* 04 25, 2020
 0.4: *Created a shop and product page that will display all of our services and detail page* 04 24, 2020  
 0.3: *Added bootstrap to our website and having the login, register and logout functionality implemented* 04 22, 2020  
 0.2: *Added unit tesing and second database for product* 04 21, 2020  

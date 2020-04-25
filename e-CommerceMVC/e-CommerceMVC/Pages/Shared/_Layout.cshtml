@@ -14,15 +14,16 @@
     <link rel="stylesheet" href="~/styles/reset.css" />
     @*Using bootstrap*@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="~/styles/base.css" />
-    <link rel="stylesheet" href="~/styles/layout.css" />
-    <link rel="stylesheet" href="~/styles/module.css" />
-    <link rel="stylesheet" href="~/styles/index/theme.css" />
+    <link rel="stylesheet" href="~/styles/base.css?t=@DateTime.Now.Ticks" type="text/css" />
+    <link rel="stylesheet" href="~/styles/layout.css?t=@DateTime.Now.Ticks" type="text/css" />
+    <link rel="stylesheet" href="~/styles/module.css?t=@DateTime.Now.Ticks" type="text/css" />
+    <link rel="stylesheet" href="~/styles/index/theme.css?t=@DateTime.Now.Ticks" type="text/css" />
     @* ========================================================= *@
 </head>
 
 <body>
     <header>
+        @* ======================== HEADER ========================== *@
         <nav class="navbar navbar-light text-white bg-dark navbar-expand-lg">
             <H1 class="ml-1" id="title-logo">QuikFix</H1>
             <button type="button" class="navbar-toggler bg-light" data-toggle="collapse" data-target="#collapsable">
@@ -45,7 +46,7 @@
             {
                 <ul class="nav navbar-nav ml-auto">
                     <li class="navbar-item col-sm-4">
-                         <a asp-page="/Home/Index" class="text-white nav-link">Home</a>
+                        <a asp-page="/Home/Index" class="text-white nav-link">Home</a>
                     </li>
                     <li class="navbar-item col-sm-4">
                         <a asp-page="/account/login" class="text-white nav-link">Login</a>
@@ -58,6 +59,8 @@
             </div>
         </nav>
     </header>
+    @* ========================================================= *@
+
     <div>
         @RenderBody()
     </div>

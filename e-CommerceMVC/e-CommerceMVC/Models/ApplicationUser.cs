@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.Models
 {
+    /// <summary>
+    /// Model for indentity db context
+    /// </summary>
     public class ApplicationUser : IdentityUser
     {
         public string FirstName { get; set; }

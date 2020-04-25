@@ -3,14 +3,16 @@ using ECommerceMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ECommerceMVC.Migrations.StoreDb
 {
     [DbContext(typeof(StoreDbContext))]
-    partial class StoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200425183040_updatedimgURL")]
+    partial class updatedimgURL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace ECommerceMVC.Migrations.StoreDb
                         {
                             ID = 1,
                             Description = "Classic website",
-                            Image = "https://i.imgur.com/ex7bvr4.jpg",
+                            Image = "https://imgur.com/ex7bvr4",
                             Name = "Classic",
                             Price = 150.00m,
                             SKU = "12jrj830"
@@ -58,7 +60,7 @@ namespace ECommerceMVC.Migrations.StoreDb
                         {
                             ID = 2,
                             Description = "Hipster website",
-                            Image = "https://i.imgur.com/KckYFPo.jpg",
+                            Image = "https://imgur.com/KckYFPo",
                             Name = "Hipster",
                             Price = 300.00m,
                             SKU = "8fw4s10"
@@ -67,7 +69,7 @@ namespace ECommerceMVC.Migrations.StoreDb
                         {
                             ID = 3,
                             Description = "Antique website",
-                            Image = "https://i.imgur.com/rIRLFbX.jpg",
+                            Image = "https://imgur.com/rIRLFbX",
                             Name = "Antique",
                             Price = 180.00m,
                             SKU = "4nj38s10"
@@ -76,7 +78,7 @@ namespace ECommerceMVC.Migrations.StoreDb
                         {
                             ID = 4,
                             Description = "Comical website",
-                            Image = "https://i.imgur.com/xf5nzhK.jpg",
+                            Image = "https://imgur.com/xf5nzhK",
                             Name = "Comic",
                             Price = 210.00m,
                             SKU = "7mj38s10"
@@ -85,7 +87,7 @@ namespace ECommerceMVC.Migrations.StoreDb
                         {
                             ID = 5,
                             Description = "Natural website",
-                            Image = "https://i.imgur.com/1k8nogz.jpg",
+                            Image = "https://imgur.com/1k8nogz",
                             Name = "Nature",
                             Price = 2000.00m,
                             SKU = "12j38s10"
@@ -94,7 +96,7 @@ namespace ECommerceMVC.Migrations.StoreDb
                         {
                             ID = 6,
                             Description = "Technical website",
-                            Image = "https://i.imgur.com/q1OefoY.jpg",
+                            Image = "https://imgur.com/q1OefoY",
                             Name = "Technical",
                             Price = 200.00m,
                             SKU = "8fg38s10"
@@ -103,7 +105,7 @@ namespace ECommerceMVC.Migrations.StoreDb
                         {
                             ID = 7,
                             Description = "Greyscale website",
-                            Image = "https://i.imgur.com/lJrL4Sr.jpg",
+                            Image = "https://imgur.com/lJrL4Sr",
                             Name = "Greyscale",
                             Price = 75.00m,
                             SKU = "8fw8s10"
@@ -112,7 +114,7 @@ namespace ECommerceMVC.Migrations.StoreDb
                         {
                             ID = 8,
                             Description = "Cozy website",
-                            Image = "https://i.imgur.com/ZesihIk.jpg",
+                            Image = "https://imgur.com/ZesihIk",
                             Name = "Cozy",
                             Price = 240.00m,
                             SKU = "yv538s10"
@@ -121,7 +123,7 @@ namespace ECommerceMVC.Migrations.StoreDb
                         {
                             ID = 9,
                             Description = "Colorful website",
-                            Image = "https://i.imgur.com/26bU5zY.png",
+                            Image = "https://imgur.com/26bU5zY",
                             Name = "Colorful",
                             Price = 350.00m,
                             SKU = "83nd8fn3"
@@ -130,7 +132,7 @@ namespace ECommerceMVC.Migrations.StoreDb
                         {
                             ID = 10,
                             Description = "Modern website",
-                            Image = "https://i.imgur.com/G6NxY8n.jpg",
+                            Image = "https://imgur.com/G6NxY8n",
                             Name = "Modern",
                             Price = 200.00m,
                             SKU = "8fj38s10"
