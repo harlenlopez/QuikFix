@@ -1,0 +1,9 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cabin', sans-serif;
+}

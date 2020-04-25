@@ -1,0 +1,22 @@
+﻿@page "{id:int?}"
+@model ECommerceMVC.Pages.Shop.ProductModel
+@{
+    Layout = "_Layout";
+
+}
+<!DOCTYPE html>
+<body>
+    <main>
+        <img src="@Model.Product.Image" alt="Product Image"/>
+        <p>
+            $@Model.Product.Price
+        </p>
+    <h1>
+        @Model.Product.Name
+    </h1>
+        <p>
+            @Model.Product.Description
+        </p>
+
+        </main>
+</body>
