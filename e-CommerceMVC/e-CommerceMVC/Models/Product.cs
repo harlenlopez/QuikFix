@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.Models
 {
+    /// <summary>
+    /// Model for storedbcontext database
+    /// </summary>
     public class Product
     {
         public int ID { get; set; }
