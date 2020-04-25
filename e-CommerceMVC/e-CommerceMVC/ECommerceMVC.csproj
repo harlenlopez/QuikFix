@@ -27,6 +27,10 @@
     <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
     <Compile Include="Migrations\StoreDb\20200422222315_product.cs" />
     <Compile Include="Migrations\StoreDb\20200422222315_product.Designer.cs" />
+    <Compile Include="Migrations\StoreDb\20200425183040_updatedimgURL.cs" />
+    <Compile Include="Migrations\StoreDb\20200425183040_updatedimgURL.Designer.cs" />
+    <Compile Include="Migrations\StoreDb\20200425183526_imgURL.cs" />
+    <Compile Include="Migrations\StoreDb\20200425183526_imgURL.Designer.cs" />
     <Compile Include="Migrations\StoreDb\StoreDbContextModelSnapshot.cs" />
   </ItemGroup>
 
