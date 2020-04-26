@@ -1,10 +1,30 @@
 ﻿
 
+/*============Product page=============*/
 .pagecenter {
     display:flex;
     justify-content:center;
 }
 
+.card-image {
+    height: 400px;
+    object-fit: cover;
+}
+
+/*============Detail page=============*/
 #detail-page {
     margin-top: 50px;
 }
+
+
+/*==========Nav Bar================*/
+#navvy {
+    background-color: transparent !important;
+}
+
+#logo {
+    width: 5%;
+}
+
+
+/*==============Login================*/

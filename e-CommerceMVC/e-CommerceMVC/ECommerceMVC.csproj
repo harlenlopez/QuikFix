@@ -31,6 +31,8 @@
     <Compile Include="Migrations\StoreDb\20200425183040_updatedimgURL.Designer.cs" />
     <Compile Include="Migrations\StoreDb\20200425183526_imgURL.cs" />
     <Compile Include="Migrations\StoreDb\20200425183526_imgURL.Designer.cs" />
+    <Compile Include="Migrations\StoreDb\20200426225616_addedsummary.cs" />
+    <Compile Include="Migrations\StoreDb\20200426225616_addedsummary.Designer.cs" />
     <Compile Include="Migrations\StoreDb\StoreDbContextModelSnapshot.cs" />
   </ItemGroup>
 

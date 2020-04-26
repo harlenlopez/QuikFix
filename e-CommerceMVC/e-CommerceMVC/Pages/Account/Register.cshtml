@@ -38,7 +38,7 @@
             <div class="form-group row">
                 <label asp-for="RegisterData.BirthDay" class="col-sm-3 col-form-label"></label>
                 <div class="col-sm-9">
-                    <input asp-for="RegisterData.BirthDay" class="form-control" />
+                    <input asp-for="RegisterData.BirthDay" class="form-control"/>
                     <span asp-validation-for="RegisterData.BirthDay"></span>
                 </div>
             </div>
@@ -47,6 +47,7 @@
                 <label asp-for="RegisterData.Password" class="col-sm-3 col-form-label"></label>
                 <div class="col-sm-9">
                     <input asp-for="RegisterData.Password" class="form-control" />
+                    <small id="emailHelp" class="form-text text-muted">Password must include small, upper case, number and one special character.</small>
                     <span asp-validation-for="RegisterData.Password"></span>
                 </div>
             </div>
