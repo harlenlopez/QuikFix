@@ -35,9 +35,9 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <div class="nav navbar-nav ml-auto">
-                        <a asp-page="/Shop/Index" class="bg link text-black pr-3 my-auto">Shop</a>
+                        <a asp-page="/Shop/Index" class="bg-link text-black pr-3 my-auto nav-link">Shop</a>
 
-                        <span class="pr-3 my-auto"> Aloha @User.Claims.First(x => x.Type == "FullName").Value </span>
+                        <span class="pr-3 my-auto text-muted"> Aloha @User.Claims.First(x => x.Type == "FullName").Value </span>
 
                         <a asp-page="/Account/Logout" class="bg-link text-black pr-1 nav-link">Logout</a>
 
