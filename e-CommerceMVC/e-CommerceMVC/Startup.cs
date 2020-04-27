@@ -82,6 +82,9 @@ namespace ECommerceMVC
 
 
             services.AddTransient<IProductManager, ProductService>();
+            services.AddTransient<ICartManager, CartService>();
+            services.AddTransient<ICartItemsManager, CartItemsService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

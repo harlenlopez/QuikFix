@@ -6,9 +6,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerceMVC.Models;
+using ECommerceMVC.Models.Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+
 
 namespace ECommerceMVC.Pages.Account
 {
@@ -19,6 +21,7 @@ namespace ECommerceMVC.Pages.Account
         /// </summary>
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
+        private readonly ICartManager _cartManager;
 
         /// <summary>
         /// Biding user form data to normalize it
@@ -27,10 +30,11 @@ namespace ECommerceMVC.Pages.Account
         public RegisterInfo RegisterData { get; set; }
 
         // constructor to bringing in identity built in libraries (UserManager and SigninManager)
-        public RegisterModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public RegisterModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ICartManager cartManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _cartManager = cartManager;
         }
 
         /// <summary>
@@ -91,6 +95,14 @@ namespace ECommerceMVC.Pages.Account
 
                     // adding the claims to the database
                     await _userManager.AddClaimsAsync(user, claims);
+
+                    //
+                    Carts carts = new Carts()
+                    {
+                        Email = RegisterData.Email
+                    };
+
+                    await _cartManager.CreateCart(carts);
 
                     //signs user in
                     await _signInManager.SignInAsync(user, isPersistent: false);

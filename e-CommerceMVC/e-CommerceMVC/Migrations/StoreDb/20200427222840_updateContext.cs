@@ -7,22 +7,7 @@ namespace ECommerceMVC.Migrations.StoreDb
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "CartItems",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductID = table.Column<int>(nullable: false),
-                    CartID = table.Column<int>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CartItems", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Carts",
+                name: "Cart",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
@@ -31,7 +16,7 @@ namespace ECommerceMVC.Migrations.StoreDb
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Carts", x => x.ID);
+                    table.PrimaryKey("PK_Cart", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -51,6 +36,34 @@ namespace ECommerceMVC.Migrations.StoreDb
                     table.PrimaryKey("PK_Products", x => x.ID);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CartItems",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductID = table.Column<int>(nullable: false),
+                    CartID = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    CartsID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartItems", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_CartItems_Cart_CartsID",
+                        column: x => x.CartsID,
+                        principalTable: "Cart",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CartItems_Products_ProductID",
+                        column: x => x.ProductID,
+                        principalTable: "Products",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ID", "Description", "Image", "Name", "Price", "SKU" },
@@ -67,6 +80,16 @@ namespace ECommerceMVC.Migrations.StoreDb
                     { 9, "Website that pursue on innovation and vibrant schema. This website illustrate all of the beautiful colors in the world into one. Sure to bring in heavy traffic.", "https://i.imgur.com/26bU5zY.png", "Colorful", 350.00m, "83nd8fn3" },
                     { 10, "Website that thrives in modern society and its fast changes. This website is for end user with modern taste and elegant details.", "https://i.imgur.com/aHUKS0C.png", "Modern", 200.00m, "8fj38s10" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartItems_CartsID",
+                table: "CartItems",
+                column: "CartsID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartItems_ProductID",
+                table: "CartItems",
+                column: "ProductID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -75,7 +98,7 @@ namespace ECommerceMVC.Migrations.StoreDb
                 name: "CartItems");
 
             migrationBuilder.DropTable(
-                name: "Carts");
+                name: "Cart");
 
             migrationBuilder.DropTable(
                 name: "Products");

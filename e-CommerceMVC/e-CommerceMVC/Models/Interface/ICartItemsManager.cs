@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.Models.Interface
 {
-    interface ICartItemsManager
+    public interface ICartItemsManager
     {
         Task<CartItems> GetCartItemsById(int ID);
         // Create

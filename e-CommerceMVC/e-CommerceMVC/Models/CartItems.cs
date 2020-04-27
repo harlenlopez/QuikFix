@@ -11,6 +11,10 @@ namespace ECommerceMVC.Models
         public int ProductID { get; set; }
         public int CartID { get; set; }
         public int Quantity { get; set; }
+        
+        public Carts Carts { get; set; }
+        public Product Product { get; set; }
+
 
     }
 }
