@@ -51,7 +51,7 @@ Microsoft Visual Studio Community 2019
 ---
 
 ## Change Log
-0.6: *README and styling for website is updated* 04 26, 2020
+0.6: *README and styling for website is updated* 04 26, 2020  
 0.5: *Added detail page to show description, price and title* 04 25, 2020
 0.4: *Created a shop and product page that will display all of our services and detail page* 04 24, 2020  
 0.3: *Added bootstrap to our website and having the login, register and logout functionality implemented* 04 22, 2020  
