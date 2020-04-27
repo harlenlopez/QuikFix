@@ -12,10 +12,17 @@ namespace ECommerceMVC.Pages.Account
 {
     public class LoginModel : PageModel
     {
+        /// <summary>
+        /// Creating local properties t obe used 
+        /// </summary>
         private readonly SignInManager<ApplicationUser> _SignInManager;
         [BindProperty]
         public LoginViewModel Input { get; set; }
 
+        /// <summary>
+        /// Bringing in the indentity component call signin manager
+        /// </summary>
+        /// <param name="signInManager">the signin manager context</param>
         public LoginModel(SignInManager<ApplicationUser> signInManager)
         {
             _SignInManager = signInManager;
@@ -34,17 +41,18 @@ namespace ECommerceMVC.Pages.Account
             if (ModelState.IsValid)
             {
                 var result = await _SignInManager.PasswordSignInAsync(Input.Email, Input.Password, isPersistent: false, false);
+                /// if login is sucessful this if will be invoked
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index", "Home");
                 }
+                // other wise it will show error message
                 else
                 {
                     ModelState.AddModelError("", "you done messed up Aaron");
                     return Page();
 
                 }
-
             }
             // if this hits it will be back to our login page
             return Page();
