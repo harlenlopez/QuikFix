@@ -127,7 +127,7 @@ namespace ECommerceMVC.Pages.Account
 
             [Required]
             [DataType(DataType.Date)]
-            [Display(Name = "Birth day")]
+            [Display(Name = "Birthday")]
             public DateTime BirthDay { get; set; }
 
             [Required]
