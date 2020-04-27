@@ -126,7 +126,10 @@ namespace ECommerceMVC.Data
         /// <summary>
         /// Using the dbset of product
         /// </summary>
-        public DbSet<Product> Inventories { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Cart> Cart { get; set; }
+        public DbSet<CartItems> CartItems { get; set; }
+
 
     }
 }

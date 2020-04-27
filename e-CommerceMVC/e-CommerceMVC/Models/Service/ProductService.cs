@@ -30,7 +30,7 @@ namespace ECommerceMVC.Models.Service
         /// <returns>product that has been created</returns>
         public async Task<Product> CreateInventory(Product inventory)
         {
-            _context.Inventories.Add(inventory);
+            _context.Products.Add(inventory);
             await _context.SaveChangesAsync();
             return inventory;
         }
@@ -41,7 +41,7 @@ namespace ECommerceMVC.Models.Service
         /// <param name="product">product that will be deleted</param>
         public async Task DeleteInventories(Product product)
         {
-            _context.Inventories.Remove(product);
+            _context.Products.Remove(product);
             await _context.SaveChangesAsync();
         }
 
@@ -49,14 +49,14 @@ namespace ECommerceMVC.Models.Service
         /// Getting all of our products in the database
         /// </summary>
         /// <returns>list of products</returns>
-        public async Task<List<Product>> GetAllInventories() => await _context.Inventories.ToListAsync();
+        public async Task<List<Product>> GetAllInventories() => await _context.Products.ToListAsync();
 
         /// <summary>
         /// getting a product specific to the id
         /// </summary>
         /// <param name="ID">id of the product to be query</param>
         /// <returns>product</returns>
-        public async Task<Product> GetInventoryById(int ID) => await _context.Inventories.FindAsync(ID);
+        public async Task<Product> GetInventoryById(int ID) => await _context.Products.FindAsync(ID);
 
         /// <summary>
         /// Update method for product route
@@ -65,7 +65,7 @@ namespace ECommerceMVC.Models.Service
         /// <returns>product</returns>
         public async Task<Product> UpdateInventories(Product product)
         {
-            _context.Inventories.Update(product);
+            _context.Products.Update(product);
             await _context.SaveChangesAsync();
             return product;
         }
