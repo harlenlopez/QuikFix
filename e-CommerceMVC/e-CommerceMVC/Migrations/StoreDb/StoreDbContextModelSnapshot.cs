@@ -18,6 +18,42 @@ namespace ECommerceMVC.Migrations.StoreDb
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ECommerceMVC.Models.Cart", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("ECommerceMVC.Models.CartItems", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CartID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("CartItems");
+                });
+
             modelBuilder.Entity("ECommerceMVC.Models.Product", b =>
                 {
                     b.Property<int>("ID")
@@ -42,7 +78,7 @@ namespace ECommerceMVC.Migrations.StoreDb
 
                     b.HasKey("ID");
 
-                    b.ToTable("Inventories");
+                    b.ToTable("Products");
 
                     b.HasData(
                         new

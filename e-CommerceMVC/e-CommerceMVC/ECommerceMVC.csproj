@@ -25,14 +25,8 @@
     <Compile Include="Migrations\20200422231744_initial.cs" />
     <Compile Include="Migrations\20200422231744_initial.Designer.cs" />
     <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
-    <Compile Include="Migrations\StoreDb\20200422222315_product.cs" />
-    <Compile Include="Migrations\StoreDb\20200422222315_product.Designer.cs" />
-    <Compile Include="Migrations\StoreDb\20200425183040_updatedimgURL.cs" />
-    <Compile Include="Migrations\StoreDb\20200425183040_updatedimgURL.Designer.cs" />
-    <Compile Include="Migrations\StoreDb\20200425183526_imgURL.cs" />
-    <Compile Include="Migrations\StoreDb\20200425183526_imgURL.Designer.cs" />
-    <Compile Include="Migrations\StoreDb\20200426225616_addedsummary.cs" />
-    <Compile Include="Migrations\StoreDb\20200426225616_addedsummary.Designer.cs" />
+    <Compile Include="Migrations\StoreDb\20200427194846_updateContext.cs" />
+    <Compile Include="Migrations\StoreDb\20200427194846_updateContext.Designer.cs" />
     <Compile Include="Migrations\StoreDb\StoreDbContextModelSnapshot.cs" />
   </ItemGroup>
 

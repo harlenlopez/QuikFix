@@ -85,7 +85,7 @@ namespace GUnitTest
                 };
                 await ps.CreateInventory(product);
 
-                var data = storeDb.Inventories.Find(product.ID);
+                var data = storeDb.Products.Find(product.ID);
 
                 Assert.Equal(product, data);
             }
@@ -111,7 +111,7 @@ namespace GUnitTest
 
                 await ps.CreateInventory(product);
 
-                var data = storeDb.Inventories.Find(1);
+                var data = storeDb.Products.Find(1);
 
                 Assert.Equal(product, data);
             }
@@ -150,7 +150,7 @@ namespace GUnitTest
                 await ps.CreateInventory(product1);
 
 
-                var data = await storeDb.Inventories.ToListAsync();
+                var data = await storeDb.Products.ToListAsync();
 
                 Assert.Equal(ProductList, data);
             }
@@ -179,7 +179,7 @@ namespace GUnitTest
 
                 await ps.UpdateInventories(product);
 
-                var data = storeDb.Inventories.Find(product.ID);
+                var data = storeDb.Products.Find(product.ID);
 
                 Assert.Equal(product.Name, data.Name);
             }
@@ -206,7 +206,7 @@ namespace GUnitTest
 
                 await ps.DeleteInventories(product);
 
-                var data = storeDb.Inventories.Find(product.ID);
+                var data = storeDb.Products.Find(product.ID);
 
                 Assert.Null(data);
             }
