@@ -8,6 +8,8 @@ namespace ECommerceMVC.Models.Interface
     public interface ICartManager
     {
         Task<Carts> GetCartById(string email);
+
+        Task<List<CartItems>> GetProductByCartID(int id);
         // Create
         Task<Carts> CreateCart(Carts carts);
         // Get all products from the db

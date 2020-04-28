@@ -18,7 +18,6 @@ namespace ECommerceMVC.Pages.Cart
         /// <summary>
         /// Interface and database context and interfaces
         /// </summary>
-        private readonly IProductManager _ProductManager;
         private readonly ICartManager _CartManager;
         private readonly StoreDbContext _Context;
         private readonly ICartItemsManager _CartItemsManager;
@@ -30,9 +29,8 @@ namespace ECommerceMVC.Pages.Cart
         /// <param name="cartManager">interface for cart</param>
         /// <param name="cartItemsManager">interface for cart item</param>
         /// <param name="context">dbcontext context</param>
-        public IndexModel(IProductManager productManager, ICartManager cartManager, ICartItemsManager cartItemsManager, StoreDbContext context)
+        public IndexModel(ICartManager cartManager, ICartItemsManager cartItemsManager, StoreDbContext context)
         {
-            _ProductManager = productManager;
             _CartManager = cartManager;
             _Context = context;
             _CartItemsManager = cartItemsManager;
@@ -58,13 +56,7 @@ namespace ECommerceMVC.Pages.Cart
         {
             var userName = User.FindFirstValue(ClaimTypes.Email);
             var userId = await _CartManager.GetCartById(userName);
-            ListCart = await _Context.CartItems.Where(x => x.CartsID == userId.ID).ToListAsync();
-            foreach (var item in ListCart)
-            {
-                var pro = await _ProductManager.GetInventoryById(item.ProductID);
-                item.Product = pro;
-            }
-
+            ListCart = await _CartManager.GetProductByCartID(userId.ID);
         }
 
         /// <summary>

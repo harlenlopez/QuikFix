@@ -11,10 +11,12 @@ namespace ECommerceMVC.Models.Service
     public class CartService : ICartManager
     {
         private readonly StoreDbContext _context;
+        private readonly IProductManager _productManager;
 
-        public CartService(StoreDbContext context)
+        public CartService(StoreDbContext context, IProductManager productManager)
         {
             _context = context;
+            _productManager = productManager;
         }
         public async Task<Carts> CreateCart(Carts carts)
         {
@@ -34,6 +36,18 @@ namespace ECommerceMVC.Models.Service
         {
             var carts = await _context.Cart.Where(x => x.Email == email).SingleAsync();
             return carts;
+        }
+
+        public async Task<List<CartItems>> GetProductByCartID(int id)
+        {
+            List<CartItems> cartList = await _context.CartItems.Where(x => x.CartsID == id).ToListAsync();
+            foreach (var item in cartList)
+            {
+                var pro = await _productManager.GetInventoryById(item.ProductID);
+                item.Product = pro;
+            }
+
+            return cartList;
         }
 
         public async Task<Carts> UpdateCart(Carts carts)
