@@ -20,6 +20,24 @@ namespace ECommerceMVC.Data
         /// </summary>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Carts>().HasData(
+               new Carts
+               {
+                   ID = 1,
+                   Email = "jinwoov@gmail.com"
+               }
+               );
+
+            modelBuilder.Entity<CartItems>().HasData(
+               new CartItems
+               {
+                   ID = 1,
+                   CartsID = 1,
+                   ProductID = 1,
+                   Quantity = 2,
+               }
+               );
+
             modelBuilder.Entity<Product>().HasData(
                new Product
                {
@@ -127,7 +145,7 @@ namespace ECommerceMVC.Data
         /// Using the dbset of product
         /// </summary>
         public DbSet<Product> Products { get; set; }
-        public DbSet<Cart> Cart { get; set; }
+        public DbSet<Carts> Cart { get; set; }
         public DbSet<CartItems> CartItems { get; set; }
 
 

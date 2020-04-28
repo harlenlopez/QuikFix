@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.Models.Interface
 {
-    interface ICartItemsManager
+    public interface ICartItemsManager
     {
         Task<CartItems> GetCartItemsById(int ID);
         // Create
@@ -15,7 +15,7 @@ namespace ECommerceMVC.Models.Interface
         // Update
         Task<CartItems> UpdateCartItems(CartItems cartItems);
         // Delete
-        Task DeleteCartItems(CartItems cartItems);
+        Task DeleteCartItems(int ID);
     }
 }
 

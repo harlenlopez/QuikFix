@@ -6,19 +6,18 @@ using System.Threading.Tasks;
 namespace ECommerceMVC.Models
 {
     /// <summary>
-    /// Model for cartItems will carry quantities
+    /// Carts model for database
     /// </summary>
-    public class CartItems
+    public class Carts
     {
         public int ID { get; set; }
-        public int ProductID { get; set; }
-        public int CartsID { get; set; }
-        public int Quantity { get; set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// Nav properties
         /// </summary>
-        public Carts Carts { get; set; }
-        public Product Product { get; set; }
+        public List<CartItems> CartItems = new List<CartItems>();
+
+
     }
 }

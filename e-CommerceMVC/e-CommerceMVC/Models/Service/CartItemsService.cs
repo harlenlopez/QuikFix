@@ -24,9 +24,10 @@ namespace ECommerceMVC.Models.Service
 
         }
 
-        public async Task DeleteCartItems(CartItems cartItems)
+        public async Task DeleteCartItems(int ID)
         {
-            _context.CartItems.Remove(cartItems);
+            var cartItem = await _context.CartItems.FindAsync(ID);
+            _context.CartItems.Remove(cartItem);
             await _context.SaveChangesAsync();
         }
 

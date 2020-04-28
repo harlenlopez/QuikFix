@@ -20,5 +20,11 @@ namespace ECommerceMVC.Models
         public decimal Price { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
+
+        /// <summary>
+        /// Nav properties
+        /// </summary>
+        public List<CartItems> CartItems = new List<CartItems>();
+        
     }
 }

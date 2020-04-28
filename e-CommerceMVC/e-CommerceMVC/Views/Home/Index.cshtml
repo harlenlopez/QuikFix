@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <body>
     <main>
+        @await Component.InvokeAsync("ShoppingCart")
+
         <div id="box">
             <img src="~/Images/Design.jpg" alt="background" id="index-background">
             <a asp-page="/Shop/Index" class="text-white">

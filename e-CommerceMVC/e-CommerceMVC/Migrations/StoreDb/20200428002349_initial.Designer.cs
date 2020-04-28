@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceMVC.Migrations.StoreDb
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20200427194846_updateContext")]
-    partial class updateContext
+    [Migration("20200428002349_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,7 +20,41 @@ namespace ECommerceMVC.Migrations.StoreDb
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ECommerceMVC.Models.Cart", b =>
+            modelBuilder.Entity("ECommerceMVC.Models.CartItems", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CartsID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CartsID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("CartItems");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            CartsID = 1,
+                            ProductID = 1,
+                            Quantity = 2
+                        });
+                });
+
+            modelBuilder.Entity("ECommerceMVC.Models.Carts", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -32,28 +66,14 @@ namespace ECommerceMVC.Migrations.StoreDb
 
                     b.HasKey("ID");
 
-                    b.ToTable("Carts");
-                });
+                    b.ToTable("Cart");
 
-            modelBuilder.Entity("ECommerceMVC.Models.CartItems", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CartID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("CartItems");
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Email = "jinwoov@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("ECommerceMVC.Models.Product", b =>
@@ -173,6 +193,21 @@ namespace ECommerceMVC.Migrations.StoreDb
                             Price = 200.00m,
                             SKU = "8fj38s10"
                         });
+                });
+
+            modelBuilder.Entity("ECommerceMVC.Models.CartItems", b =>
+                {
+                    b.HasOne("ECommerceMVC.Models.Carts", "Carts")
+                        .WithMany()
+                        .HasForeignKey("CartsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ECommerceMVC.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
