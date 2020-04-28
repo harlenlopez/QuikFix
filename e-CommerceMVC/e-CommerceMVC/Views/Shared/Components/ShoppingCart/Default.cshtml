@@ -9,8 +9,10 @@
     <div class="card text-center border-left-0 border-right-0 border-top-0" id="shopping-card">
         <div class="card-body bg-muted">
             <h4 class="card-title">@post.Product.Name</h4>
-                <p><small class="text-muted">Quantity: @post.Quantity</small></p>
-            <a asp-page="/Cart/Delete"class="btn btn-danger p-1 text-white" asp-route-id="@post.ProductID">Delete</a>
+            <p><small class="text-muted">Quantity: @post.Quantity</small></p>
+            <p><small class="text-muted">$@post.Product.Price</small></p>
+            <a asp-page="/Cart/Delete" class="btn btn-danger p-1 text-white" asp-route-id="@post.ID">Delete</a>
         </div>
     </div>
  }
+

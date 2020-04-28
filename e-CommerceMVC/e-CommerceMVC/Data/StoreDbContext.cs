@@ -25,7 +25,13 @@ namespace ECommerceMVC.Data
                {
                    ID = 1,
                    Email = "jinwoov@gmail.com"
+               },
+               new Carts
+               {
+                   ID = 2,
+                   Email = "bobR@gmail.com"
                }
+
                );
 
             modelBuilder.Entity<CartItems>().HasData(
@@ -35,7 +41,15 @@ namespace ECommerceMVC.Data
                    CartsID = 1,
                    ProductID = 1,
                    Quantity = 2,
+               },
+               new CartItems
+               {
+                   ID = 2,
+                   CartsID = 2,
+                   ProductID = 5,
+                   Quantity = 20,
                }
+
                );
 
             modelBuilder.Entity<Product>().HasData(
@@ -44,9 +58,9 @@ namespace ECommerceMVC.Data
                    ID = 1,
                    SKU = "12jrj830",
                    Name = "Classic",
-                   Description = "Website that is tailor to business with exquisite taste in classical theme. This outline will grab all of the antiquity enthusiast ",
+                   Description = "A no nonsense design tailored to businesses with decerning taste. The Classic theme will allow your business to focus on what is important and not waste time with unnecessary features.",
                    Image = "https://i.imgur.com/ex7bvr4.jpg",
-                   Price = 150.00m,
+                   Price = 1500.00m,
 
                },
                new Product
@@ -54,9 +68,9 @@ namespace ECommerceMVC.Data
                    ID = 2,
                    SKU = "8fw4s10",
                    Name = "Hipster",
-                   Description = "Website that is designed for gen-z business owner. This site will captivate customers that favorites new trend.",
+                   Description = "Not your average design, be unique, be bold and carve your own path. The flexibility in this design will ensure no two are the same,so go ahead,and let your creativity show.",
                    Image = "https://i.imgur.com/KckYFPo.jpg",
-                   Price = 300.00m,
+                   Price = 3000.00m,
 
                },
                 new Product
@@ -64,9 +78,9 @@ namespace ECommerceMVC.Data
                     ID = 3,
                     SKU = "4nj38s10",
                     Name = "Antique",
-                    Description = "Website that gear towards older generation customer. Very comprehensive and well designed website that will increase your profit immediately.",
+                    Description = "A classic design that is reminiscent of a by gone era. With a comprehensive and eloquently designed website, you will see an increase in positive user experiences, resulting in a better profit margin.",
                     Image = "https://i.imgur.com/rIRLFbX.jpg",
-                    Price = 180.00m,
+                    Price = 1800.00m,
 
                 },
                 new Product
@@ -74,9 +88,9 @@ namespace ECommerceMVC.Data
                     ID = 4,
                     SKU = "7mj38s10",
                     Name = "Comic",
-                    Description = "Website that is for comic fan user. This design will flourish with incoming traffic of comic and action hero lovers.",
+                    Description = "An exciting design for the hero in everyone. The comic design will allow the inner hero of your business to shine.Do not be fooled be the straightforward design, this layout packs a punch!",
                     Image = "https://i.imgur.com/xf5nzhK.jpg",
-                    Price = 210.00m,
+                    Price = 2100.00m,
 
                 },
                 new Product
@@ -84,7 +98,7 @@ namespace ECommerceMVC.Data
                     ID = 5,
                     SKU = "12j38s10",
                     Name = "Nature",
-                    Description = "Website that is one of our best seller. This nature design is sure to bring people who wants to be away from fast paced society and enjoy what nature has to offer.",
+                    Description = "Get away from the hustle and bustle and take a deep breath. With a design that will make even the most adventurous feel right at home, this design is for those who are not afraid to get dirty and enjoy the great outdoors.",
                     Image = "https://i.imgur.com/1k8nogz.jpg",
                     Price = 2000.00m,
 
@@ -94,9 +108,9 @@ namespace ECommerceMVC.Data
                     ID = 6,
                     SKU = "8fg38s10",
                     Name = "Technical",
-                    Description = "Website that aims to change and new things in the market. This website breathe in scalability and agile.",
+                    Description = "A design focused on showcasing technical data to convey your designs and all you to keep productive. With its straight forward layout you can spend less time fixing your site and more time being creative and doing what your passionate about.",
                     Image = "https://i.imgur.com/q1OefoY.jpg",
-                    Price = 200.00m,
+                    Price = 2000.00m,
 
                 },
                new Product
@@ -104,9 +118,9 @@ namespace ECommerceMVC.Data
                    ID = 7,
                    SKU = "8fw8s10",
                    Name = "Greyscale",
-                   Description = "Website that is affordable and simple to user's eyes. The format is easy to follow and navigate.",
+                   Description = "An elegant and minimalistic design to punctuate the things that are most important.This designs beauty is in its simplicity, when you need to present your site in a straightforward way this is the design to use.",
                    Image = "https://i.imgur.com/lJrL4Sr.jpg",
-                   Price = 75.00m,
+                   Price = 1750.00m,
 
                },
                 new Product
@@ -114,9 +128,9 @@ namespace ECommerceMVC.Data
                     ID = 8,
                     SKU = "yv538s10",
                     Name = "Cozy",
-                    Description = "Website that just looking at it brings coziness in your heart. Having this design will leave you with christmas everyday.",
+                    Description = "Like a warm fire, your favorite sweater or a home cooked meal, this design will make you feel right at home.So settle in and get cozy, this design will make you want to take it easy and spend some time to enjoy the simple things.",
                     Image = "https://i.imgur.com/ZesihIk.jpg",
-                    Price = 240.00m,
+                    Price = 1400.00m,
 
                 },
                 new Product
@@ -124,9 +138,9 @@ namespace ECommerceMVC.Data
                     ID = 9,
                     SKU = "83nd8fn3",
                     Name = "Colorful",
-                    Description = "Website that pursue on innovation and vibrant schema. This website illustrate all of the beautiful colors in the world into one. Sure to bring in heavy traffic.",
+                    Description = "with a well thought out design you are ensured to have a site that pops. Not afraid of a little color, go crazy with your palette and show the world how far a little color can go.",
                     Image = "https://i.imgur.com/26bU5zY.png",
-                    Price = 350.00m,
+                    Price = 1900.00m,
 
                 },
                 new Product
@@ -136,7 +150,7 @@ namespace ECommerceMVC.Data
                     Name = "Modern",
                     Description = "Website that thrives in modern society and its fast changes. This website is for end user with modern taste and elegant details.",
                     Image = "https://i.imgur.com/aHUKS0C.png",
-                    Price = 200.00m,
+                    Price = 2000.00m,
                 }
                 );
         }
