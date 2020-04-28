@@ -25,8 +25,8 @@
     <Compile Include="Migrations\20200422231744_initial.cs" />
     <Compile Include="Migrations\20200422231744_initial.Designer.cs" />
     <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
-    <Compile Include="Migrations\StoreDb\20200427222840_updateContext.cs" />
-    <Compile Include="Migrations\StoreDb\20200427222840_updateContext.Designer.cs" />
+    <Compile Include="Migrations\StoreDb\20200427232015_seeddata.cs" />
+    <Compile Include="Migrations\StoreDb\20200427232015_seeddata.Designer.cs" />
     <Compile Include="Migrations\StoreDb\StoreDbContextModelSnapshot.cs" />
   </ItemGroup>
 

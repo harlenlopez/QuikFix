@@ -1,12 +1,24 @@
 ﻿@page
+@using ECommerceMVC.Models
 @model ECommerceMVC.Pages.Cart.IndexModel
 @{
     Layout = "_Layout";
 }
 <!DOCTYPE html>
 <body>
-    <form>
-        <p></p>
-        <button type="submit"></button>
-    </form>
+    @foreach (var item in Model.ListCart)
+    {
+        <h3>@item.Product.Name</h3>
+        <h3>@item.Product.Description</h3>
+
+        <p>Quantity: @item.Quantity</p>
+        <form method="post">
+            <input type="number" asp-for="@Model.Qty" />
+            <input type="hidden" value="@item.ProductID"  asp-for="@Model.ProductID"/>
+            <button type="submit">Edit the quantity</button>
+        </form>
+    }
+
+
+    <a asp-page="Delete" class="btn btn-danger">Remove from Cart</a>
 </body>
