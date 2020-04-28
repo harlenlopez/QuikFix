@@ -1,10 +1,15 @@
 ﻿@model IEnumerable<ECommerceMVC.Models.CartItems>
 @using ECommerceMVC.Models
-<h1>Top Posts!</h1>
 
+
+<h4 class="mt-5 text-center">Shopping List</h4>
 @foreach (var post in Model)
 {
-    <h2>@post.Product.Name</h2>
-    <p>@post.Quantity</p>
-    <hr />
-}
+    <div class="card text-center border-left-0 border-right-0 border-top-0" id="shopping-card">
+        <div class="card-body bg-muted">
+            <h4 class="card-title">@post.Product.Name</h4>
+                <p><small class="text-muted">Quantity: @post.Quantity</small></p>
+            <a asp-page="/Cart/Delete"class="btn btn-danger p-1 text-white" asp-route-id="@post.ProductID">Delete</a>
+        </div>
+    </div>
+ }
