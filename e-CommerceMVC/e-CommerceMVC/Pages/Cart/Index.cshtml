@@ -17,15 +17,18 @@
         {
             <h3>@item.Product.Name</h3>
             <h3>@item.Product.Description</h3>
-
+            <p>
+                TotalPrice: $@(item.Product.Price*item.Quantity)
+            </p>
             <p>Quantity: @item.Quantity</p>
             <form method="post">
                 <input type="number" asp-for="@Model.Qty" />
                 <input type="hidden" value="@item.ProductID" asp-for="@Model.ProductID" />
-                <button type="submit">Edit the quantity</button>
+                <button type="submit" class="btn btn-info">Edit the quantity</button>
             </form>
             <a asp-page="Delete" class="btn btn-danger" asp-route-id="@item.ID">Remove from Cart</a>
         }
+        <h4>Total Price: $@Model.TotalPrice</h4>
     }
 
 

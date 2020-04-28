@@ -19,7 +19,7 @@ namespace ECommerceMVC.Components
         {
             _context = context;
         }
-
+        public decimal TotalPrice { get; set; }
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var userName = User.Identity.Name;
@@ -30,6 +30,8 @@ namespace ECommerceMVC.Components
             {
                 var pro = await _context.Products.Where(x => x.ID == list.ProductID).SingleAsync();
                 list.Product = pro;
+                decimal TempTotal = list.Quantity * list.Product.Price;
+                TotalPrice += TempTotal;
             }
 
 

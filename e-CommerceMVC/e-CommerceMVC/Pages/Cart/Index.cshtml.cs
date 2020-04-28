@@ -43,6 +43,7 @@ namespace ECommerceMVC.Pages.Cart
         public int Qty { get; set; }
         [BindProperty]
         public int ProductID { get; set; }
+        public decimal TotalPrice { get; set; }
 
         /// <summary>
         /// Storing items in the cart
@@ -57,6 +58,11 @@ namespace ECommerceMVC.Pages.Cart
             var userName = User.FindFirstValue(ClaimTypes.Email);
             var userId = await _CartManager.GetCartById(userName);
             ListCart = await _CartManager.GetProductByCartID(userId.ID);
+            foreach (var item in ListCart)
+            {
+                decimal TempTotal = item.Product.Price * item.Quantity;
+                TotalPrice += TempTotal;
+            }
         }
 
         /// <summary>

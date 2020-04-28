@@ -27,6 +27,11 @@
                             @Model.Product.Description
                         </p>
                     </div>
+                    <div class="col-sm-12">
+                        <form method="post">
+                            <button class="btn btn-primary" asp-route-productID="@Model.Product.ID">Purchase</button>
+                        </form>
+                    </div>
                 </div>
             </div>
     </main>
