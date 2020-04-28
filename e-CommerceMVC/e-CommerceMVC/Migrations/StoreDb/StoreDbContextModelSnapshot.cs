@@ -70,7 +70,7 @@ namespace ECommerceMVC.Migrations.StoreDb
                         new
                         {
                             ID = 1,
-                            Email = "Mochi@mochi.inc"
+                            Email = "jinwoov@gmail.com"
                         });
                 });
 

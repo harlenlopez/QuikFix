@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceMVC.Migrations.StoreDb
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20200427232015_seeddata")]
-    partial class seeddata
+    [Migration("20200428002349_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -72,7 +72,7 @@ namespace ECommerceMVC.Migrations.StoreDb
                         new
                         {
                             ID = 1,
-                            Email = "Mochi@mochi.inc"
+                            Email = "jinwoov@gmail.com"
                         });
                 });
 

@@ -24,7 +24,7 @@ namespace ECommerceMVC.Data
                new Carts
                {
                    ID = 1,
-                   Email = "Mochi@mochi.inc"
+                   Email = "jinwoov@gmail.com"
                }
                );
 

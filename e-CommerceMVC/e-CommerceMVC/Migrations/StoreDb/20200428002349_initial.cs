@@ -2,7 +2,7 @@
 
 namespace ECommerceMVC.Migrations.StoreDb
 {
-    public partial class seeddata : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,7 +66,7 @@ namespace ECommerceMVC.Migrations.StoreDb
             migrationBuilder.InsertData(
                 table: "Cart",
                 columns: new[] { "ID", "Email" },
-                values: new object[] { 1, "Mochi@mochi.inc" });
+                values: new object[] { 1, "jinwoov@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "Products",

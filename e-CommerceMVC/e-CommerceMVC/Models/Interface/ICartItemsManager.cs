@@ -15,7 +15,7 @@ namespace ECommerceMVC.Models.Interface
         // Update
         Task<CartItems> UpdateCartItems(CartItems cartItems);
         // Delete
-        Task DeleteCartItems(CartItems cartItems);
+        Task DeleteCartItems(int ID);
     }
 }
 
