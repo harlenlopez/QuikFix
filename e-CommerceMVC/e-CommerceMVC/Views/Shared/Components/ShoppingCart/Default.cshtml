@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<ECommerceMVC.Models.CartItems>
 @using ECommerceMVC.Models
 
-
-<h4 class="mt-5 text-center">Shopping List</h4>
+    <a asp-page="/Cart/Index" class="text-primary">
+        <h4 class="mt-5 text-center">To the cart</h4>
+    </a>
 @foreach (var post in Model)
 {
     <div class="card text-center border-left-0 border-right-0 border-top-0" id="shopping-card">
