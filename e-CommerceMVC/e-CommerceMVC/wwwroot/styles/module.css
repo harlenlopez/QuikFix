@@ -19,6 +19,10 @@
     margin-top: 50px;
 }
 
+#product-image-detail {
+    width: 80%;
+}
+
 
 /*==========Nav Bar================*/
 #navvy {
@@ -27,6 +31,11 @@
 
 #logo {
     width: 90px;
+}
+
+#shopping-icon {
+    display: none;
+    visibility: hidden;
 }
 
 /*==================================================*/
@@ -60,7 +69,15 @@ div.content {
 #shopping-card {
     background-color: transparent !important;
 }
-/* On screens that are less than 700px wide, make the sidebar into a topbar */
+
+
+/*=============== For Checkout page ================*/
+#view-box {
+    height: 100vh;
+}
+
+
+
 @media screen and (max-width: 700px) {
     .sidebar {
         display: none;
@@ -68,9 +85,10 @@ div.content {
     div.content {
         margin-right: 0;
     }
+
+    #shopping-icon {
+        display: block !important;
+        visibility: visible !important;
+    }
 }
 
-/*=============== For Checkout page ================*/
-#view-box{
-    height: 100vh;
-}

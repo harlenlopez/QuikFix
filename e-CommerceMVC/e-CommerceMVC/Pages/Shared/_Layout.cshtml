@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="~/styles/reset.css" />
     @*Using bootstrap*@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/styles/base.css?t=@DateTime.Now.Ticks" type="text/css" />
     <link rel="stylesheet" href="~/styles/layout.css?t=@DateTime.Now.Ticks" type="text/css" />
@@ -30,9 +31,14 @@
                 <a asp-page="/Home/Index">
                     <img src="~/Images/logos.png" alt="logo" class="w-20 h-20 ml-1" id="logo" />
                 </a>
-                <button type="button" class="navbar-toggler bg-light" data-toggle="collapse" data-target="#collapsable">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <div class="d-flex justify-content-between">
+                    <a asp-page="/Cart/Index" id="shopping-icon" class="mr-4 text-white nav-link">
+                        <i class="fa fa-shopping-cart" style="font-size:34px"></i>
+                    </a>
+                    <button type="button" class="navbar-toggler bg-light" data-toggle="collapse" data-target="#collapsable">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
                 <div class="collapse navbar-collapse" id="collapsable">
                     <div class="nav navbar-nav ml-auto">
                         <a asp-page="/Shop/Index" class="bg-link text-white pr-3 my-auto nav-link">Shop</a>
