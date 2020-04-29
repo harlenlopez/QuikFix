@@ -44,7 +44,8 @@ namespace ECommerceMVC.Pages.Account
                 /// if login is sucessful this if will be invoked
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("Index", "Home");
+                    return RedirectToPage("/Shop/Index");
                 }
                 // other wise it will show error message
                 else

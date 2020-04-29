@@ -8,31 +8,40 @@
 <body>
     @if (Model.ListCart.Count == 0)
     {
-        <p>Your shopping cart is empty</p>
-        <a asp-page="/Shop/Index" class="btn btn-warning">Go back</a>
+        <div class="text-center d-flex align-items-center justify-content-center" id="view-box">
+            <div>
+                <p>Your shopping cart is empty</p>
+                <a asp-page="/Shop/Index" class="btn btn-warning">Go back</a>
+            </div>
+        </div>
     }
     else
     {
         @foreach (var item in Model.ListCart)
         {
-            <h3>@item.Product.Name</h3>
-            <h3>@item.Product.Description</h3>
-            <p>
-                TotalPrice: $@(item.Product.Price*item.Quantity)
-            </p>
-            <p>Quantity: @item.Quantity</p>
-            <form method="post">
-                <input type="number" asp-for="@Model.Qty" />
-                <input type="hidden" value="@item.ProductID" asp-for="@Model.ProductID" />
-                <button type="submit" class="btn btn-info">Edit the quantity</button>
-            </form>
-            <a asp-page="Delete" class="btn btn-danger" asp-route-id="@item.ID">Remove from Cart</a>
+            <div class="container mt-4">
+                <h3><u>@item.Product.Name Website</u></h3>
+                <h5>@item.Product.Description</h5>
+                <p>
+                    Price: $@(item.Product.Price*item.Quantity)
+                </p>
+                <p>Quantity: @item.Quantity</p>
+                <div class="d-flex justify-content-end">
+                    <form method="post">
+                        <input type="number" asp-for="@Model.Qty"  class="p-1"/>
+                        <button type="submit" asp-route-productID="@item.ProductID" class="btn btn-info mr-1">Update</button>
+                    </form>
+                    <a asp-page="Delete" class="btn btn-danger" asp-route-id="@item.ID">Delete</a>
+                </div>
+            </div>
         }
-        <h4>Total Price: $@Model.TotalPrice</h4>
+        <div class="d-flex justify-content-end mt-4 mr-4">
+            <h4>Total Price: $@Model.TotalPrice</h4>
+         </div>
     }
 
 
 
 
 
-</body>
+ </body>
