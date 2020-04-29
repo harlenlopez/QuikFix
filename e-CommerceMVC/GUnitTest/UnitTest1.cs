@@ -1,7 +1,9 @@
 using ECommerceMVC.Data;
 using ECommerceMVC.Models;
+using ECommerceMVC.Models.Interface;
 using ECommerceMVC.Models.Service;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -10,6 +12,14 @@ namespace GUnitTest
 {
     public class UnitTest1
     {
+        private readonly Mock<IProductManager> _moqManager;
+        private readonly Mock<ICartItemsManager> _cartItemManager;
+
+        public UnitTest1()
+        {
+            _moqManager = new Mock<IProductManager>();
+            _cartItemManager = new Mock<ICartItemsManager>();
+        }
         [Fact]
         public void CanAddProductName()
         {
@@ -211,5 +221,192 @@ namespace GUnitTest
                 Assert.Null(data);
             }
         }
+        [Fact]
+        public async void CreateCart()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+               .UseInMemoryDatabase("CreateCart")
+                .Options;
+
+            using (StoreDbContext storeDb = new StoreDbContext(options))
+            {
+                CartService ps = new CartService(storeDb, _moqManager.Object);
+
+                Carts carts = new Carts()
+                {
+                    Email = "bobR@gmail.com"
+                    
+                };
+
+                var Cart = await ps.CreateCart(carts);
+
+                Assert.Equal(carts.Email, Cart.Email);
+            }
+        }
+        [Fact]
+        public async void GetUserById()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+               .UseInMemoryDatabase("GetUserById")
+                .Options;
+
+            using (StoreDbContext storeDb = new StoreDbContext(options))
+            {
+                CartService ps = new CartService(storeDb, _moqManager.Object);
+
+                Carts carts = new Carts()
+                {
+                    Email = "bobR@gmail.com"
+
+                };
+
+                await ps.CreateCart(carts);
+                var result = await ps.GetCartById(carts.Email);
+
+                Assert.Equal(carts, result);
+            }
+        }
+/*        [Fact]
+*/        public async void AbleToGetProductUsingUserEmail()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+               .UseInMemoryDatabase("AbleToGetProductUsingUserEmail")
+                .Options;
+
+            using (StoreDbContext storeDb = new StoreDbContext(options))
+            {
+                CartService ps = new CartService(storeDb, _moqManager.Object);
+
+                Carts carts = new Carts()
+                {
+                    Email = "bobR@gmail.com"
+
+                };
+
+                var Cart = await ps.CreateCart(carts);
+
+                CartItemsService cis = new CartItemsService(storeDb);
+                ProductService pis = new ProductService(storeDb);
+
+                Product pr = new Product()
+                {
+                    Name = "Classic"
+                };
+
+                var productaftercreated = await pis.CreateInventory(pr);
+
+                CartItems ci = new CartItems()
+                {
+                    ProductID = 1,
+                    CartsID = 1,
+                    Quantity = 200
+                };
+
+                var cartitem = await cis.CreateCartItems(ci);
+                var result = await ps.GetProductByCartID(Cart.ID);
+
+                Assert.Equal("Classic", result[0].Product.Name);
+            }
+        }
+        [Fact]
+        public async void AbleToGetCartItems()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+               .UseInMemoryDatabase("AbleToGetCartItems")
+                .Options;
+
+            using (StoreDbContext storeDb = new StoreDbContext(options))
+            {
+                CartItemsService cis = new CartItemsService(storeDb);
+                
+                CartItems ci = new CartItems()
+                {
+                    ProductID = 1,
+                    CartsID = 1,
+                    Quantity = 200
+                };
+
+                await cis.CreateCartItems(ci);
+
+                var result = await cis.GetCartItemsById(ci.ID);
+
+                Assert.Equal(200, result.Quantity);
+            }
+        }
+        [Fact]
+        public async void AbleToCreateCartItem()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+               .UseInMemoryDatabase("AbleToCreateCartItem")
+                .Options;
+
+            using (StoreDbContext storeDb = new StoreDbContext(options))
+            {
+                CartItemsService cis = new CartItemsService(storeDb);
+
+                CartItems ci = new CartItems()
+                {
+                    ProductID = 1,
+                    CartsID = 1,
+                    Quantity = 200
+                };
+
+                var result = await cis.CreateCartItems(ci);
+
+                Assert.Equal(1, result.ID);
+            }
+        }
+        [Fact]
+        public async void AbleToDeleteCartItem()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+               .UseInMemoryDatabase("AbleToDeleteCartItem")
+                .Options;
+
+            using (StoreDbContext storeDb = new StoreDbContext(options))
+            {
+                CartItemsService cis = new CartItemsService(storeDb);
+
+                CartItems ci = new CartItems()
+                {
+                    ProductID = 1,
+                    CartsID = 1,
+                    Quantity = 200
+                };
+
+                await cis.CreateCartItems(ci);
+                await cis.DeleteCartItems(ci.ID);
+                var result = await cis.GetCartItemsById(ci.ID);
+
+                Assert.Null(result);
+            }
+        }
+        [Fact]
+        public async void AbleToUpdateQuantity()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+               .UseInMemoryDatabase("AbleToUpdateQuantity")
+                .Options;
+
+            using (StoreDbContext storeDb = new StoreDbContext(options))
+            {
+                CartItemsService cis = new CartItemsService(storeDb);
+
+                CartItems ci = new CartItems()
+                {
+                    ProductID = 1,
+                    CartsID = 1,
+                    Quantity = 420
+                };
+
+                await cis.CreateCartItems(ci);
+                ci.Quantity = 69;
+                await cis.UpdateCartItems(ci);
+                var blazeIt = await cis.GetCartItemsById(ci.ID);
+
+                Assert.Equal(69, blazeIt.Quantity);
+            }
+        }
+
     }
 }
