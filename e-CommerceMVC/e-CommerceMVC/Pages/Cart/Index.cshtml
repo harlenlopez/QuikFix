@@ -5,6 +5,10 @@
     Layout = "_Layout";
 }
 <!DOCTYPE html>
+<head>
+      <link rel="stylesheet" href="~/styles/Cart/theme.css?t=@DateTime.Now.Ticks" type="text/css" />
+</head>
+
 <body>
     @if (Model.ListCart.Count == 0)
     {
@@ -35,13 +39,11 @@
                 </div>
             </div>
         }
-        <div class="d-flex justify-content-end mt-4 mr-4">
-            <h4>Total Price: $@Model.TotalPrice</h4>
-         </div>
+            <div class="d-flex justify-content-end mr-4">
+                <h4>Total Price: $@Model.TotalPrice</h4>
+                <div class="container ">
+                    <button class="btn btn-success">Purchase</button>
+                </div>
+            </div>
     }
-
-
-
-
-
  </body>
