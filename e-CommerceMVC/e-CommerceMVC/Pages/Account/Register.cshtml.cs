@@ -96,7 +96,7 @@ namespace ECommerceMVC.Pages.Account
                     // adding the claims to the database
                     await _userManager.AddClaimsAsync(user, claims);
 
-                    //
+                    // creating a cart object to be stored when the user creates email
                     Carts carts = new Carts()
                     {
                         Email = RegisterData.Email
