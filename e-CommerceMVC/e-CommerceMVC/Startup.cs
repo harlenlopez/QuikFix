@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace ECommerceMVC
 {
@@ -81,6 +82,10 @@ namespace ECommerceMVC
                 options.User.RequireUniqueEmail = false;
             });
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+            });
 
             services.AddTransient<IProductManager, ProductService>();
             services.AddTransient<ICartManager, CartService>();
@@ -101,6 +106,7 @@ namespace ECommerceMVC
             app.UseStaticFiles();
             // adding an identity
             app.UseAuthentication();
+            app.UseAuthorization();
 
             // Endpoint to our default home/index/id?
             app.UseEndpoints(endpoints =>
