@@ -4,10 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using ECommerceMVC.Models;
 using ECommerceMVC.Models.Interface;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -22,6 +24,7 @@ namespace ECommerceMVC.Pages.Account
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
         private readonly ICartManager _cartManager;
+        private readonly IEmailSender _email;
 
         /// <summary>
         /// Biding user form data to normalize it
@@ -30,11 +33,12 @@ namespace ECommerceMVC.Pages.Account
         public RegisterInfo RegisterData { get; set; }
 
         // constructor to bringing in identity built in libraries (UserManager and SigninManager)
-        public RegisterModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ICartManager cartManager)
+        public RegisterModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ICartManager cartManager, IEmailSender email)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _cartManager = cartManager;
+            _email = email;
         }
 
         /// <summary>
@@ -96,13 +100,26 @@ namespace ECommerceMVC.Pages.Account
                     // adding the claims to the database
                     await _userManager.AddClaimsAsync(user, claims);
 
-                    //
+                    // creating a cart object to be stored when the user creates email
                     Carts carts = new Carts()
                     {
                         Email = RegisterData.Email
                     };
 
                     await _cartManager.CreateCart(carts);
+
+                    // Sending Mail to User
+
+                    StringBuilder sb = new StringBuilder();
+
+                    string imageUrl = "https://i.imgur.com/rocGIxN.png";
+                    sb.AppendLine($"<div style='text-align:center'>");
+                    sb.AppendLine($"<img src='{imageUrl}' alt='Logo' style='margin-bottom:50px' />");
+                    sb.AppendLine($"<h3>Thank you so much for signup to QuikFix, {RegisterData.FirstName}</h3>");
+                    sb.AppendLine("<p> Let's make your dream come true! </p>");
+                    sb.AppendLine("</div>");
+
+                    await _email.SendEmailAsync(RegisterData.Email, "Welcome to the QuikFix", sb.ToString());
 
                     //signs user in
                     await _signInManager.SignInAsync(user, isPersistent: false);

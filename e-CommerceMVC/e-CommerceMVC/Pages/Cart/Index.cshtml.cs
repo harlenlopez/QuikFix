@@ -39,8 +39,6 @@ namespace ECommerceMVC.Pages.Cart
         /// <summary>
         /// Properties that will store data from database
         /// </summary>
-        [BindProperty]
-        public int Qty { get; set; }
         public decimal TotalPrice { get; set; }
 
         /// <summary>
@@ -67,17 +65,19 @@ namespace ECommerceMVC.Pages.Cart
         /// Post method that will update the product quantity
         /// </summary>
         /// <returns>redirect to cart page after the update</returns>
-        public async Task<IActionResult> OnPost(int productID)
+        public async Task<IActionResult> OnPost(int productID,int quantity)
         {
-            if (Qty <= 0)
+            if (quantity <= 0)
             {
                 return Page();
             }
+            var user = User.Identity.Name;
 
-            
-            var product = await _Context.CartItems.Where(x => x.ProductID == productID).SingleAsync();
+            var userId = await _CartManager.GetCartById(user);
 
-            product.Quantity = Qty;
+            var product = await _Context.CartItems.Where(x => x.ProductID == productID && x.CartsID == userId.ID).SingleAsync();
+
+            product.Quantity = quantity;
 
             await _CartItemsManager.UpdateCartItems(product);
 
