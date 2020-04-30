@@ -38,7 +38,7 @@ namespace ECommerceMVC.Models.Service
             SendGridMessage msg = new SendGridMessage();
 
             //First param is email and second is email
-            msg.SetFrom("quikfixcf@gmail.com", "QuickFix");
+            msg.SetFrom("quikfixcf@gmail.com", "QuikFix");
             msg.AddTo(email);
             msg.SetSubject(subject);
             msg.AddContent(MimeType.Html, htmlMessage);
