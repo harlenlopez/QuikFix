@@ -13,12 +13,10 @@ namespace GUnitTest
     public class UnitTest1
     {
         private readonly Mock<IProductManager> _moqManager;
-        private readonly Mock<ICartItemsManager> _cartItemManager;
 
         public UnitTest1()
         {
             _moqManager = new Mock<IProductManager>();
-            _cartItemManager = new Mock<ICartItemsManager>();
         }
         [Fact]
         public void CanAddProductName()
@@ -266,48 +264,7 @@ namespace GUnitTest
                 Assert.Equal(carts, result);
             }
         }
-/*        [Fact]
-*/        public async void AbleToGetProductUsingUserEmail()
-        {
-            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
-               .UseInMemoryDatabase("AbleToGetProductUsingUserEmail")
-                .Options;
-
-            using (StoreDbContext storeDb = new StoreDbContext(options))
-            {
-                CartService ps = new CartService(storeDb, _moqManager.Object);
-
-                Carts carts = new Carts()
-                {
-                    Email = "bobR@gmail.com"
-
-                };
-
-                var Cart = await ps.CreateCart(carts);
-
-                CartItemsService cis = new CartItemsService(storeDb);
-                ProductService pis = new ProductService(storeDb);
-
-                Product pr = new Product()
-                {
-                    Name = "Classic"
-                };
-
-                var productaftercreated = await pis.CreateInventory(pr);
-
-                CartItems ci = new CartItems()
-                {
-                    ProductID = 1,
-                    CartsID = 1,
-                    Quantity = 200
-                };
-
-                var cartitem = await cis.CreateCartItems(ci);
-                var result = await ps.GetProductByCartID(Cart.ID);
-
-                Assert.Equal("Classic", result[0].Product.Name);
-            }
-        }
+     
         [Fact]
         public async void AbleToGetCartItems()
         {
