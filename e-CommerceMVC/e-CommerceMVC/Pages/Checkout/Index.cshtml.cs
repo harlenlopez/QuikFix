@@ -62,6 +62,7 @@ namespace ECommerceMVC.Pages.Checkout
             {
                 sb.AppendLine($"<h5>{item.Product.Name} </h5>");
                 sb.AppendLine($"<p>Price: {item.Product.Price} </p>");
+                sb.AppendLine("<hr />");
             }
             sb.AppendLine($"<p>Total: {TotalPrice} </p>");
             sb.AppendLine($"<p>Thank you, {Userinfo.FirstName} {Userinfo.LastName}!</p>");
