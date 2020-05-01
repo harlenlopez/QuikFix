@@ -43,7 +43,7 @@
 
                     @if (User.IsInRole("Admin"))
                     {
-                        <a asp-action="index" asp-controller="Products" class="bg-link text-white pr-3 nav-link">Admin</a>
+                        <a asp-page="/Admin/index" class="bg-link text-white pr-3 nav-link">Admin</a>
                     }
 
                     <a asp-page="/Account/Logout" class="bg-link text-white pr-1 nav-link">Logout</a>
