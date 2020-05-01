@@ -7,34 +7,30 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ECommerceMVC.Data;
 using ECommerceMVC.Models;
+using ECommerceMVC.Models.Interface;
 
 namespace ECommerceMVC.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly StoreDbContext _context;
+        private readonly IProductManager _productManager;
 
-        public ProductsController(StoreDbContext context)
+        public ProductsController(IProductManager productManager)
         {
-            _context = context;
+            _productManager = productManager;
         }
 
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.ToListAsync());
+            return View(await _productManager.GetAllInventories());
         }
 
         // GET: Products/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var product = await _productManager.GetInventoryById(id);
 
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.ID == id);
             if (product == null)
             {
                 return NotFound();
@@ -58,26 +54,22 @@ namespace ECommerceMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
+                await _productManager.CreateInventory(product);
                 return RedirectToAction(nameof(Index));
             }
             return View(product);
         }
 
         // GET: Products/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var product = await _context.Products.FindAsync(id);
+            var product = await _productManager.GetInventoryById(id);
+            product = await _productManager.UpdateInventories(product);
             if (product == null)
             {
                 return NotFound();
             }
+
             return View(product);
         }
 
@@ -97,12 +89,11 @@ namespace ECommerceMVC.Controllers
             {
                 try
                 {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
+                    Product newProduct = await _productManager.UpdateInventories(product);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(product.ID))
+                    if (await _productManager.GetInventoryById(id) == null)
                     {
                         return NotFound();
                     }
@@ -117,15 +108,11 @@ namespace ECommerceMVC.Controllers
         }
 
         // GET: Products/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var product = await _productManager.GetInventoryById(id);
+            await _productManager.DeleteInventories(product);
 
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.ID == id);
             if (product == null)
             {
                 return NotFound();
@@ -134,20 +121,20 @@ namespace ECommerceMVC.Controllers
             return View(product);
         }
 
-        // POST: Products/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var product = await _context.Products.FindAsync(id);
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+        //// POST: Products/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var product = await _context.Products.FindAsync(id);
+        //    _context.Products.Remove(product);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
-        private bool ProductExists(int id)
-        {
-            return _context.Products.Any(e => e.ID == id);
-        }
+        //private bool ProductExists(int id)
+        //{
+        //    return _context.Products.Any(e => e.ID == id);
+        //}
     }
 }
