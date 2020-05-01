@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace ECommerceMVC
 {
@@ -81,6 +82,10 @@ namespace ECommerceMVC
                 options.User.RequireUniqueEmail = false;
             });
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+            });
 
             services.AddTransient<IProductManager, ProductService>();
             services.AddTransient<ICartManager, CartService>();
@@ -90,7 +95,7 @@ namespace ECommerceMVC
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
              if (env.IsDevelopment())
              {
@@ -101,6 +106,8 @@ namespace ECommerceMVC
             app.UseStaticFiles();
             // adding an identity
             app.UseAuthentication();
+            app.UseAuthorization();
+            RoleInitializer.SeedData(serviceProvider);
 
             // Endpoint to our default home/index/id?
             app.UseEndpoints(endpoints =>

@@ -2,7 +2,7 @@
 
 namespace ECommerceMVC.Migrations.StoreDb
 {
-    public partial class initial : Migration
+    public partial class initialStore : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -64,31 +64,21 @@ namespace ECommerceMVC.Migrations.StoreDb
                 });
 
             migrationBuilder.InsertData(
-                table: "Cart",
-                columns: new[] { "ID", "Email" },
-                values: new object[] { 1, "jinwoov@gmail.com" });
-
-            migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ID", "Description", "Image", "Name", "Price", "SKU" },
                 values: new object[,]
                 {
-                    { 1, "Website that is tailor to business with exquisite taste in classical theme. This outline will grab all of the antiquity enthusiast ", "https://i.imgur.com/ex7bvr4.jpg", "Classic", 150.00m, "12jrj830" },
-                    { 2, "Website that is designed for gen-z business owner. This site will captivate customers that favorites new trend.", "https://i.imgur.com/KckYFPo.jpg", "Hipster", 300.00m, "8fw4s10" },
-                    { 3, "Website that gear towards older generation customer. Very comprehensive and well designed website that will increase your profit immediately.", "https://i.imgur.com/rIRLFbX.jpg", "Antique", 180.00m, "4nj38s10" },
-                    { 4, "Website that is for comic fan user. This design will flourish with incoming traffic of comic and action hero lovers.", "https://i.imgur.com/xf5nzhK.jpg", "Comic", 210.00m, "7mj38s10" },
-                    { 5, "Website that is one of our best seller. This nature design is sure to bring people who wants to be away from fast paced society and enjoy what nature has to offer.", "https://i.imgur.com/1k8nogz.jpg", "Nature", 2000.00m, "12j38s10" },
-                    { 6, "Website that aims to change and new things in the market. This website breathe in scalability and agile.", "https://i.imgur.com/q1OefoY.jpg", "Technical", 200.00m, "8fg38s10" },
-                    { 7, "Website that is affordable and simple to user's eyes. The format is easy to follow and navigate.", "https://i.imgur.com/lJrL4Sr.jpg", "Greyscale", 75.00m, "8fw8s10" },
-                    { 8, "Website that just looking at it brings coziness in your heart. Having this design will leave you with christmas everyday.", "https://i.imgur.com/ZesihIk.jpg", "Cozy", 240.00m, "yv538s10" },
-                    { 9, "Website that pursue on innovation and vibrant schema. This website illustrate all of the beautiful colors in the world into one. Sure to bring in heavy traffic.", "https://i.imgur.com/26bU5zY.png", "Colorful", 350.00m, "83nd8fn3" },
-                    { 10, "Website that thrives in modern society and its fast changes. This website is for end user with modern taste and elegant details.", "https://i.imgur.com/aHUKS0C.png", "Modern", 200.00m, "8fj38s10" }
+                    { 1, "A no nonsense design tailored to businesses with decerning taste. The Classic theme will allow your business to focus on what is important and not waste time with unnecessary features.", "https://i.imgur.com/ex7bvr4.jpg", "Classic", 1500.00m, "12jrj830" },
+                    { 2, "Not your average design, be unique, be bold and carve your own path. The flexibility in this design will ensure no two are the same,so go ahead,and let your creativity show.", "https://i.imgur.com/KckYFPo.jpg", "Hipster", 3000.00m, "8fw4s10" },
+                    { 3, "A classic design that is reminiscent of a by gone era. With a comprehensive and eloquently designed website, you will see an increase in positive user experiences, resulting in a better profit margin.", "https://i.imgur.com/rIRLFbX.jpg", "Antique", 1800.00m, "4nj38s10" },
+                    { 4, "An exciting design for the hero in everyone. The comic design will allow the inner hero of your business to shine.Do not be fooled be the straightforward design, this layout packs a punch!", "https://i.imgur.com/xf5nzhK.jpg", "Comic", 2100.00m, "7mj38s10" },
+                    { 5, "Get away from the hustle and bustle and take a deep breath. With a design that will make even the most adventurous feel right at home, this design is for those who are not afraid to get dirty and enjoy the great outdoors.", "https://i.imgur.com/1k8nogz.jpg", "Nature", 2000.00m, "12j38s10" },
+                    { 6, "A design focused on showcasing technical data to convey your designs and all you to keep productive. With its straight forward layout you can spend less time fixing your site and more time being creative and doing what your passionate about.", "https://i.imgur.com/q1OefoY.jpg", "Technical", 2000.00m, "8fg38s10" },
+                    { 7, "An elegant and minimalistic design to punctuate the things that are most important.This designs beauty is in its simplicity, when you need to present your site in a straightforward way this is the design to use.", "https://i.imgur.com/lJrL4Sr.jpg", "Greyscale", 1750.00m, "8fw8s10" },
+                    { 8, "Like a warm fire, your favorite sweater or a home cooked meal, this design will make you feel right at home.So settle in and get cozy, this design will make you want to take it easy and spend some time to enjoy the simple things.", "https://i.imgur.com/ZesihIk.jpg", "Cozy", 1400.00m, "yv538s10" },
+                    { 9, "with a well thought out design you are ensured to have a site that pops. Not afraid of a little color, go crazy with your palette and show the world how far a little color can go.", "https://i.imgur.com/26bU5zY.png", "Colorful", 1900.00m, "83nd8fn3" },
+                    { 10, "Website that thrives in modern society and its fast changes. This website is for end user with modern taste and elegant details.", "https://i.imgur.com/aHUKS0C.png", "Modern", 2000.00m, "8fj38s10" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "CartItems",
-                columns: new[] { "ID", "CartsID", "ProductID", "Quantity" },
-                values: new object[] { 1, 1, 1, 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CartItems_CartsID",

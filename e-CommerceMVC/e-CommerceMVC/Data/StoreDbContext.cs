@@ -20,38 +20,6 @@ namespace ECommerceMVC.Data
         /// </summary>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Carts>().HasData(
-               new Carts
-               {
-                   ID = 1,
-                   Email = "jinwoov@gmail.com"
-               },
-               new Carts
-               {
-                   ID = 2,
-                   Email = "bobR@gmail.com"
-               }
-
-               );
-
-            modelBuilder.Entity<CartItems>().HasData(
-               new CartItems
-               {
-                   ID = 1,
-                   CartsID = 1,
-                   ProductID = 1,
-                   Quantity = 2,
-               },
-               new CartItems
-               {
-                   ID = 2,
-                   CartsID = 2,
-                   ProductID = 5,
-                   Quantity = 20,
-               }
-
-               );
-
             modelBuilder.Entity<Product>().HasData(
                new Product
                {

@@ -108,6 +108,16 @@ namespace ECommerceMVC.Pages.Account
 
                     await _cartManager.CreateCart(carts);
 
+                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+                    if (user.Email == "fourstringaddiction@gmail.com" || user.Email == "jinwoov@gmail.com" || user.Email == "rice.jonathanm@gmail.com" || user.Email == "amanda@codefellows.com")
+                    {
+                        await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
+                    }
+                    if  (user.Email == "fourstringaddiction@gmail.com" || user.Email == "jinwoov@gmail.com")
+                    {
+                        await _userManager.AddToRoleAsync(user, ApplicationRoles.Dev);
+                    }
+
                     // Sending Mail to User
 
                     StringBuilder sb = new StringBuilder();
@@ -121,10 +131,13 @@ namespace ECommerceMVC.Pages.Account
 
                     await _email.SendEmailAsync(RegisterData.Email, "Welcome to the QuikFix", sb.ToString());
 
+
+
                     //signs user in
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("index", "Home");
                 }
+
 
                 // Adding all the error message into model state
                 foreach (var error in result.Errors)

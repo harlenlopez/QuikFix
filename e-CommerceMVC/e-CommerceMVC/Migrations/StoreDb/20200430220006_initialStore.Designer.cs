@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceMVC.Migrations.StoreDb
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20200428211215_updateSeed")]
-    partial class updateSeed
+    [Migration("20200430220006_initialStore")]
+    partial class initialStore
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,22 +43,6 @@ namespace ECommerceMVC.Migrations.StoreDb
                     b.HasIndex("ProductID");
 
                     b.ToTable("CartItems");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            CartsID = 1,
-                            ProductID = 1,
-                            Quantity = 2
-                        },
-                        new
-                        {
-                            ID = 2,
-                            CartsID = 2,
-                            ProductID = 5,
-                            Quantity = 20
-                        });
                 });
 
             modelBuilder.Entity("ECommerceMVC.Models.Carts", b =>
@@ -74,18 +58,6 @@ namespace ECommerceMVC.Migrations.StoreDb
                     b.HasKey("ID");
 
                     b.ToTable("Cart");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Email = "jinwoov@gmail.com"
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Email = "bobR@gmail.com"
-                        });
                 });
 
             modelBuilder.Entity("ECommerceMVC.Models.Product", b =>
