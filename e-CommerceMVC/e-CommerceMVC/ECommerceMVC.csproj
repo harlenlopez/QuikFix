@@ -7,29 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\**" />
-    <Content Remove="Migrations\**" />
-    <EmbeddedResource Remove="Migrations\**" />
-    <None Remove="Migrations\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Pages\Product.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Pages\Product.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Migrations\20200422231744_initial.cs" />
-    <Compile Include="Migrations\20200422231744_initial.Designer.cs" />
-    <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
-    <Compile Include="Migrations\StoreDb\20200428002349_initial.cs" />
-    <Compile Include="Migrations\StoreDb\20200428002349_initial.Designer.cs" />
-    <Compile Include="Migrations\StoreDb\20200428211215_updateSeed.cs" />
-    <Compile Include="Migrations\StoreDb\20200428211215_updateSeed.Designer.cs" />
-    <Compile Include="Migrations\StoreDb\StoreDbContextModelSnapshot.cs" />
   </ItemGroup>
 
   <ItemGroup>
