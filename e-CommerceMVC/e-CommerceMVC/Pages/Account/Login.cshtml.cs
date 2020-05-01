@@ -50,7 +50,7 @@ namespace ECommerceMVC.Pages.Account
                 // other wise it will show error message
                 else
                 {
-                    ModelState.AddModelError("", "you done messed up Aaron");
+                    ModelState.AddModelError(String.Empty, "Please enter correct information or sign up");
                     return Page();
 
                 }

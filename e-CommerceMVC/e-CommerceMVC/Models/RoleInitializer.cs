@@ -17,6 +17,7 @@ namespace ECommerceMVC.Models
             new IdentityRole{ Name = ApplicationRoles.Admin, NormalizedName = ApplicationRoles.Admin.ToUpper(), ConcurrencyStamp = Guid.NewGuid().ToString() },
             new IdentityRole{ Name = ApplicationRoles.Dev, NormalizedName = ApplicationRoles.Dev.ToUpper(), ConcurrencyStamp = Guid.NewGuid().ToString()}
         };
+
         public static void SeedData(IServiceProvider serviceProvider)
         {
             using (var DbContext = new ApplicationDbContext(serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
@@ -25,6 +26,7 @@ namespace ECommerceMVC.Models
                 AddRoles(DbContext);
             }
         }
+
         private static void AddRoles(ApplicationDbContext context)
         {
             if (context.Roles.Any()) return;
