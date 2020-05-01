@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using ECommerceMVC.Data;
 using ECommerceMVC.Models;
 using ECommerceMVC.Models.Interface;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerceMVC.Controllers
 {
+    [Authorize(Policy = "AdminOnly")]
     public class ProductsController : Controller
     {
         private readonly IProductManager _productManager;
@@ -111,7 +113,6 @@ namespace ECommerceMVC.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var product = await _productManager.GetInventoryById(id);
-            await _productManager.DeleteInventories(product);
 
             if (product == null)
             {
@@ -121,20 +122,15 @@ namespace ECommerceMVC.Controllers
             return View(product);
         }
 
-        //// POST: Products/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var product = await _context.Products.FindAsync(id);
-        //    _context.Products.Remove(product);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+        // POST: Products/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var product = await _productManager.GetInventoryById(id);
 
-        //private bool ProductExists(int id)
-        //{
-        //    return _context.Products.Any(e => e.ID == id);
-        //}
+            await _productManager.DeleteInventories(product);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

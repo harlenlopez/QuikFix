@@ -45,7 +45,12 @@
 
                         <span class="pr-3 my-auto"> Aloha @User.Claims.First(x => x.Type == "FullName").Value </span>
 
-                        <a asp-page="/Account/Logout" class="bg-link text-white pr-1 nav-link">Logout</a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="index" asp-controller="Products" class="bg-link text-white pr-1 nav-link">Admin</a>
+                        }
+
+                        <a asp-page="/Account/Logout" class="bg-link text-white pr-3 nav-link">Logout</a>
 
                     </div>
                 </div>

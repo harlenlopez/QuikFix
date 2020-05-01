@@ -15,18 +15,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/styles/base.css?t=@DateTime.Now.Ticks" type="text/css" />
-    <link rel="stylesheet" href="~/styles/layout.css?t=@DateTime.Now.Ticks" type="text/css" />
-    <link rel="stylesheet" href="~/styles/module.css?t=@DateTime.Now.Ticks" type="text/css" />
-    <link rel="stylesheet" href="~/styles/index/theme.css?t=@DateTime.Now.Ticks" type="text/css" />
+    <link rel="stylesheet" href="~/styles/Admin/theme.css?t=@DateTime.Now.Ticks" type="text/css" />
+
     @* ========================================================= *@
 
 </head>
+
 <body>
-    @* =====================header============================ *@
     <header>
-        <nav class="navbar navbar-light text-black bg-dark navbar-expand-lg fixed-top" id="navvy">
+        <nav class="navbar navbar-light text-black bg-dark navbar-expand-lg fixed" id="navvy">
             <a asp-page="/Home/Index">
-                <img src="~/Images/logo.png" alt="logo" class="w-20 h-20 ml-1" id="logo" />
+                <img src="~/Images/logos.png" alt="logo" class="w-20 h-20 ml-1" id="logo" />
             </a>
 
             <button type="button" class="navbar-toggler bg-light" data-toggle="collapse" data-target="#collapsable">
@@ -38,19 +37,16 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                 <div class="nav navbar-nav ml-auto">
-                    <a asp-page="/Shop/Index" class="bg-link text-black pr-3 my-auto nav-link">Shop</a>
+                    <a asp-page="/Shop/Index" class="bg-link text-white pr-3 my-auto nav-link">Shop</a>
 
-                    <span class="pr-3 my-auto text-muted"> Aloha @User.Claims.First(x => x.Type == "FullName").Value </span>
-
+                    <span class="pr-3 my-auto text-white"> Aloha @User.Claims.First(x => x.Type == "FullName").Value </span>
 
                     @if (User.IsInRole("Admin"))
                     {
-                        <a asp-action="index" asp-controller="Products" class="bg-link text-black pr-3 nav-link">Admin</a>
+                        <a asp-action="index" asp-controller="Products" class="bg-link text-white pr-3 nav-link">Admin</a>
                     }
 
-                    <a asp-page="/Account/Logout" class="bg-link text-black pr-3 nav-link">Logout</a>
-
-
+                    <a asp-page="/Account/Logout" class="bg-link text-white pr-1 nav-link">Logout</a>
 
                 </div>
                 }
@@ -58,27 +54,22 @@
                 {
                     <ul class="nav navbar-nav ml-auto">
                         <li class="navbar-item col-sm-4">
-                            <a asp-page="/Shop/Index" class="text-black nav-link">Shop</a>
+                            <a asp-page="/Shop/Index" class="text-white nav-link">Shop</a>
                         </li>
 
                         <li class="navbar-item col-sm-4">
-                            <a asp-page="/account/login" class="text-black nav-link">Login</a>
+                            <a asp-page="/account/login" class="text-white nav-link">Login</a>
                         </li>
                         <li class="navbar-item col-sm-4">
-                            <a asp-page="/account/register" class="text-black nav-link">Register</a>
+                            <a asp-page="/account/register" class="text-white nav-link">Register</a>
                         </li>
                     </ul>
                 }
             </div>
         </nav>
     </header>
-    @* ====================================================== *@
     <div>
         @RenderBody()
     </div>
-    @* Using JQUERY, Popper, and bootstrap *@
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
