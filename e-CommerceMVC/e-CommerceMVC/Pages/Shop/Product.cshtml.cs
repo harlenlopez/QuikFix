@@ -39,6 +39,12 @@ namespace ECommerceMVC.Pages.Shop
         {
             Product = await _ProductManager.GetInventoryById(ID);
         }
+
+        /// <summary>
+        /// On post method that will add cart item to the cartitems 
+        /// </summary>
+        /// <param name="productID">Id of the product</param>
+        /// <returns>to the shop index page</returns>
         public async Task<IActionResult> OnPost(int productID)
         {
             var user = User.Identity.Name;

@@ -16,6 +16,8 @@ namespace ECommerceMVC.Pages.Account
         /// Creating local properties t obe used 
         /// </summary>
         private readonly SignInManager<ApplicationUser> _SignInManager;
+        private readonly UserManager<ApplicationUser> _UserManager;
+
         [BindProperty]
         public LoginViewModel Input { get; set; }
 
@@ -23,11 +25,16 @@ namespace ECommerceMVC.Pages.Account
         /// Bringing in the indentity component call signin manager
         /// </summary>
         /// <param name="signInManager">the signin manager context</param>
-        public LoginModel(SignInManager<ApplicationUser> signInManager)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _SignInManager = signInManager;
+            _UserManager = userManager;
 
         }
+
+        /// <summary>
+        /// Onget method that is used to load the page
+        /// </summary>
         public void OnGet()
         {
         }
@@ -44,8 +51,14 @@ namespace ECommerceMVC.Pages.Account
                 /// if login is sucessful this if will be invoked
                 if (result.Succeeded)
                 {
+                    var user = await _UserManager.FindByNameAsync(Input.Email);
+                    var role = await _UserManager.GetRolesAsync(user);
+                    if (role.Contains("Admin"))
+                    {
+                        return RedirectToPage("/Admin/Index");
+                    }
                     //return RedirectToAction("Index", "Home");
-                    return RedirectToPage("/Shop/Index");
+                    return RedirectToAction("Index", "Home");
                 }
                 // other wise it will show error message
                 else

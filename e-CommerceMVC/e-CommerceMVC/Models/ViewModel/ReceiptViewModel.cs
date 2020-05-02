@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.Models.ViewModel
 {
+
+    // This is created for future use when the user is going to fill out the personal information to checkout
     public class ReceiptViewModel
     {
         [Required]

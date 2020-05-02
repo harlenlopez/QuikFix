@@ -14,12 +14,21 @@ namespace ECommerceMVC.Pages.Checkout
 {
     public class ReceiptModel : PageModel
     {
+        /// <summary>
+        /// Local properties
+        /// </summary>
         private readonly ICartManager _CartManager;
         private readonly ICartItemsManager _CartItemsManager;
         private readonly IEmailSender _Email;
 
         //public ReceiptViewModel ReceiptInfo { get; set; }
 
+        /// <summary>
+        /// Constructor that brings in all of the interface
+        /// </summary>
+        /// <param name="cartManager">interface for cart</param>
+        /// <param name="cartItemsManager">interface for the cart items</param>
+        /// <param name="email">interface for the email sender</param>
         public ReceiptModel(ICartManager cartManager, ICartItemsManager cartItemsManager, IEmailSender email)
         {
             _CartManager = cartManager;
@@ -41,9 +50,6 @@ namespace ECommerceMVC.Pages.Checkout
             //ReceiptInfo = rm;
             // Refactoring the method to be more readable code
             await ReceiptDelete();
-            
-
-
         }
 
         /// <summary>
@@ -63,6 +69,7 @@ namespace ECommerceMVC.Pages.Checkout
                 await _CartItemsManager.DeleteCartItems(item.ID);
             }
 
+            /// Creating a letter to send it to user when they purchase
             StringBuilder sb = new StringBuilder();
 
             string imageUrl = "https://i.imgur.com/rocGIxN.png";
@@ -85,6 +92,7 @@ namespace ECommerceMVC.Pages.Checkout
             sb.AppendLine("</div>");
             sb.AppendLine("</div>");
             
+            /// sending the receipt to the shopper
             await _Email.SendEmailAsync(userName, "Thank you for the order", sb.ToString());
         }
     }

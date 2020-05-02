@@ -18,32 +18,51 @@ namespace ECommerceMVC.Pages.Checkout
         private readonly IEmailSender _email;
         private readonly ICartManager _CartManager;
 
+        /// <summary>
+        /// Constructor that brings the interface
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="cartManger"></param>
         public IndexModel(IEmailSender email, ICartManager cartManger)
         {
             _email = email;
             _CartManager = cartManger;
         }
+
+        // User info when they feel out
         [BindProperty]
         public ReceiptViewModel Userinfo { get; set; }
 
+        /// <summary>
+        /// Tallying the total price
+        /// </summary>
         public decimal TotalPrice { get; set; }
 
+        // List of cartitems
         public List<CartItems> CartItems { get; set; }
 
+        /// <summary>
+        /// Calling all getting the cart items for the user
+        /// </summary>
         public async Task OnGet()
         {
             await GetData();
         }
 
+        /// <summary>
+        /// Submitting the whats in the cart and sending it to the user
+        /// </summary>
+        /// <returns>Sending the email</returns>
         public async Task<IActionResult> OnPost()
         {
 
             var userName = User.Identity.Name;
             await GetData();
-            // Sending Mail to User
 
+            // Sending Mail to User
             StringBuilder sb = new StringBuilder();
 
+            // Appending the lines to the content
             string imageUrl = "https://i.imgur.com/rocGIxN.png";
             sb.AppendLine($"<div style='text-align:center'>");
             sb.AppendLine($"<img src='{imageUrl}' alt='Logo' style='margin-bottom:50px' />");
@@ -72,12 +91,14 @@ namespace ECommerceMVC.Pages.Checkout
             
             await _email.SendEmailAsync(userName, "Thank you for the order", sb.ToString());
 
-
-
+            // To the receipt page
             return RedirectToPage("Receipt", Userinfo);
 
         }
 
+        /// <summary>
+        /// Getting what is in the user's cart
+        /// </summary>
         public async Task GetData()
         {
             var userName = User.Identity.Name;

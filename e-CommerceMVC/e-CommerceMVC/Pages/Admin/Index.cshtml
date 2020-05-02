@@ -15,14 +15,16 @@
     <div class="container mt-5">
         <h1>Admin Dashboard</h1>
         <div class="text-center row mt-3">
-           <div class="col-sm-5 btn btn-primary p-5 mx-auto rounded">
-               <a  class="text-white"  asp-action="index" asp-controller="products">
-               <h1>Product</h1></a>
-           </div>
-           <div class="col-sm-5 btn btn-primary p-5 mx-auto rounded">
-               <a class="text-white">
-                   <h1>Order</h1></a>
-           </div>
+            <a class="text-white col-sm-5 btn btn-primary p-5 mx-auto mb-1 rounded" asp-action="index" asp-controller="products">
+                <div>
+                    <h1>Product</h1>
+                </div>
+            </a>
+            <a class="text-white col-sm-5 btn btn-primary p-5 mx-auto mt-1 rounded">
+                <div>
+                    <h1>Order</h1>
+                </div>
+            </a>
         </div>
     </div>
 </body>

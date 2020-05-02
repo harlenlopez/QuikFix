@@ -19,6 +19,10 @@ namespace ECommerceMVC.Models
         public string TypeOfBusiness { get; set; }
 
     }
+
+    /// <summary>
+    /// List of roles that will be available to different users
+    /// </summary>
     public static class ApplicationRoles
     {
         public const string Member = "Member";
