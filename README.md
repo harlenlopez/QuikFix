@@ -16,6 +16,13 @@ In a current society, businesses are required to have website and QuikFix is her
 - This website captures user's favorite color, design that user wants and the type of business the employer owns. They are required to input this information during the registration page. Our goal is to utilize these claims to tailor each web page to the end user.
 
 ---
+
+## Policies
+
+- The website consists of user and admin roles to differentiate the right that user has on editing the product on the website. Admin will be given an access to delete, update and create product that will be shown on website. On other hand, user will be prohibited from accessing that admin page due to the policies in place.
+
+---
+
 ## Tools Used
 Microsoft Visual Studio Community 2019
 
@@ -26,10 +33,15 @@ Microsoft Visual Studio Community 2019
 - xUnit
 - Bootstrap
 - Azure
-- Swagger
 - LazZiya.TagHelpers
 ---
+## ERD
 
+![ERD](./assets/ERD.png)
+
+The ERD shown here is from Code Fellows 401 class for E-commerce project. As shown in the ERD, when the user sign up to our site, they will be given unique primary key that will be stored in `Cart` table, in conjunction to storing their information in identity database. Once user selects website that they like to purchase, it will add productID and user's primary key to the `CartItems` table and also quantities that user wants to buy. Due to the quantity that is in this table, this table can be updated and deleted anytime user purchase, delete or update their product. From this table, when the user enters shoppping cart, using the primary key of the product that is stored in the `CartItems`, each product will be render for specific user.
+
+---
 ## Visual
 
 ### Main Page
