@@ -108,6 +108,7 @@ namespace ECommerceMVC.Pages.Account
 
                     await _cartManager.CreateCart(carts);
 
+                    /// Allowing certain individual to have admin powers
                     await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
                     if (user.Email == "fourstringaddiction@gmail.com" || user.Email == "jinwoov@gmail.com" || user.Email == "rice.jonathanm@gmail.com" || user.Email == "amanda@codefellows.com")
                     {
@@ -119,7 +120,6 @@ namespace ECommerceMVC.Pages.Account
                     }
 
                     // Sending Mail to User
-
                     StringBuilder sb = new StringBuilder();
 
                     string imageUrl = "https://i.imgur.com/rocGIxN.png";

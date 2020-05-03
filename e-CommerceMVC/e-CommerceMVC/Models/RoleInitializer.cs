@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.Models
 {
+    // class that will up hold all of the roles
     public class RoleInitializer
     {
         private static readonly List<IdentityRole> Roles = new List<IdentityRole>()
@@ -18,6 +19,10 @@ namespace ECommerceMVC.Models
             new IdentityRole{ Name = ApplicationRoles.Dev, NormalizedName = ApplicationRoles.Dev.ToUpper(), ConcurrencyStamp = Guid.NewGuid().ToString()}
         };
 
+        /// <summary>
+        ///  Seeding the roles into our database using the service provider which is like traffic cop
+        /// </summary>
+        /// <param name="serviceProvider"></param>
         public static void SeedData(IServiceProvider serviceProvider)
         {
             using (var DbContext = new ApplicationDbContext(serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
@@ -27,6 +32,7 @@ namespace ECommerceMVC.Models
             }
         }
 
+        // checking to see if there is a role other wise will add it
         private static void AddRoles(ApplicationDbContext context)
         {
             if (context.Roles.Any()) return;

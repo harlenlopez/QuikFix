@@ -13,13 +13,23 @@ namespace ECommerceMVC.Components
 {
     public class ShoppingCart : ViewComponent
     {
+        // local property
         private readonly StoreDbContext _context;
 
+        //Constructor that bring in the dbcontext
         public ShoppingCart(StoreDbContext context)
         {
             _context = context;
         }
+
+        /// <summary>
+        /// The tally of all of the item in the cart
+        /// </summary>
         public decimal TotalPrice { get; set; }
+
+        /// <summary>
+        /// A view component method that will be used to grab all of the item in the cart
+        /// </summary>
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var userName = User.Identity.Name;
@@ -33,8 +43,6 @@ namespace ECommerceMVC.Components
                 decimal TempTotal = list.Quantity * list.Product.Price;
                 TotalPrice += TempTotal;
             }
-
-
             return View(cartList);
         }
 

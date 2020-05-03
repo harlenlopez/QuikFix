@@ -7,16 +7,11 @@ namespace ECommerceMVC.Models.Interface
 {
     public interface ICartManager
     {
+        //read
         Task<Carts> GetCartById(string email);
-
+        //Read
         Task<List<CartItems>> GetProductByCartID(int id);
         // Create
         Task<Carts> CreateCart(Carts carts);
-        // Get all products from the db
-        Task<List<Carts>> GetAllCart();
-        // Update
-        Task<Carts> UpdateCart(Carts carts);
-        // Delete
-        Task DeleteCart(Carts carts);
     }
 }

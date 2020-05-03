@@ -11,8 +11,15 @@ namespace ECommerceMVC.Pages.Shop
 {
     public class IndexModel : PageModel
     {
+        /// <summary>
+        /// Interface
+        /// </summary>
         private readonly IProductManager _product;
 
+        /// <summary>
+        /// Constructor that brings in the interface
+        /// </summary>
+        /// <param name="product">product manager interface</param>
         public IndexModel(IProductManager product)
         {
             _product = product;
