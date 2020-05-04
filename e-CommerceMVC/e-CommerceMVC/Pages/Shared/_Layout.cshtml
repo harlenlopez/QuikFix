@@ -14,57 +14,92 @@
     <link rel="stylesheet" href="~/styles/reset.css" />
     @*Using bootstrap*@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/styles/base.css?t=@DateTime.Now.Ticks" type="text/css" />
     <link rel="stylesheet" href="~/styles/layout.css?t=@DateTime.Now.Ticks" type="text/css" />
     <link rel="stylesheet" href="~/styles/module.css?t=@DateTime.Now.Ticks" type="text/css" />
-    <link rel="stylesheet" href="~/styles/index/theme.css?t=@DateTime.Now.Ticks" type="text/css" />
     @* ========================================================= *@
 </head>
 
 <body>
     @* ======================== HEADER ========================== *@
     <header>
-        <nav class="navbar navbar-light text-white bg-dark navbar-expand-lg">
-            <img src="~/Images/logos.png" alt="logo" class="w-20 h-20 ml-1" id="logo" />
-            <button type="button" class="navbar-toggler bg-light" data-toggle="collapse" data-target="#collapsable">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="collapsable">
-
-                @if (SignInManager.IsSignedIn(User))
-                {
-                <div class="nav navbar-nav ml-auto">
-                    <a asp-page="/Home/Index" class="bg link text-white pr-3 my-auto">Home</a>
-
-                    <span class="pr-3 my-auto"> Aloha @User.Claims.First(x => x.Type == "FullName").Value </span>
-
-                    <a asp-page="/Account/Logout" class="bg-link text-white pr-1 nav-link">Logout</a>
-
+            @if (SignInManager.IsSignedIn(User))
+            {
+            <nav class="navbar navbar-light text-white bg-dark navbar-expand-lg fixed-top">
+                <a asp-page="/Home/Index">
+                    <img src="~/Images/logos.png" alt="logo" class="w-20 h-20 ml-1" id="logo" />
+                </a>
+                <div class="d-flex justify-content-between">
+                    <a asp-page="/Cart/Index" id="shopping-icon" class="mr-4 text-white nav-link">
+                        <i class="fa fa-shopping-cart" style="font-size:34px"></i>
+                    </a>
+                    <button type="button" class="navbar-toggler bg-light" data-toggle="collapse" data-target="#collapsable">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                 </div>
-                }
-                else
-                {
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="navbar-item col-sm-4">
-                        <a asp-page="/Home/Index" class="text-white nav-link">Home</a>
-                    </li>
-                    <li class="navbar-item col-sm-4">
-                        <a asp-page="/account/login" class="text-white nav-link">Login</a>
-                    </li>
-                    <li class="navbar-item col-sm-4">
-                        <a asp-page="/account/register" class="text-white nav-link">Register</a>
-                    </li>
-                </ul>
-                }
-            </div>
-        </nav>
+                <div class="collapse navbar-collapse" id="collapsable">
+                    <div class="nav navbar-nav ml-auto">
+                        <a asp-page="/Shop/Index" class="bg-link text-white pr-3 my-auto nav-link">Shop</a>
+
+                        <span class="pr-3 my-auto"> Aloha @User.Claims.First(x => x.Type == "FullName").Value </span>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-page="/Admin/index" class="bg-link text-white pr-1 nav-link">Admin</a>
+                        }
+
+                        <a asp-page="/Account/Logout" class="bg-link text-white pr-3 nav-link">Logout</a>
+
+                    </div>
+                </div>
+            </nav>
+            }
+            else
+            {
+            <nav class="navbar navbar-light text-white bg-dark navbar-expand-lg">
+                <a asp-page="/Home/Index">
+                    <img src="~/Images/logos.png" alt="logo" class="w-20 h-20 ml-1" id="logo" />
+                </a>
+                <button type="button" class="navbar-toggler bg-light" data-toggle="collapse" data-target="#collapsable">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsable">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="navbar-item col-sm-4">
+                            <a asp-page="/Shop/Index" class="text-white nav-link">Shop</a>
+                        </li>
+                        <li class="navbar-item col-sm-4">
+                            <a asp-page="/account/login" class="text-white nav-link">Login</a>
+                        </li>
+                        <li class="navbar-item col-sm-4">
+                            <a asp-page="/account/register" class="text-white nav-link">Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            }
     </header>
     @* ========================================================= *@
+    @if (SignInManager.IsSignedIn(User))
+    {
+    <div id="main-box">
+        <div class="sidebar">
+            @await Component.InvokeAsync("ShoppingCart")
+        </div>
 
-    <div>
-        @RenderBody()
+        <div class="content">
+            @RenderBody()
+        </div>
     </div>
+    }
+    else
+    {
+        <div>
+            @RenderBody()
+        </div>
+    }
 
     @* Using JQUERY, Popper, and bootstrap *@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

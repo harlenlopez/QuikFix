@@ -1,0 +1,18 @@
+﻿@model IEnumerable<ECommerceMVC.Models.CartItems>
+@using ECommerceMVC.Models
+
+    <a asp-page="/Cart/Index" class="text-center" id="cart-button-side">
+        <h4 class="mt-3 text-center btn btn-success col-12">Shopping Cart (@Model.Count())</h4>
+    </a>
+@foreach (var post in Model)
+{
+    <div class="card text-center border-left-0 border-right-0 border-top-0" id="shopping-card">
+        <div class="card-body bg-muted">
+            <h4 class="card-title">@post.Product.Name</h4>
+            <p><small class="text-muted">Quantity: @post.Quantity</small></p>
+            <p><small class="text-muted">$@post.Product.Price</small></p>
+            <a asp-page="/Cart/Delete" class="btn btn-danger p-1 text-white" asp-route-id="@post.ID" id="sidebar-delete-button">Delete</a>
+        </div>
+    </div>
+ }
+

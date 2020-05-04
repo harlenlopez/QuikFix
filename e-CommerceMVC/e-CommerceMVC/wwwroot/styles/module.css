@@ -11,9 +11,16 @@
     object-fit: cover;
 }
 
+#main-box {
+    margin-top:100px;
+}
 /*============Detail page=============*/
 #detail-page {
     margin-top: 50px;
+}
+
+#product-image-detail {
+    width: 80%;
 }
 
 
@@ -25,3 +32,63 @@
 #logo {
     width: 90px;
 }
+
+#shopping-icon {
+    display: none;
+    visibility: hidden;
+}
+
+/*==================================================*/
+/*=======================side bar===================*/
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 250px;
+    background-color: #f1f1f1;
+    position: fixed;
+    max-height: 800px;
+    overflow-y: auto;
+    right: 0;
+}
+
+    /* Sidebar links */
+    .sidebar a {
+        display: block;
+        color: black;
+        padding: 16px;
+        text-decoration: none;
+    }
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+div.content {
+    margin-right: 250px;
+    padding: 1px 16px;
+    height: 1000px;
+}
+
+#shopping-card {
+    background-color: transparent !important;
+}
+
+
+/*=============== For Checkout page ================*/
+#view-box {
+    height: 100vh;
+}
+
+
+
+@media screen and (max-width: 700px) {
+    .sidebar {
+        display: none;
+    }
+    div.content {
+        margin-right: 0;
+    }
+
+    #shopping-icon {
+        display: block !important;
+        visibility: visible !important;
+    }
+}
+

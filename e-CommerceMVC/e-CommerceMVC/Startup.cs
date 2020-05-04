@@ -10,10 +10,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace ECommerceMVC
 {
@@ -54,13 +56,15 @@ namespace ECommerceMVC
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             }
-        );
+            );
 
 
             /// TO add identity to our application
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            /// Identity password configuration that will be used to implement stricter rule in password
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
@@ -80,22 +84,37 @@ namespace ECommerceMVC
                 options.User.RequireUniqueEmail = false;
             });
 
+            /// Adding the amdin only authorization
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+            });
 
+            ///transient method that will be invoked for every instance when the interface is called
             services.AddTransient<IProductManager, ProductService>();
+            services.AddTransient<ICartManager, CartService>();
+            services.AddTransient<ICartItemsManager, CartItemsService>();
+            services.AddTransient<IEmailSender, EmailSender>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
-              if (env.IsDevelopment())
-              {
+            if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
-              }
+            }
 
             app.UseRouting();
+            // using the static file location wwwroot
             app.UseStaticFiles();
             // adding an identity
             app.UseAuthentication();
+            app.UseAuthorization();
+            
+            /// Seeding the roles if its in the database
+            RoleInitializer.SeedData(serviceProvider);
 
             // Endpoint to our default home/index/id?
             app.UseEndpoints(endpoints =>

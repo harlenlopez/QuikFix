@@ -1,0 +1,97 @@
+﻿@page
+@model ECommerceMVC.Pages.Checkout.IndexModel
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="~/styles/Cart/theme.css?t=@DateTime.Now.Ticks" type="text/css" />
+</head>
+
+<body>
+    <div class="container" style="margin-top:80px;">
+        <form method="post">
+            <div class="form-group row">
+                <label asp-for="Userinfo.FirstName" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Userinfo.FirstName" class="form-control" />
+                    <span asp-validation-for="Userinfo.FirstName"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="Userinfo.LastName" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Userinfo.LastName" class="form-control" />
+                    <span asp-validation-for="Userinfo.LastName"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="Userinfo.ShippingAddress" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Userinfo.ShippingAddress" class="form-control" />
+                    <span asp-validation-for="Userinfo.ShippingAddress"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="Userinfo.City" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Userinfo.City" class="form-control" />
+                    <span asp-validation-for="Userinfo.City"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="Userinfo.State" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Userinfo.State" class="form-control" />
+                    <span asp-validation-for="Userinfo.State"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="Userinfo.Country" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Userinfo.Country" class="form-control" />
+                    <span asp-validation-for="Userinfo.Country"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="Userinfo.PaymentMethod" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <select asp-for="Userinfo.PaymentMethod" class="form-control">
+                        <option value="Default">Payment Option</option>
+                        <option value="Visa">Visa</option>
+                        <option value="Master Card">Master Card</option>
+                        <option value="Amex">American Express</option>
+                    </select>
+                    <span asp-validation-for="Userinfo.PaymentMethod"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                    <div class="col-6 text-left">
+                        <a asp-page="/Cart/Index" class="btn btn-secondary" style="margin-top:20px;margin-bottom:20px;">Back To Cart</a>
+                    </div>
+
+                    <div class="col-6 text-right">
+                        <button type="submit" class="btn btn-success" style="margin-top:20px;margin-bottom:20px;">Purchase</button>
+                    </div>
+                </div>
+    </form>
+
+        <div class="container mb-5">
+            @await Component.InvokeAsync("ShoppingCart")
+        </div>
+        <div class="row">
+            <div class="col-12 text-right">
+                <h3>Total: $@Model.TotalPrice</h3>
+            </div>
+        </div>
+    </div>
+
+</body>

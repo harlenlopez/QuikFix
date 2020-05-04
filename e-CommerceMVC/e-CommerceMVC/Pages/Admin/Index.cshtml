@@ -1,0 +1,30 @@
+﻿@page
+@model ECommerceMVC.Pages.Admin.IndexModel
+@{
+    Layout = "_Layout";
+
+}
+
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="~/styles/Cart/theme.css" />
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Admin Dashboard</h1>
+        <div class="text-center row mt-3">
+            <a class="text-white col-sm-5 btn btn-primary p-5 mx-auto mb-1 rounded" asp-action="index" asp-controller="products">
+                <div>
+                    <h1>Product</h1>
+                </div>
+            </a>
+            <a class="text-white col-sm-5 btn btn-primary p-5 mx-auto mt-1 rounded">
+                <div>
+                    <h1>Order</h1>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>

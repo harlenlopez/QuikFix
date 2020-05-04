@@ -1,0 +1,15 @@
+﻿.sidebar {
+    display: none;
+}
+
+div.content {
+    margin-right: 0;
+}
+
+#cart-button-side{
+    display: none !important;
+}
+
+#sidebar-delete-button{
+    display: none !important;
+}

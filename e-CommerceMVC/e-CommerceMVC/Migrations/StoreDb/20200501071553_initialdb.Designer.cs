@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceMVC.Migrations.StoreDb
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20200426225616_addedsummary")]
-    partial class addedsummary
+    [Migration("20200501071553_initialdb")]
+    partial class initialdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,6 +19,46 @@ namespace ECommerceMVC.Migrations.StoreDb
                 .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("ECommerceMVC.Models.CartItems", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CartsID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CartsID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("CartItems");
+                });
+
+            modelBuilder.Entity("ECommerceMVC.Models.Carts", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Cart");
+                });
 
             modelBuilder.Entity("ECommerceMVC.Models.Product", b =>
                 {
@@ -44,49 +84,49 @@ namespace ECommerceMVC.Migrations.StoreDb
 
                     b.HasKey("ID");
 
-                    b.ToTable("Inventories");
+                    b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
                             ID = 1,
-                            Description = "Website that is tailor to business with exquisite taste in classical theme. This outline will grab all of the antiquity enthusiast ",
+                            Description = "A no nonsense design tailored to businesses with decerning taste. The Classic theme will allow your business to focus on what is important and not waste time with unnecessary features.",
                             Image = "https://i.imgur.com/ex7bvr4.jpg",
                             Name = "Classic",
-                            Price = 150.00m,
+                            Price = 1500.00m,
                             SKU = "12jrj830"
                         },
                         new
                         {
                             ID = 2,
-                            Description = "Website that is designed for gen-z business owner. This site will captivate customers that favorites new trend.",
+                            Description = "Not your average design, be unique, be bold and carve your own path. The flexibility in this design will ensure no two are the same,so go ahead,and let your creativity show.",
                             Image = "https://i.imgur.com/KckYFPo.jpg",
                             Name = "Hipster",
-                            Price = 300.00m,
+                            Price = 3000.00m,
                             SKU = "8fw4s10"
                         },
                         new
                         {
                             ID = 3,
-                            Description = "Website that gear towards older generation customer. Very comprehensive and well designed website that will increase your profit immediately.",
+                            Description = "A classic design that is reminiscent of a by gone era. With a comprehensive and eloquently designed website, you will see an increase in positive user experiences, resulting in a better profit margin.",
                             Image = "https://i.imgur.com/rIRLFbX.jpg",
                             Name = "Antique",
-                            Price = 180.00m,
+                            Price = 1800.00m,
                             SKU = "4nj38s10"
                         },
                         new
                         {
                             ID = 4,
-                            Description = "Website that is for comic fan user. This design will flourish with incoming traffic of comic and action hero lovers.",
+                            Description = "An exciting design for the hero in everyone. The comic design will allow the inner hero of your business to shine.Do not be fooled be the straightforward design, this layout packs a punch!",
                             Image = "https://i.imgur.com/xf5nzhK.jpg",
                             Name = "Comic",
-                            Price = 210.00m,
+                            Price = 2100.00m,
                             SKU = "7mj38s10"
                         },
                         new
                         {
                             ID = 5,
-                            Description = "Website that is one of our best seller. This nature design is sure to bring people who wants to be away from fast paced society and enjoy what nature has to offer.",
+                            Description = "Get away from the hustle and bustle and take a deep breath. With a design that will make even the most adventurous feel right at home, this design is for those who are not afraid to get dirty and enjoy the great outdoors.",
                             Image = "https://i.imgur.com/1k8nogz.jpg",
                             Name = "Nature",
                             Price = 2000.00m,
@@ -95,37 +135,37 @@ namespace ECommerceMVC.Migrations.StoreDb
                         new
                         {
                             ID = 6,
-                            Description = "Website that aims to change and new things in the market. This website breathe in scalability and agile.",
+                            Description = "A design focused on showcasing technical data to convey your designs and all you to keep productive. With its straight forward layout you can spend less time fixing your site and more time being creative and doing what your passionate about.",
                             Image = "https://i.imgur.com/q1OefoY.jpg",
                             Name = "Technical",
-                            Price = 200.00m,
+                            Price = 2000.00m,
                             SKU = "8fg38s10"
                         },
                         new
                         {
                             ID = 7,
-                            Description = "Website that is affordable and simple to user's eyes. The format is easy to follow and navigate.",
+                            Description = "An elegant and minimalistic design to punctuate the things that are most important.This designs beauty is in its simplicity, when you need to present your site in a straightforward way this is the design to use.",
                             Image = "https://i.imgur.com/lJrL4Sr.jpg",
                             Name = "Greyscale",
-                            Price = 75.00m,
+                            Price = 1750.00m,
                             SKU = "8fw8s10"
                         },
                         new
                         {
                             ID = 8,
-                            Description = "Website that just looking at it brings coziness in your heart. Having this design will leave you with christmas everyday.",
+                            Description = "Like a warm fire, your favorite sweater or a home cooked meal, this design will make you feel right at home.So settle in and get cozy, this design will make you want to take it easy and spend some time to enjoy the simple things.",
                             Image = "https://i.imgur.com/ZesihIk.jpg",
                             Name = "Cozy",
-                            Price = 240.00m,
+                            Price = 1400.00m,
                             SKU = "yv538s10"
                         },
                         new
                         {
                             ID = 9,
-                            Description = "Website that pursue on innovation and vibrant schema. This website illustrate all of the beautiful colors in the world into one. Sure to bring in heavy traffic.",
+                            Description = "with a well thought out design you are ensured to have a site that pops. Not afraid of a little color, go crazy with your palette and show the world how far a little color can go.",
                             Image = "https://i.imgur.com/26bU5zY.png",
                             Name = "Colorful",
-                            Price = 350.00m,
+                            Price = 1900.00m,
                             SKU = "83nd8fn3"
                         },
                         new
@@ -134,9 +174,24 @@ namespace ECommerceMVC.Migrations.StoreDb
                             Description = "Website that thrives in modern society and its fast changes. This website is for end user with modern taste and elegant details.",
                             Image = "https://i.imgur.com/aHUKS0C.png",
                             Name = "Modern",
-                            Price = 200.00m,
+                            Price = 2000.00m,
                             SKU = "8fj38s10"
                         });
+                });
+
+            modelBuilder.Entity("ECommerceMVC.Models.CartItems", b =>
+                {
+                    b.HasOne("ECommerceMVC.Models.Carts", "Carts")
+                        .WithMany()
+                        .HasForeignKey("CartsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ECommerceMVC.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

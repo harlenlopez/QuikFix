@@ -1,0 +1,49 @@
+﻿@page
+@using ECommerceMVC.Models
+@model ECommerceMVC.Pages.Cart.IndexModel
+@{
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+<head>
+      <link rel="stylesheet" href="~/styles/Cart/theme.css?t=@DateTime.Now.Ticks" type="text/css" />
+</head>
+
+<body>
+    @if (Model.ListCart.Count == 0)
+    {
+        <div class="text-center d-flex align-items-center justify-content-center" id="view-box">
+            <div>
+                <p>Your shopping cart is empty</p>
+                <a asp-page="/Shop/Index" class="btn btn-warning">Go back</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        @foreach (var item in Model.ListCart)
+        {
+            <div class="container mt-4">
+                <h3><u>@item.Product.Name Website</u></h3>
+                <h5>@item.Product.Description</h5>
+                <p>
+                    Price: $@(item.Product.Price*item.Quantity)
+                </p>
+                <p>Quantity: @item.Quantity</p>
+                <div class="d-flex justify-content-end">
+                    <form method="post">
+                        <input type="number" name="quantity" placeholder="Quantity" class="p-1" />
+                        <button type="submit" asp-route-productID="@item.ProductID" class="btn btn-info mr-1">Update</button>
+                    </form>
+                    <a asp-page="Delete" class="btn btn-danger" asp-route-id="@item.ID">Delete</a>
+                </div>
+            </div>
+        }
+        <div class="d-flex justify-content-end mr-4 mt-4">
+            <h4>Total Price: $@Model.TotalPrice</h4>
+        </div>
+        <div class="container d-flex justify-content-end mr-4">
+            <a asp-page="/checkout/Receipt" class="btn btn-success">Checkout</a>
+        </div>
+    }
+</body>
