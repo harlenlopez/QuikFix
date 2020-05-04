@@ -61,11 +61,6 @@ namespace ECommerceMVC.Pages.Checkout
                 // Computing
                 await GetData();
 
-                Address address = new Address()
-                {
-
-                }
-
 
                 /// Using the view models to create an object of customerAddressType to send it through PaymentService
                 customerAddressType addressInfo = new customerAddressType
