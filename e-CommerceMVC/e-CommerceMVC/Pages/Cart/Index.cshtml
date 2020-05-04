@@ -32,7 +32,7 @@
                 <p>Quantity: @item.Quantity</p>
                 <div class="d-flex justify-content-end">
                     <form method="post">
-                        <input type="number" name="quantity" placeholder="Quantity" class="p-1" />
+                        <input type="number" name="quantity" placeholder="Qty" class="py-1 px-4" min="1" max="99"/>
                         <button type="submit" asp-route-productID="@item.ProductID" class="btn btn-info mr-1">Update</button>
                     </form>
                     <a asp-page="Delete" class="btn btn-danger" asp-route-id="@item.ID">Delete</a>
