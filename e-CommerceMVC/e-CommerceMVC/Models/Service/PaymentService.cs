@@ -1,6 +1,7 @@
 ﻿using AuthorizeNet.Api.Contracts.V1;
 using AuthorizeNet.Api.Controllers;
 using AuthorizeNet.Api.Controllers.Bases;
+using ECommerceMVC.Models.Interface;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.Models.Service
 {
-    public class PaymentService
+    public class PaymentService : IPayment
     {
         private readonly IConfiguration _config;
 

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AuthorizeNet.Api.Contracts.V1;
 using ECommerceMVC.Models;
 using ECommerceMVC.Models.Interface;
 using ECommerceMVC.Models.ViewModel;
@@ -15,18 +16,17 @@ namespace ECommerceMVC.Pages.Checkout
 {
     public class IndexModel : PageModel
     {
-        private readonly IEmailSender _email;
+        // Local properties that are being used
         private readonly ICartManager _CartManager;
+        private readonly IPayment _payment;
 
         /// <summary>
         /// Constructor that brings the interface
         /// </summary>
-        /// <param name="email"></param>
-        /// <param name="cartManger"></param>
-        public IndexModel(IEmailSender email, ICartManager cartManger)
+        public IndexModel( ICartManager cartManger, IPayment payment)
         {
-            _email = email;
             _CartManager = cartManger;
+            _payment = payment;
         }
 
         // User info when they feel out
@@ -55,45 +55,36 @@ namespace ECommerceMVC.Pages.Checkout
         /// <returns>Sending the email</returns>
         public async Task<IActionResult> OnPost()
         {
-
-            var userName = User.Identity.Name;
-            await GetData();
-
-            // Sending Mail to User
-            StringBuilder sb = new StringBuilder();
-
-            // Appending the lines to the content
-            string imageUrl = "https://i.imgur.com/rocGIxN.png";
-            sb.AppendLine($"<div style='text-align:center'>");
-            sb.AppendLine($"<img src='{imageUrl}' alt='Logo' style='margin-bottom:50px' />");
-            sb.AppendLine("<h3 style='margin-bottom:15px'>Receipt</h3>");
-            sb.AppendLine($"<p>First Name: {Userinfo.FirstName} </p>");
-            sb.AppendLine($"<p>Last Name: {Userinfo.LastName} </p>");
-            sb.AppendLine($"<p>Shipping Address: {Userinfo.ShippingAddress} </p>");
-            sb.AppendLine($"<p>City: {Userinfo.City} </p>");
-            sb.AppendLine($"<p>State: {Userinfo.State} </p>");
-            sb.AppendLine($"<p>Country {Userinfo.Country} </p>");
-            sb.AppendLine($"<p>Payment Method: {Userinfo.PaymentMethod} </p>");
+            /// Checking to see if user had filled out right information
+            if (ModelState.IsValid) 
+            { 
+                // Computing
+                await GetData();
 
 
-            sb.AppendLine($"<div style='text-align:center; margin-top:80px'>");
-            foreach (var item in CartItems)
-            {
-                sb.AppendLine($"<h5>{item.Product.Name} </h5>");
-                sb.AppendLine($"<p>Price: {item.Product.Price} </p>");
-                sb.AppendLine("<hr />");
+                /// Using the view models to create an object of customerAddressType to send it through PaymentService
+                customerAddressType addressInfo = new customerAddressType
+                {
+                    firstName = Userinfo.FirstName,
+                    lastName = Userinfo.LastName,
+                    address = Userinfo.ShippingAddress,
+                    city = Userinfo.City,
+                    zip = Userinfo.ZipCode.ToString()
+                };
+
+                // As the result of Authorize.net payment process, it will return false, if it didn't go through, and it will return true if it did.
+                bool result = _payment.Run(addressInfo, TotalPrice);
+
+                // Only routing them back if the payment have processed correctly.
+                if (result)
+                {
+                    // redirect them to receipt page once the payment goes through
+                    return RedirectToPage("Receipt", Userinfo);
+                }
+
             }
-            sb.AppendLine($"<p>Total: {TotalPrice} </p>");
-            sb.AppendLine($"<p>Thank you, {Userinfo.FirstName} {Userinfo.LastName}!</p>");
-            sb.AppendLine($"<p>We will start on it right away! </p>");
-            sb.AppendLine("</div>");
-            sb.AppendLine("</div>");
-            
-            await _email.SendEmailAsync(userName, "Thank you for the order", sb.ToString());
-
-            // To the receipt page
-            return RedirectToPage("Receipt", Userinfo);
-
+            // otherwise, it wil reroute them to page
+            return Page();
         }
 
         /// <summary>

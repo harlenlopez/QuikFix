@@ -95,6 +95,7 @@ namespace ECommerceMVC
             services.AddTransient<ICartManager, CartService>();
             services.AddTransient<ICartItemsManager, CartItemsService>();
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IPayment, PaymentService>();
 
         }
 
