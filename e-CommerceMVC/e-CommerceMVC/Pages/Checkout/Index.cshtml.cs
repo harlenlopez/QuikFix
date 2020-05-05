@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using AuthorizeNet.Api.Contracts.V1;
 using ECommerceMVC.Models;
 using ECommerceMVC.Models.Interface;
@@ -61,15 +63,22 @@ namespace ECommerceMVC.Pages.Checkout
                 // Computing
                 await GetData();
 
+                string response = ValidateAddress();
+
+                if (response.Contains("Error"))
+                {
+                    ModelState.AddModelError(String.Empty, "Please Enter Correct Address");
+                    return Page();
+                }
 
                 /// Using the view models to create an object of customerAddressType to send it through PaymentService
                 customerAddressType addressInfo = new customerAddressType
                 {
-                    firstName = Userinfo.FirstName,
-                    lastName = Userinfo.LastName,
-                    address = Userinfo.ShippingAddress,
-                    city = Userinfo.City,
-                    zip = Userinfo.ZipCode.ToString()
+                firstName = Userinfo.FirstName,
+                lastName = Userinfo.LastName,
+                address = Userinfo.ShippingAddress,
+                city = Userinfo.City,
+                zip = Userinfo.ZipCode.ToString()
                 };
 
                 // As the result of Authorize.net payment process, it will return false, if it didn't go through, and it will return true if it did.
@@ -101,6 +110,30 @@ namespace ECommerceMVC.Pages.Checkout
                 decimal TempTotal = item.Product.Price * item.Quantity;
                 TotalPrice += TempTotal;
             }
+        }
+
+        public string ValidateAddress()
+        {
+            XDocument requestDoc = new XDocument(
+                    new XElement("AddressValidateRequest",
+                        new XAttribute("USERID", "366QUIKF5953"),
+                        new XElement("Revision", "1"),
+                        new XElement("Address",
+                            new XAttribute("ID", "0"),
+                            new XElement("Address1", Userinfo.ShippingAddress),
+                            new XElement("Address2", ""),
+                            new XElement("City", Userinfo.City),
+                            new XElement("State", Userinfo.State),
+                            new XElement("Zip5", Userinfo.ZipCode),
+                            new XElement("Zip4", "")
+                            )
+                        )
+                    );
+
+            var url = @"https://secure.shippingapis.com/ShippingAPI.dll?API=Verify&XML=" + requestDoc;
+            var client = new WebClient();
+            var response = client.DownloadString(url);
+            return response;
         }
     }
 
