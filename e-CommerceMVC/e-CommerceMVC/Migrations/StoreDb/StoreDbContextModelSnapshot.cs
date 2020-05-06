@@ -61,10 +61,11 @@ namespace ECommerceMVC.Migrations.StoreDb
 
             modelBuilder.Entity("ECommerceMVC.Models.OrderList", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("OrderListID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -75,10 +76,15 @@ namespace ECommerceMVC.Migrations.StoreDb
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Quantities")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("ID");
+                    b.HasKey("OrderListID", "ProductID");
+
+                    b.HasIndex("ProductID");
 
                     b.ToTable("OrderList");
                 });
@@ -210,6 +216,15 @@ namespace ECommerceMVC.Migrations.StoreDb
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ECommerceMVC.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ECommerceMVC.Models.OrderList", b =>
+                {
                     b.HasOne("ECommerceMVC.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductID")
