@@ -94,6 +94,7 @@ namespace ECommerceMVC
             services.AddTransient<IProductManager, ProductService>();
             services.AddTransient<ICartManager, CartService>();
             services.AddTransient<ICartItemsManager, CartItemsService>();
+            services.AddTransient<IOrderManager, OrderService>();
             //Sendgrid
             services.AddTransient<IEmailSender, EmailSender>();
             //Authorization .net
