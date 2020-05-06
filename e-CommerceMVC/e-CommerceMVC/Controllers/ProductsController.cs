@@ -9,6 +9,10 @@ using ECommerceMVC.Data;
 using ECommerceMVC.Models;
 using ECommerceMVC.Models.Interface;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using ECommerceMVC.Models.Service;
+using Microsoft.Extensions.Configuration;
 
 namespace ECommerceMVC.Controllers
 {
@@ -16,10 +20,13 @@ namespace ECommerceMVC.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductManager _productManager;
-
-        public ProductsController(IProductManager productManager)
+        [BindProperty]
+        public IFormFile Image { get; set; }
+        public Blob blob { get; set; }
+        public ProductsController(IProductManager productManager, IConfiguration configuration)
         {
             _productManager = productManager;
+            blob = new Blob(configuration);
         }
 
         // GET: Products
@@ -52,10 +59,23 @@ namespace ECommerceMVC.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,SKU,Name,Price,Description,Image")] Product product)
+        public async Task<IActionResult> Create([Bind("ID,SKU,Name,Price,Description")] Product product)
         {
             if (ModelState.IsValid)
             {
+                //var filePath = Path.GetTempPath() + Image.FileName;
+                //var cloudContainer = blob.GetContainer("product");
+
+                //using (var memoryStream = new MemoryStream())
+                //{
+                //    await Image.CopyToAsync(memoryStream);
+
+                //}
+                await blob.UploadFile("product", Image.FileName, Image);
+
+                var Blob = await blob.GetBlob(Image.FileName, "product");
+                product.Image = Blob.Uri.ToString();
+
                 await _productManager.CreateInventory(product);
                 return RedirectToAction(nameof(Index));
             }
@@ -80,17 +100,26 @@ namespace ECommerceMVC.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,SKU,Name,Price,Description,Image")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,SKU,Name,Price,Description")] Product product)
         {
             if (id != product.ID)
             {
                 return NotFound();
             }
 
+            
+
             if (ModelState.IsValid)
             {
                 try
                 {
+                    if (Image != null)
+                    {
+                        await blob.UploadFile("product", Image.FileName, Image);
+
+                        var Blob = await blob.GetBlob(Image.FileName, "product");
+                        product.Image = Blob.Uri.ToString();
+                    }
                     Product newProduct = await _productManager.UpdateInventories(product);
                 }
                 catch (DbUpdateConcurrencyException)
