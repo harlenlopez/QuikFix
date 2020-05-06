@@ -13,20 +13,24 @@ using ECommerceMVC.Models.ViewModel;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
 
 namespace ECommerceMVC.Pages.Checkout
 {
     public class IndexModel : PageModel
     {
+
         // Local properties that are being used
+        private readonly IConfiguration _config;
         private readonly ICartManager _CartManager;
         private readonly IPayment _payment;
 
         /// <summary>
         /// Constructor that brings the interface
         /// </summary>
-        public IndexModel( ICartManager cartManger, IPayment payment)
+        public IndexModel( ICartManager cartManger, IPayment payment, IConfiguration configuration)
         {
+            _config = configuration;
             _CartManager = cartManger;
             _payment = payment;
         }
@@ -60,11 +64,13 @@ namespace ECommerceMVC.Pages.Checkout
             /// Checking to see if user had filled out right information
             if (ModelState.IsValid) 
             { 
-                // Computing
+                // Computing total price
                 await GetData();
 
+                //validating the address using the USPS api
                 string response = ValidateAddress();
 
+                // if the return XML contains error, then it will output error message and have user fill out again
                 if (response.Contains("Error"))
                 {
                     ModelState.AddModelError(String.Empty, "Please Enter Correct Address");
@@ -92,7 +98,7 @@ namespace ECommerceMVC.Pages.Checkout
                 }
 
             }
-            // otherwise, it wil reroute them to page
+            // otherwise, it will reroute them to page
             return Page();
         }
 
@@ -112,11 +118,17 @@ namespace ECommerceMVC.Pages.Checkout
             }
         }
 
+
+        /// <summary>
+        /// Method that will be used to create XML format document to be sent off to the USPS and they will validate if its correct address
+        /// </summary>
+        /// <returns>XML output of correct address or error address</returns>
         public string ValidateAddress()
         {
+            /// Creating XDocument to be sent to USPS
             XDocument requestDoc = new XDocument(
                     new XElement("AddressValidateRequest",
-                        new XAttribute("USERID", "366QUIKF5953"),
+                        new XAttribute("USERID", _config["USPSAPI"]),
                         new XElement("Revision", "1"),
                         new XElement("Address",
                             new XAttribute("ID", "0"),
@@ -129,7 +141,7 @@ namespace ECommerceMVC.Pages.Checkout
                             )
                         )
                     );
-
+            //API for USPS
             var url = @"https://secure.shippingapis.com/ShippingAPI.dll?API=Verify&XML=" + requestDoc;
             var client = new WebClient();
             var response = client.DownloadString(url);
