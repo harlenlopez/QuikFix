@@ -24,15 +24,17 @@ namespace ECommerceMVC.Pages.Checkout
         private readonly IConfiguration _config;
         private readonly ICartManager _CartManager;
         private readonly IPayment _payment;
+        private readonly IOrderManager _orderManager;
 
         /// <summary>
         /// Constructor that brings the interface
         /// </summary>
-        public IndexModel( ICartManager cartManger, IPayment payment, IConfiguration configuration)
+        public IndexModel( ICartManager cartManger, IPayment payment, IConfiguration configuration, IOrderManager orderManager)
         {
             _config = configuration;
             _CartManager = cartManger;
             _payment = payment;
+            _orderManager = orderManager;
         }
 
         // User info when they feel out
@@ -76,6 +78,14 @@ namespace ECommerceMVC.Pages.Checkout
                     ModelState.AddModelError(String.Empty, "Please Enter Correct Address");
                     return Page();
                 }
+                OrderList orderList = new OrderList
+                {
+                    FirstName = Userinfo.FirstName,
+                    LastName = Userinfo.LastName,
+                    OrderDate = DateTime.Today.Date,
+                    TotalPrice = TotalPrice
+                };
+                await _orderManager.CreateOrder(orderList);
 
                 /// Using the view models to create an object of customerAddressType to send it through PaymentService
                 customerAddressType addressInfo = new customerAddressType
