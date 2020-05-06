@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -39,11 +40,11 @@ namespace ECommerceMVC.Models.Service
             CloudBlob blob = Container.GetBlobReference(imageName);
             return blob;
         }
-        public async Task UploadFile(string containerName, string fileName, Stream filePath)
+        public async Task UploadFile(string containerName, string fileName, IFormFile filePath)
         {
             var container = await GetContainer(containerName);
             var blobFile = container.GetBlockBlobReference(fileName);
-            await blobFile.UploadFromStreamAsync(filePath);
+            await blobFile.UploadFromStreamAsync(filePath.OpenReadStream());
         }
         public async Task DeleteFile(string containerName, string fileName)
         {
