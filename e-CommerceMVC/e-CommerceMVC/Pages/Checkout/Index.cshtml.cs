@@ -78,14 +78,24 @@ namespace ECommerceMVC.Pages.Checkout
                     ModelState.AddModelError(String.Empty, "Please Enter Correct Address");
                     return Page();
                 }
-                OrderList orderList = new OrderList
+
+
+                foreach (var item in CartItems)
                 {
-                    FirstName = Userinfo.FirstName,
-                    LastName = Userinfo.LastName,
-                    OrderDate = DateTime.Today.Date,
-                    TotalPrice = TotalPrice
-                };
-                await _orderManager.CreateOrder(orderList);
+                    OrderList orderList = new OrderList
+                    {
+                        FirstName = Userinfo.FirstName,
+                        LastName = Userinfo.LastName,
+                        OrderDate = DateTime.Today.Date,
+                        TotalPrice = TotalPrice,
+                        ProductID = item.ProductID,
+                        Quantities = item.Quantity,
+                        OrderListID = item.CartsID
+                    };
+                    await _orderManager.CreateOrder(orderList);
+            
+                }
+
 
                 /// Using the view models to create an object of customerAddressType to send it through PaymentService
                 customerAddressType addressInfo = new customerAddressType
