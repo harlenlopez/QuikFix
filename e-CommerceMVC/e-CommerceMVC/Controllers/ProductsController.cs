@@ -85,14 +85,14 @@ namespace ECommerceMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var filePath = Path.GetTempFileName();
+                var filePath = Path.GetTempFileName();
 
-                //using (var memoryStream = System.IO.File.Create(filePath))
-                //{
-                //    await Image.CopyToAsync(memoryStream);
-                //}
+                using (var memoryStream = System.IO.File.Create(filePath))
+                {
+                    await Image.CopyToAsync(memoryStream);
+                }
 
-                await blob.UploadFile("product", Image.FileName, Image);
+                await blob.UploadFile("product", Image.FileName, filePath);
 
                 var Blob = await blob.GetBlob(Image.FileName, "product");
                 product.Image = Blob.Uri.ToString();
@@ -136,7 +136,14 @@ namespace ECommerceMVC.Controllers
                 {
                     if (Image != null)
                     {
-                        await blob.UploadFile("product", Image.FileName, Image);
+                        var filePath = Path.GetTempFileName();
+
+                        using (var memoryStream = System.IO.File.Create(filePath))
+                        {
+                            await Image.CopyToAsync(memoryStream);
+                        }
+
+                        await blob.UploadFile("product", Image.FileName, filePath);
 
                         var Blob = await blob.GetBlob(Image.FileName, "product");
                         product.Image = Blob.Uri.ToString();

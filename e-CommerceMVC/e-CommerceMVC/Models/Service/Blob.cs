@@ -65,11 +65,11 @@ namespace ECommerceMVC.Models.Service
         /// <param name="fileName">file name</param>
         /// <param name="filePath">Image file</param>
         /// <returns></returns>
-        public async Task UploadFile(string containerName, string fileName, IFormFile filePath)
+        public async Task UploadFile(string containerName, string fileName, string filePath)
         {
             var container = await GetContainer(containerName);
             var blobFile = container.GetBlockBlobReference(fileName);
-            await blobFile.UploadFromStreamAsync(filePath.OpenReadStream());
+            await blobFile.UploadFromFileAsync(filePath);
         }
 
         /// <summary>
