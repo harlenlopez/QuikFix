@@ -86,11 +86,11 @@ namespace ECommerceMVC.Pages.Checkout
                     {
                         FirstName = Userinfo.FirstName,
                         LastName = Userinfo.LastName,
-                        OrderDate = DateTime.Today.Date,
+                        OrderDate = DateTime.Now,
                         TotalPrice = TotalPrice,
                         ProductID = item.ProductID,
                         Quantities = item.Quantity,
-                        OrderListID = item.CartsID
+                        CartsID = item.CartsID
                     };
                     await _orderManager.CreateOrder(orderList);
             

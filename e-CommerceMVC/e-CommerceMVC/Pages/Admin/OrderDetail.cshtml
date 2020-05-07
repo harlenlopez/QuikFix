@@ -1,0 +1,24 @@
+﻿@page "{id:int?}"
+@model ECommerceMVC.Pages.Admin.OrderDetailModel
+@{
+    Layout = "_Layout";
+
+}
+
+<!DOCTYPE html>
+<body>
+
+    <div class="container mt-5 mx-auto">
+        <div class="text-center">
+            @foreach (var item in @Model.Order)
+            {
+                <h3>@item.FirstName @item.LastName</h3>
+                <p>Total Price: @item.TotalPrice</p>
+                <p>Purchase Date: @item.OrderDate</p>
+
+            }
+            
+        </div>
+    </div>
+
+</body>

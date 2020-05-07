@@ -1,4 +1,25 @@
 ﻿@page
 @model ECommerceMVC.Pages.Admin.OrdersModel
 @{
+    Layout = "_layout";
 }
+
+<!DOCTYPE html>
+
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            @foreach (var order in Model.OrderList)
+            {
+                <a asp-page="/admin/OrderDetail" asp-route-id="@order.CartsID" class="text-primary">
+                    <div class="col-sm-4">
+                        <h5>@order.FirstName @order.LastName</h5>
+                        <p>Purchase Date: @order.OrderDate</p>
+                        <p>@order.TotalPrice</p>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+
+</body>

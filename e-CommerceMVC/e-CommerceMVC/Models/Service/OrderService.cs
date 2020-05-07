@@ -30,6 +30,7 @@ namespace ECommerceMVC.Models.Service
         }
 
         public async Task<List<OrderList>> GetAllOrder() => await _context.OrderList.ToListAsync();
-        
+
+        public async Task<List<OrderList>> GetOrderByID(int ID) => await _context.OrderList.Where(x => x.CartsID == ID).ToListAsync();
     }
 }

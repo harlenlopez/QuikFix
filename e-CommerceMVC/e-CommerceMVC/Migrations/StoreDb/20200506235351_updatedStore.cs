@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ECommerceMVC.Migrations.StoreDb
 {
-    public partial class addedTable : Migration
+    public partial class updatedStore : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -68,7 +68,9 @@ namespace ECommerceMVC.Migrations.StoreDb
                 name: "OrderList",
                 columns: table => new
                 {
-                    OrderListID = table.Column<int>(nullable: false),
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CartsID = table.Column<int>(nullable: false),
                     ProductID = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
@@ -78,7 +80,13 @@ namespace ECommerceMVC.Migrations.StoreDb
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderList", x => new { x.OrderListID, x.ProductID });
+                    table.PrimaryKey("PK_OrderList", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_OrderList_Cart_CartsID",
+                        column: x => x.CartsID,
+                        principalTable: "Cart",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrderList_Products_ProductID",
                         column: x => x.ProductID,
@@ -113,6 +121,11 @@ namespace ECommerceMVC.Migrations.StoreDb
                 name: "IX_CartItems_ProductID",
                 table: "CartItems",
                 column: "ProductID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderList_CartsID",
+                table: "OrderList",
+                column: "CartsID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderList_ProductID",
