@@ -1,32 +1,41 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using AuthorizeNet.Api.Contracts.V1;
 using ECommerceMVC.Models;
 using ECommerceMVC.Models.Interface;
 using ECommerceMVC.Models.ViewModel;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
 
 namespace ECommerceMVC.Pages.Checkout
 {
     public class IndexModel : PageModel
     {
-        private readonly IEmailSender _email;
+
+        // Local properties that are being used
+        private readonly IConfiguration _config;
         private readonly ICartManager _CartManager;
+        private readonly IPayment _payment;
+        private readonly IOrderManager _orderManager;
 
         /// <summary>
         /// Constructor that brings the interface
         /// </summary>
-        /// <param name="email"></param>
-        /// <param name="cartManger"></param>
-        public IndexModel(IEmailSender email, ICartManager cartManger)
+        public IndexModel( ICartManager cartManger, IPayment payment, IConfiguration configuration, IOrderManager orderManager)
         {
-            _email = email;
+            _config = configuration;
             _CartManager = cartManger;
+            _payment = payment;
+            _orderManager = orderManager;
         }
 
         // User info when they feel out
@@ -55,45 +64,64 @@ namespace ECommerceMVC.Pages.Checkout
         /// <returns>Sending the email</returns>
         public async Task<IActionResult> OnPost()
         {
+            /// Checking to see if user had filled out right information
+            if (ModelState.IsValid) 
+            { 
+                // Computing total price
+                await GetData();
 
-            var userName = User.Identity.Name;
-            await GetData();
+                //validating the address using the USPS api
+                string response = ValidateAddress();
 
-            // Sending Mail to User
-            StringBuilder sb = new StringBuilder();
+                // if the return XML contains error, then it will output error message and have user fill out again
+                if (response.Contains("Error"))
+                {
+                    ModelState.AddModelError(String.Empty, "Please Enter Correct Address");
+                    return Page();
+                }
 
-            // Appending the lines to the content
-            string imageUrl = "https://i.imgur.com/rocGIxN.png";
-            sb.AppendLine($"<div style='text-align:center'>");
-            sb.AppendLine($"<img src='{imageUrl}' alt='Logo' style='margin-bottom:50px' />");
-            sb.AppendLine("<h3 style='margin-bottom:15px'>Receipt</h3>");
-            sb.AppendLine($"<p>First Name: {Userinfo.FirstName} </p>");
-            sb.AppendLine($"<p>Last Name: {Userinfo.LastName} </p>");
-            sb.AppendLine($"<p>Shipping Address: {Userinfo.ShippingAddress} </p>");
-            sb.AppendLine($"<p>City: {Userinfo.City} </p>");
-            sb.AppendLine($"<p>State: {Userinfo.State} </p>");
-            sb.AppendLine($"<p>Country {Userinfo.Country} </p>");
-            sb.AppendLine($"<p>Payment Method: {Userinfo.PaymentMethod} </p>");
+                int orderNumber = _orderManager.OrderNumberGenerator();
+
+                foreach (var item in CartItems)
+                {
+                    OrderList orderList = new OrderList
+                    {
+                        FirstName = Userinfo.FirstName,
+                        LastName = Userinfo.LastName,
+                        OrderDate = DateTime.Now,
+                        TotalPrice = TotalPrice,
+                        ProductID = item.ProductID,
+                        Quantities = item.Quantity,
+                        CartsID = item.CartsID,
+                        OrderNumber = orderNumber
+                    };
+                    await _orderManager.CreateOrder(orderList);
+                }
 
 
-            sb.AppendLine($"<div style='text-align:center; margin-top:80px'>");
-            foreach (var item in CartItems)
-            {
-                sb.AppendLine($"<h5>{item.Product.Name} </h5>");
-                sb.AppendLine($"<p>Price: {item.Product.Price} </p>");
-                sb.AppendLine("<hr />");
+                /// Using the view models to create an object of customerAddressType to send it through PaymentService
+                customerAddressType addressInfo = new customerAddressType
+                {
+                firstName = Userinfo.FirstName,
+                lastName = Userinfo.LastName,
+                address = Userinfo.ShippingAddress,
+                city = Userinfo.City,
+                zip = Userinfo.ZipCode.ToString()
+                };
+
+                // As the result of Authorize.net payment process, it will return false, if it didn't go through, and it will return true if it did.
+                bool result = _payment.Run(addressInfo, TotalPrice);
+
+                // Only routing them back if the payment have processed correctly.
+                if (result)
+                {
+                    // redirect them to receipt page once the payment goes through
+                    return RedirectToPage("Receipt", Userinfo);
+                }
+
             }
-            sb.AppendLine($"<p>Total: {TotalPrice} </p>");
-            sb.AppendLine($"<p>Thank you, {Userinfo.FirstName} {Userinfo.LastName}!</p>");
-            sb.AppendLine($"<p>We will start on it right away! </p>");
-            sb.AppendLine("</div>");
-            sb.AppendLine("</div>");
-            
-            await _email.SendEmailAsync(userName, "Thank you for the order", sb.ToString());
-
-            // To the receipt page
-            return RedirectToPage("Receipt", Userinfo);
-
+            // otherwise, it will reroute them to page
+            return Page();
         }
 
         /// <summary>
@@ -110,6 +138,36 @@ namespace ECommerceMVC.Pages.Checkout
                 decimal TempTotal = item.Product.Price * item.Quantity;
                 TotalPrice += TempTotal;
             }
+        }
+
+
+        /// <summary>
+        /// Method that will be used to create XML format document to be sent off to the USPS and they will validate if its correct address
+        /// </summary>
+        /// <returns>XML output of correct address or error address</returns>
+        public string ValidateAddress()
+        {
+            /// Creating XDocument to be sent to USPS
+            XDocument requestDoc = new XDocument(
+                    new XElement("AddressValidateRequest",
+                        new XAttribute("USERID", _config["USPSAPI"]),
+                        new XElement("Revision", "1"),
+                        new XElement("Address",
+                            new XAttribute("ID", "0"),
+                            new XElement("Address1", Userinfo.ShippingAddress),
+                            new XElement("Address2", ""),
+                            new XElement("City", Userinfo.City),
+                            new XElement("State", Userinfo.State),
+                            new XElement("Zip5", Userinfo.ZipCode),
+                            new XElement("Zip4", "")
+                            )
+                        )
+                    );
+            //API for USPS
+            var url = @"https://secure.shippingapis.com/ShippingAPI.dll?API=Verify&XML=" + requestDoc;
+            var client = new WebClient();
+            var response = client.DownloadString(url);
+            return response;
         }
     }
 

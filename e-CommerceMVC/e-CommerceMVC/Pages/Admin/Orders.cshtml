@@ -1,0 +1,40 @@
+﻿@page
+@model ECommerceMVC.Pages.Admin.OrdersModel
+@{
+    Layout = "_layout";
+}
+
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="~/styles/Cart/theme.css" />
+</head>
+
+<body>
+    <div class="container mt-5">
+        @foreach (var order in Model.OrderList)
+        {
+            <div class="row">
+                <a asp-page="/admin/OrderDetail" asp-route-ordernumber="@order.OrderNumber" class="text-primary w-100">
+                    <div>
+                        <h5>@order.FirstName @order.LastName</h5>
+                        <p>Purchase Date: @order.OrderDate</p>
+                        <p>Total: $@order.TotalPrice</p>
+                    </div>
+                </a>
+            </div>
+        }
+
+
+        @if (Model.OrderList.Count == 0)
+        {
+            <div class="text-center d-flex align-items-center justify-content-center" id="view-box">
+                <div>
+                    <p>No Order Has Been Requested At the Moment</p>
+                    <a asp-page="/Admin/Index" class="btn btn-warning">Go back</a>
+                </div>
+            </div>
+        }
+    </div>
+
+</body>

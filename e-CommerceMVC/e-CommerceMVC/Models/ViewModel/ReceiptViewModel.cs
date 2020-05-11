@@ -30,7 +30,7 @@ namespace ECommerceMVC.Models.ViewModel
         public string State { get; set; }
 
         [Required]
-        public string Country { get; set; }
+        public int ZipCode { get; set; }
 
         [Required]
         [Display(Name = "Payment Method")]

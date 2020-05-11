@@ -25,6 +25,7 @@ namespace ECommerceMVC.Models
         /// Nav properties
         /// </summary>
         public List<CartItems> CartItems = new List<CartItems>();
+        public List<OrderList> OrderLists = new List<OrderList>();
         
     }
 }

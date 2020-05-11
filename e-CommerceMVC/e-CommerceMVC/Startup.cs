@@ -94,17 +94,21 @@ namespace ECommerceMVC
             services.AddTransient<IProductManager, ProductService>();
             services.AddTransient<ICartManager, CartService>();
             services.AddTransient<ICartItemsManager, CartItemsService>();
+            services.AddTransient<IOrderManager, OrderService>();
+            //Sendgrid
             services.AddTransient<IEmailSender, EmailSender>();
+            //Authorization .net
+            services.AddTransient<IPayment, PaymentService>();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
-            if (env.IsDevelopment())
-            {
+            //if (env.IsDevelopment())
+            //{
                 app.UseDeveloperExceptionPage();
-            }
+            //}
 
             app.UseRouting();
             // using the static file location wwwroot

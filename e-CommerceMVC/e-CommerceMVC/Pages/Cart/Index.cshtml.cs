@@ -67,10 +67,6 @@ namespace ECommerceMVC.Pages.Cart
         /// <returns>redirect to cart page after the update</returns>
         public async Task<IActionResult> OnPost(int productID,int quantity)
         {
-            if (quantity <= 0)
-            {
-                return Page();
-            }
             var user = User.Identity.Name;
 
             var userId = await _CartManager.GetCartById(user);
