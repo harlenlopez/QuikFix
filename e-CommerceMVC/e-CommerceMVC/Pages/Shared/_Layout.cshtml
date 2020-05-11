@@ -45,6 +45,9 @@
 
                         <span class="pr-3 my-auto"> Aloha @User.Claims.First(x => x.Type == "FullName").Value </span>
 
+                        <a asp-page="/Account/Profile" class="bg-link text-white pr-3 my-auto nav-link">Profile</a>
+
+
                         @if (User.IsInRole("Admin"))
                         {
                             <a asp-page="/Admin/index" class="bg-link text-white pr-1 nav-link">Admin</a>
