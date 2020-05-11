@@ -5,7 +5,9 @@
 }
 
 <!DOCTYPE html>
-
+<head>
+    <link rel="stylesheet" href="~/styles/Cart/theme.css" />
+</head>
 <body>
 
     <form method="post">
@@ -13,7 +15,7 @@
         <div class="form-group row">
             <label asp-for="UserInfo.PreviousPassword" class="col-sm-3 col-form-label"></label>
             <div class="col-sm-9">
-                <input asp-for="UserInfo.PreviousPassword" />
+                <input asp-for="UserInfo.PreviousPassword" class="form-control"/>
                 <span asp-validation-for="UserInfo.PreviousPassword"></span>
             </div>
         </div>
@@ -38,4 +40,17 @@
         </div>
     </form>
 
+    <div>
+        <h4>Favorite Theme: @Model.Claims.Theme</h4>
+        <h4>Favorite Color: @Model.Claims.FavoriteColor</h4>
+        <h4>Current Business: @Model.Claims.TypeOfBusiness</h4>
+    </div>
+
+    @foreach (var item in Model.UserOrderList)
+    {
+        <h5>Name: @item.FirstName @item.LastName</h5>
+        <h5>Order Number: @item.OrderNumber</h5>
+        <h5>Order Date: @item.OrderDate</h5>
+        <h5>Total Price: @item.TotalPrice</h5>
+    }
 </body>

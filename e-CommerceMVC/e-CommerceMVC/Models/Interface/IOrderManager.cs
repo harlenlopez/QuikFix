@@ -12,5 +12,6 @@ namespace ECommerceMVC.Models.Interface
         Task<List<OrderList>> GetOrderByID(int ID);
         int OrderNumberGenerator();
         Task DeleteOrder(int ID);
+        Task<List<OrderList>> GetOrdersByUserID(int ID);
     }
 }

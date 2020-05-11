@@ -42,5 +42,12 @@ namespace ECommerceMVC.Models.Service
 
             return randomeNumber;
         }
+
+        public async Task<List<OrderList>> GetOrdersByUserID(int ID)
+        {
+            var orderList = await _context.OrderList.Where(x => x.CartsID == ID).ToListAsync();
+
+            return orderList;
+        }
     }
 }
