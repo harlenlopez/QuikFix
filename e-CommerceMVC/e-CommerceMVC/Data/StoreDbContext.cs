@@ -21,7 +21,6 @@ namespace ECommerceMVC.Data
         /// </summary>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<OrderList>().HasKey(x => new { x.OrderListID, x.ProductID });
             modelBuilder.Entity<Product>().HasData(
                new Product
                {

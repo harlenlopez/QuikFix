@@ -9,6 +9,8 @@ namespace ECommerceMVC.Models.Interface
     {
         Task CreateOrder(OrderList orderList);
         Task<List<OrderList>> GetAllOrder();
+        Task<List<OrderList>> GetOrderByID(int ID);
+        int OrderNumberGenerator();
         Task DeleteOrder(int ID);
     }
 }

@@ -110,7 +110,7 @@ namespace ECommerceMVC.Pages.Account
 
                     /// Allowing certain individual to have admin powers
                     await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
-                    if (user.Email == "fourstringaddiction@gmail.com" || user.Email == "jinwoov@gmail.com" || user.Email == "rice.jonathanm@gmail.com" || user.Email == "amanda@codefellows.com")
+                    if (user.Email == "fourstringaddiction@gmail.com" || user.Email == "jinwoov@gmail.com" || user.Email == "rice.jonathanm@gmail.com" || user.Email == "amanda@codefellows.com" || user.Email == "revyolution1120@gmail.com")
                     {
                         await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
                     }

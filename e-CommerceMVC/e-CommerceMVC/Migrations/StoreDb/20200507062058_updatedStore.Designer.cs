@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceMVC.Migrations.StoreDb
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20200506231524_addedTable")]
-    partial class addedTable
+    [Migration("20200507062058_updatedStore")]
+    partial class updatedStore
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,10 +63,12 @@ namespace ECommerceMVC.Migrations.StoreDb
 
             modelBuilder.Entity("ECommerceMVC.Models.OrderList", b =>
                 {
-                    b.Property<int>("OrderListID")
-                        .HasColumnType("int");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ProductID")
+                    b.Property<int>("CartsID")
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
@@ -78,13 +80,21 @@ namespace ECommerceMVC.Migrations.StoreDb
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("OrderNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
                     b.Property<int>("Quantities")
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("OrderListID", "ProductID");
+                    b.HasKey("ID");
+
+                    b.HasIndex("CartsID");
 
                     b.HasIndex("ProductID");
 
@@ -227,6 +237,12 @@ namespace ECommerceMVC.Migrations.StoreDb
 
             modelBuilder.Entity("ECommerceMVC.Models.OrderList", b =>
                 {
+                    b.HasOne("ECommerceMVC.Models.Carts", "Carts")
+                        .WithMany()
+                        .HasForeignKey("CartsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ECommerceMVC.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductID")
