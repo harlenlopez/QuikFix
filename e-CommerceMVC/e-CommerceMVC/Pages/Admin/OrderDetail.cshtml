@@ -2,23 +2,39 @@
 @model ECommerceMVC.Pages.Admin.OrderDetailModel
 @{
     Layout = "_Layout";
-
+    int counter = 0;
 }
 
 <!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="~/styles/Cart/theme.css" />
+    <link rel="stylesheet" href="~/styles/Admin/Theme.css" />
+</head>
+
 <body>
 
-    <div class="container mt-5 mx-auto">
-        <div class="text-center">
-            @foreach (var item in @Model.Order)
-            {
-                <h3>@item.FirstName @item.LastName</h3>
-                <p>Total Price: @item.TotalPrice</p>
-                <p>Purchase Date: @item.OrderDate</p>
-
-            }
-            
+    <div class="my-4 d-flex justify-content-around">
+                <h3 class="col-sm-6">Purchase by: @Model.Order[0].FirstName @Model.Order[0].LastName</h3>
+                <p>Total Price: $@Model.Order[0].TotalPrice</p>
+                <p>Purchase Date: @Model.Order[0].OrderDate</p>
+    </div>
+    <div class="container mx-auto mt-3">
+        @foreach (var item in Model.OrderProduct)
+        {
+        <div class="row col-sm-12 my-2">
+            <div class="col-sm-6 text-center">
+                <img src="@item.Image" alt="@item.Name" class="product-picture" />
+            </div>
+            <div class="col-sm-6 text-center">
+                <h3>@item.Name Website</h3>
+                <p>Price: $@item.Price</p>
+                <p>SKU: @item.SKU</p>
+                <p>Qty: @Model.Order[counter++].Quantities</p>
+                <a asp-route-id="@item.ID" asp-page="/Shop/Product">Product Detail</a>
+            </div>
         </div>
+        }
     </div>
 
 </body>

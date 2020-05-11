@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -79,6 +80,7 @@ namespace ECommerceMVC.Pages.Checkout
                     return Page();
                 }
 
+                int orderNumber = _orderManager.OrderNumberGenerator();
 
                 foreach (var item in CartItems)
                 {
@@ -90,10 +92,10 @@ namespace ECommerceMVC.Pages.Checkout
                         TotalPrice = TotalPrice,
                         ProductID = item.ProductID,
                         Quantities = item.Quantity,
-                        CartsID = item.CartsID
+                        CartsID = item.CartsID,
+                        OrderNumber = orderNumber
                     };
                     await _orderManager.CreateOrder(orderList);
-            
                 }
 
 

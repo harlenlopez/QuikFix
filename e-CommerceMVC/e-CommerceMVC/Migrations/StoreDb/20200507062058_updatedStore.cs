@@ -72,9 +72,10 @@ namespace ECommerceMVC.Migrations.StoreDb
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CartsID = table.Column<int>(nullable: false),
                     ProductID = table.Column<int>(nullable: false),
+                    OrderNumber = table.Column<int>(nullable: false),
+                    OrderDate = table.Column<DateTime>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
-                    OrderDate = table.Column<DateTime>(nullable: false),
                     TotalPrice = table.Column<decimal>(nullable: false),
                     Quantities = table.Column<int>(nullable: false)
                 },

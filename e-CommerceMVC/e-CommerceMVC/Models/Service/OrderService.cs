@@ -2,6 +2,7 @@
 using ECommerceMVC.Models.Interface;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -32,5 +33,14 @@ namespace ECommerceMVC.Models.Service
         public async Task<List<OrderList>> GetAllOrder() => await _context.OrderList.ToListAsync();
 
         public async Task<List<OrderList>> GetOrderByID(int ID) => await _context.OrderList.Where(x => x.CartsID == ID).ToListAsync();
+
+        public int OrderNumberGenerator()
+        {
+            Random random = new Random();
+
+            int randomeNumber = random.Next(100000);
+
+            return randomeNumber;
+        }
     }
 }

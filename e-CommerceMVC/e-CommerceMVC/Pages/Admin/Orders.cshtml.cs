@@ -23,7 +23,7 @@ namespace ECommerceMVC.Pages.Admin
         public async Task OnGet()
         {
             OrderList = await _orderManager.GetAllOrder();
-            OrderList = OrderList.GroupBy(x => x.OrderDate)
+            OrderList = OrderList.GroupBy(x => x.OrderNumber)
                                 .Select(z => z.First())
                                 .ToList();
         }

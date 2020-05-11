@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceMVC.Migrations.StoreDb
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20200506235351_updatedStore")]
+    [Migration("20200507062058_updatedStore")]
     partial class updatedStore
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -79,6 +79,9 @@ namespace ECommerceMVC.Migrations.StoreDb
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderNumber")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductID")
                         .HasColumnType("int");

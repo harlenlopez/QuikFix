@@ -78,6 +78,9 @@ namespace ECommerceMVC.Migrations.StoreDb
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("OrderNumber")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductID")
                         .HasColumnType("int");
 
