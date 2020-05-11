@@ -27,6 +27,11 @@ namespace ECommerceMVC.Pages.Admin
         public List<OrderList> Order { get; set; }
         public List<Product> OrderProduct = new List<Product>();
 
+        /// <summary>
+        /// Post 
+        /// </summary>
+        /// <param name="ordernumber"></param>
+        /// <returns></returns>
         public async Task OnGet(int ordernumber)
         {
             Order = await _context.OrderList.Where(x => x.OrderNumber == ordernumber).ToListAsync();
