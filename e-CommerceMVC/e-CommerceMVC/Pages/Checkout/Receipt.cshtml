@@ -23,26 +23,11 @@
         @foreach (var item in ViewBag.ListProduct)
         {
             <h5>@item.Product.Name</h5>
-            <p>@item.Product.Description</p>
+            <p class="text mx-auto" id="receipt-description">@item.Product.Description</p>
             <p>Price: $@item.Product.Price</p>
             <p>Qty: @item.Quantity</p>
         }
         <h5>Total: $@Model.TotalPrice</h5>
         <a asp-page="/Shop/Index" class="btn btn-primary mt-3">Back To Shop</a>
     </div>
-
-    @*<div class="containe text-center">
-            <img src='https://i.imgur.com/rocGIxN.png' alt='Logo' style='margin-bottom:50px' />
-            <h5>Thank you so much @Model.ReceiptInfo.FirstName @Model.ReceiptInfo.LastName</h5>
-            <h3 style='margin-bottom:15px'>
-                Receipt
-            </h3>
-            <p>First Name: @Model.ReceiptInfo.FirstName</p>
-            <p>Last Name: @Model.ReceiptInfo.LastName</p>
-            <p>Shipping Address: @Model.ReceiptInfo.ShippingAddress</p>
-            <p>City: @Model.ReceiptInfo.City</p>
-            <p>State/Province: @Model.ReceiptInfo.State</p>
-            <p>Country: @Model.ReceiptInfo.Country</p>
-            <p>Payment Method: @Model.ReceiptInfo.PaymentMethod</p>
-        </div>*@
 </body>

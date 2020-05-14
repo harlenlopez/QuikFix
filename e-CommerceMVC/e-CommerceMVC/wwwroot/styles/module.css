@@ -14,13 +14,21 @@
 #main-box {
     margin-top:100px;
 }
+
+#product-card {
+    border: 3px #343a40 solid;
+    box-shadow: 15px 10px 10px #c0c0c0;
+    width: 100%;
+}
+
 /*============Detail page=============*/
 #detail-page {
     margin-top: 50px;
 }
 
 #product-image-detail {
-    width: 80%;
+    width: 58%;
+    border: 2px #343a40 solid;
 }
 
 

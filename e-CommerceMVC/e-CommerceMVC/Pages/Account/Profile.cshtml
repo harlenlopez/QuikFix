@@ -12,45 +12,45 @@
 
     <form method="post">
         <div asp-validation-summary="All"></div>
-        <div class="form-group row">
-            <label asp-for="UserInfo.PreviousPassword" class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9">
-                <input asp-for="UserInfo.PreviousPassword" class="form-control"/>
+        <div class="form-group row mt-5">
+            <div class="col-sm-4 mx-auto">
+                <input asp-for="UserInfo.PreviousPassword" class="form-control" placeholder="Previous Password"/>
                 <span asp-validation-for="UserInfo.PreviousPassword"></span>
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="UserInfo.ChangePassword" class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9">
-                <input asp-for="UserInfo.ChangePassword" class="form-control" />
+            <div class="col-sm-4 mx-auto">
+                <input asp-for="UserInfo.ChangePassword" class="form-control" placeholder="Change Password"/>
                 <span asp-validation-for="UserInfo.ChangePassword"></span>
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="UserInfo.ConfirmPassword" class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9">
-                <input asp-for="UserInfo.ConfirmPassword" class="form-control" />
+            <div class="col-sm-4 mx-auto">
+                <input asp-for="UserInfo.ConfirmPassword" class="form-control" placeholder="Confirm Password"/>
                 <span asp-validation-for="UserInfo.ConfirmPassword"></span>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-9 offset-sm-3">
-                <button type="submit" class="btn btn-primary" style="margin-top:20px;">Submit</button>
+            <div class="mx-auto">
+                <button type="submit" class="btn btn-primary my-5">Submit</button>
             </div>
         </div>
     </form>
 
-    <div>
-        <h4>Favorite Theme: @Model.Claims.Theme</h4>
-        <h4>Favorite Color: @Model.Claims.FavoriteColor</h4>
-        <h4>Current Business: @Model.Claims.TypeOfBusiness</h4>
+    <div class="text-center">
+        <h5>Favorite Theme: @Model.Claims.Theme</h5>
+        <h5>Favorite Color: @Model.Claims.FavoriteColor</h5>
+        <h5>Current Business: @Model.Claims.TypeOfBusiness</h5>
     </div>
-
-    @foreach (var item in Model.UserOrderList)
-    {
-        <h5>Name: @item.FirstName @item.LastName</h5>
-        <h5>Order Number: @item.OrderNumber</h5>
-        <h5>Order Date: @item.OrderDate</h5>
-        <h5>Total Price: @item.TotalPrice</h5>
-    }
+    <div class="text-center">
+        @foreach (var item in Model.UserOrderList)
+        {
+        <div class="my-5">
+            <h5>Name: @item.FirstName @item.LastName</h5>
+            <h5>Order Number: @item.OrderNumber</h5>
+            <h5>Order Date: @item.OrderDate</h5>
+            <h5>Total Price: @item.TotalPrice</h5>
+        </div>
+        }
+    </div>
 </body>
