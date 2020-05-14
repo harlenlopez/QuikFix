@@ -82,6 +82,7 @@ namespace ECommerceMVC.Pages.Checkout
 
                 int orderNumber = _orderManager.OrderNumberGenerator();
 
+                /// this is to track what order user has placed and store that in the database
                 foreach (var item in CartItems)
                 {
                     OrderList orderList = new OrderList

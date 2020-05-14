@@ -11,20 +11,21 @@
 </head>
 
 <body>
-    <div class="container mt-5">
-        @foreach (var order in Model.OrderList)
-        {
-            <div class="row">
-                <a asp-page="/admin/OrderDetail" asp-route-ordernumber="@order.OrderNumber" class="text-primary w-100">
-                    <div>
+    <div class="mt-5 col-12">
+        <div class="d-sm-flex justify-content-around">
+            @foreach (var order in Model.OrderList)
+            {
+                <div class="col-sm-3">
+                    <a asp-page="/admin/OrderDetail" asp-route-ordernumber="@order.OrderNumber" class="text-primary">
                         <h5>@order.FirstName @order.LastName</h5>
-                        <p>Purchase Date: @order.OrderDate</p>
-                        <p>Total: $@order.TotalPrice</p>
-                    </div>
-                </a>
-            </div>
-        }
 
+                        <p>Purchase Date: @order.OrderDate</p>
+
+                        <p>Total: $@order.TotalPrice</p>
+                    </a>
+                </div>
+            }
+        </div>
 
         @if (Model.OrderList.Count == 0)
         {

@@ -3,5 +3,12 @@
 }
 
 .product-picture{
-    width: 50%;
+    width: 60%;
+}
+
+#order-card {
+    border: 3px #343a40 solid;
+    box-shadow: 15px 10px 10px #c0c0c0;
+    margin: 35px auto !important;
+    padding: 15px;
 }

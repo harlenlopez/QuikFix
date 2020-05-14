@@ -5,32 +5,35 @@ using System.Threading.Tasks;
 using ECommerceMVC.Data;
 using ECommerceMVC.Models;
 using ECommerceMVC.Models.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace ECommerceMVC.Pages.Admin
 {
+    [Authorize(Policy = "AdminOnly")]
     public class OrderDetailModel : PageModel
     {
-        private readonly IOrderManager _orderManager;
         private readonly IProductManager _productManager;
         private readonly StoreDbContext _context;
 
-        public OrderDetailModel(IOrderManager orderManager, IProductManager pManager, StoreDbContext context)
+        /// <summary>
+        /// bringing in the interface to be used in this class
+        /// </summary>
+        public OrderDetailModel(IProductManager pManager, StoreDbContext context)
         {
-            _orderManager = orderManager;
             _productManager = pManager;
             _context = context;
         }
-
+        // storing all of the information from the database to be used in the html.
         public List<OrderList> Order { get; set; }
         public List<Product> OrderProduct = new List<Product>();
 
         /// <summary>
-        /// Post 
+        /// Getting all of the ordernumber and sorting them so we don't have duplicate order
         /// </summary>
-        /// <param name="ordernumber"></param>
+        /// <param name="ordernumber"> Order number</param>
         /// <returns></returns>
         public async Task OnGet(int ordernumber)
         {
@@ -39,11 +42,7 @@ namespace ECommerceMVC.Pages.Admin
             {
                 var result = await _productManager.GetInventoryById(product.ProductID);
                 OrderProduct.Add(result);
-
             }
-
-            
         }
-        /// I have to change duplicate list from showing and also change check if the order number is incrementing
     }
 }

@@ -13,3 +13,7 @@ div.content {
 #sidebar-delete-button{
     display: none !important;
 }
+
+#receipt-description{
+    width:45%;
+}
