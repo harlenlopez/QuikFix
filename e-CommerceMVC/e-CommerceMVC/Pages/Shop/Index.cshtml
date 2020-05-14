@@ -11,7 +11,7 @@
             @foreach (var template in Model.PageList)
             {
             <div class="col-md-4" style="margin-top:30px;">
-                <div class="card text-center">
+                <div class="card text-center" id="product-card">
                     @if (@template.Image != "")
                         {
                     <a asp-page="./Product" asp-route-id="@template.ID">

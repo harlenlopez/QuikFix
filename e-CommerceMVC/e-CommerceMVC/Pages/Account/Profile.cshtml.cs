@@ -76,11 +76,12 @@ namespace ECommerceMVC.Pages.Account
             {
                 return RedirectToAction("Index", "Home");
             }
-            else
+
+            foreach (var error in result.Errors)
             {
-                ModelState.AddModelError(String.Empty, "Please enter correct password");
+                ModelState.AddModelError(String.Empty, error.Description);
             }
-            return Page();
+            return RedirectToPage("/Account/Profile", ModelState);
 
         }
 
