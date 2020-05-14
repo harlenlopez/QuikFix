@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 namespace ECommerceMVC.Models.ViewModel
 {
 
-    // This is created for future use when the user is going to fill out the personal information to checkout
+    /// <summary>
+    /// These information is used for the user's to fill out and will be sent to the auth net which then send confirmation email using the info provided by user to their email.
+    /// </summary>
     public class ReceiptViewModel
     {
         [Required]

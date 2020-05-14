@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.Models
 {
+    /// <summary>
+    /// Model for orderlist database that will store user's order upon confirming heir checkout products.
+    /// </summary>
     public class OrderList
     {
         public int ID { get; set; }

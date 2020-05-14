@@ -14,7 +14,7 @@ namespace ECommerceMVC.Models
         public string Email { get; set; }
 
         /// <summary>
-        /// Nav properties
+        /// Nav properties from cart -> cartitems
         /// </summary>
         public List<CartItems> CartItems = new List<CartItems>();
 
