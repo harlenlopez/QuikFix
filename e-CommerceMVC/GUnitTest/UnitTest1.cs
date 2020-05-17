@@ -1,7 +1,9 @@
+using Castle.Core.Configuration;
 using ECommerceMVC.Data;
 using ECommerceMVC.Models;
 using ECommerceMVC.Models.Interface;
 using ECommerceMVC.Models.Service;
+using ECommerceMVC.Models.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
@@ -75,14 +77,61 @@ namespace GUnitTest
         }
 
         [Fact]
+        public void CanAddOrderListObject()
+        {
+            OrderList ol = new OrderList
+            {
+                CartsID = 1,
+                FirstName = "Alexa",
+                LastName = "Siri",
+                OrderDate = DateTime.Now,
+                OrderNumber = 123,
+                ProductID = 2,
+                Quantities = 4,
+                TotalPrice = 2000
+            };
+
+            Assert.IsType<OrderList>(ol);
+        }
+        [Fact]
+        public void ViewModelIsPassing()
+        {
+            LoginViewModel lv = new LoginViewModel
+            {
+                Email = "Hello@yahoo.com",
+                Password = "Test123@"
+            };
+
+            Assert.IsType<LoginViewModel>(lv);
+        }
+
+        [Fact]
+        public void ReceiptViewModelIsPassing()
+        {
+            ReceiptViewModel rcv = new ReceiptViewModel
+            {
+                City = "Seattle",
+                FirstName = "Alexa",
+                LastName = "Siri",
+                PaymentMethod = "Visa",
+                ShippingAddress = "123 Hello ville",
+                State = "WA",
+                ZipCode = 12345
+            };
+
+            Assert.IsType<ReceiptViewModel>(rcv);
+        }
+
+
+        [Fact]
         public async void AbleToCreateAProductInOurDatabase()
         {
             DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
                 .UseInMemoryDatabase("AbleToCreateAProductInOurDatabase")
                  .Options;
-            
+
             // using the context of database
-            using(StoreDbContext storeDb = new StoreDbContext(options))
+            using (StoreDbContext storeDb = new StoreDbContext(options))
             {
                 ProductService ps = new ProductService(storeDb);
 
@@ -233,7 +282,7 @@ namespace GUnitTest
                 Carts carts = new Carts()
                 {
                     Email = "bobR@gmail.com"
-                    
+
                 };
 
                 var Cart = await ps.CreateCart(carts);
@@ -264,7 +313,7 @@ namespace GUnitTest
                 Assert.Equal(carts, result);
             }
         }
-     
+
         [Fact]
         public async void AbleToGetCartItems()
         {
@@ -275,7 +324,7 @@ namespace GUnitTest
             using (StoreDbContext storeDb = new StoreDbContext(options))
             {
                 CartItemsService cis = new CartItemsService(storeDb);
-                
+
                 CartItems ci = new CartItems()
                 {
                     ProductID = 1,
@@ -365,5 +414,168 @@ namespace GUnitTest
             }
         }
 
+        [Fact]
+        public async void CanCreateOrder()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+              .UseInMemoryDatabase("CanCreateOrder")
+               .Options;
+
+            using (StoreDbContext storeDb = new StoreDbContext(options))
+            {
+                OrderService os = new OrderService(storeDb);
+
+                OrderList ol = new OrderList
+                {
+                    FirstName = "Alexa"
+                };
+
+                await os.CreateOrder(ol);
+
+                OrderList result = await storeDb.OrderList.FindAsync(1);
+
+                Assert.Equal(ol, result);
+            }
+        }
+
+        [Fact]
+        public async void CanGetAllOrder()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+              .UseInMemoryDatabase("CanGetAllOrder")
+               .Options;
+
+            using (StoreDbContext storeDb = new StoreDbContext(options))
+            {
+                OrderService os = new OrderService(storeDb);
+
+                OrderList ol = new OrderList
+                {
+                    FirstName = "Alexa"
+                };
+
+                await os.CreateOrder(ol);
+
+                var list = await os.GetAllOrder();
+
+                Assert.NotNull(list);
+            }
+        }
+
+        [Fact]
+        public async void CanGetAOrderUsingCartID()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+              .UseInMemoryDatabase("CanGetAllOrder")
+               .Options;
+
+            using (StoreDbContext storeDb = new StoreDbContext(options))
+            {
+
+                CartService ps = new CartService(storeDb, _moqManager.Object);
+
+                Carts carts = new Carts()
+                {
+                    Email = "bobR@gmail.com"
+
+                };
+
+                OrderService os = new OrderService(storeDb);
+
+                OrderList ol = new OrderList
+                {
+                    FirstName = "Alexa",
+                    CartsID = 1
+                };
+                await ps.CreateCart(carts);
+                await os.CreateOrder(ol);
+
+                var list = await os.GetOrderByID(1);
+
+                Assert.Equal(ol, list[0]);
+            }
+        }
+
+        [Fact]
+        public async void CanDeleteOrderFromOrderList()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+              .UseInMemoryDatabase("CanDeleteOrderFromOrderList")
+               .Options;
+
+            using (StoreDbContext storeDb = new StoreDbContext(options))
+            {
+
+                OrderService os = new OrderService(storeDb);
+
+                OrderList ol = new OrderList
+                {
+                    FirstName = "Alexa"
+                };
+
+                await os.CreateOrder(ol);
+
+                await os.DeleteOrder(1);
+
+                var orderlist = await storeDb.OrderList.FindAsync(1);
+
+                Assert.Null(orderlist);
+
+            }
+        }
+
+        [Fact]
+        public void OrderNumberGeneratorWorks()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+              .UseInMemoryDatabase("OrderNumberGeneratorWorks")
+               .Options;
+
+            using (StoreDbContext storeDb = new StoreDbContext(options))
+            {
+
+                OrderService os = new OrderService(storeDb);
+
+                var result = os.OrderNumberGenerator();
+
+                Assert.IsType<int>(result);
+            }
+        }
+
+        [Fact]
+        public async void CanGetUsersOrderUsingCartID()
+        {
+            DbContextOptions<StoreDbContext> options = new DbContextOptionsBuilder<StoreDbContext>()
+              .UseInMemoryDatabase("CanGetUsersOrderUsingCartID")
+               .Options;
+
+            using (StoreDbContext storeDb = new StoreDbContext(options))
+            {
+
+                CartService ps = new CartService(storeDb, _moqManager.Object);
+
+                Carts carts = new Carts()
+                {
+                    Email = "bobR@gmail.com"
+
+                };
+
+                OrderService os = new OrderService(storeDb);
+
+                OrderList ol = new OrderList
+                {
+                    FirstName = "Alexa",
+                    CartsID = 1
+                };
+
+                await ps.CreateCart(carts);
+                await os.CreateOrder(ol);
+
+
+                var result = os.GetOrdersByUserID(1);
+
+                Assert.NotNull(result);
+            }
+        }
     }
 }
