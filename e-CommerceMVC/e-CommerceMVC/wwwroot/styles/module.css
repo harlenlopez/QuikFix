@@ -12,7 +12,7 @@
 }
 
 #main-box {
-    margin-top:100px;
+    margin-top:130px;
 }
 
 #product-card {
@@ -51,13 +51,22 @@
 .sidebar {
     margin: 0;
     padding: 0;
-    width: 250px;
+    width: 270px;
     background-color: #f1f1f1;
     position: fixed;
     max-height: 800px;
     overflow-y: auto;
     right: 0;
+    bottom: 0;
+    top: 0;
+    margin-top: 100px;
 }
+
+
+#inside-containter {
+    overflow-y: auto;
+}
+
 
     /* Sidebar links */
     .sidebar a {
@@ -92,6 +101,10 @@ div.content {
     }
     div.content {
         margin-right: 0;
+    }
+
+    #side-cart-button{
+        display:none;
     }
 
     #shopping-icon {
